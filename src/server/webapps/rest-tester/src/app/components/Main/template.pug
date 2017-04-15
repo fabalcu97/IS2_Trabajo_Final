@@ -1,0 +1,24 @@
+h1 Rest Tester
+hr
+div
+  div
+    p.test(
+      (click)="addPerson.hidden = !addPerson.hidden"
+      ) Rest: '/api/addperson'
+    div(
+        hidden='true',
+        #addPerson
+      ) Requirements:
+      div(
+        *ngFor="let requirements of routes.addperson.req"
+        )
+          li {{requirements}}
+
+      textarea(
+        [(ngModel)]="addperson"
+        )
+      br
+      button(
+          (click)="addPersonFunction()"
+        ) Add Person
+hr

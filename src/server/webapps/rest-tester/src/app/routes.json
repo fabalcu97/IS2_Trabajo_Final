@@ -1,0 +1,8 @@
+{
+    "services": {
+      "addperson": {
+        "url": "/api/addperson",
+        "req": ["name", "sex", "email"]
+      }
+    }
+}
