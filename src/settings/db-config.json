@@ -1,0 +1,7 @@
+{
+  "domain": "ds161210.mlab.com",
+  "port": 61210,
+  "dbname": "is2",
+  "username": "conn_user",
+  "password": "conn_user"
+}
