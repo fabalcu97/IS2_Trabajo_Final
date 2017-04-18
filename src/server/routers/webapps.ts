@@ -6,9 +6,9 @@ import {ExpressRouter} from '../../core/classes/ExpressRouter';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as express from 'express';
-import config from '../../settings/index';
+import { config } from '../../settings/index';
 
-let webappsRoutes: ExpressRouter;
+export let webappsRoutes: ExpressRouter;
 
 webappsRoutes = new ExpressRouter();
 
@@ -34,6 +34,3 @@ webappsEntries.forEach( (webapp) => {
 	});
 
 });
-
-export default webappsRoutes;
-

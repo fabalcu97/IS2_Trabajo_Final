@@ -2,34 +2,37 @@
  * Created by fabalcu97 on 13/04/17.
  */
 
-import {ExpressRouter} from '../../core/classes/ExpressRouter';
-import {connectDatabase, MongoModel} from '../../core/classes/MongoModel';
-import config from '../../settings/index';
+import { ExpressRouter } from '../../core/classes/ExpressRouter';
+import { MongoModel } from '../../core/classes/MongoModel';
+import { config } from '../../settings/index';
+import * as variables from '../../settings/variables';
 import * as dbModels from '../../core/db-models/models'
 
-let apiRoutes: ExpressRouter;
+export let apiRoutes: ExpressRouter;
 
 apiRoutes = new ExpressRouter();
 
 apiRoutes.addRoute('POST', '/addperson', (req, res) => {
 
-	connectDatabase(config.dbConfig.url).then(() => {
-		let personModel: MongoModel = new MongoModel('Person');
-		let person: dbModels.Person;
-		person = req.body.person;
-		personModel.insertOne(person).then( (data) => {
-			res.status(200);
-			res.send(data);
-			res.end();
-		}).catch((err) => {
-			res.send(err);
-			res.end();
-		});
-
+	let personModel: MongoModel = new MongoModel('Person');
+	let person: dbModels.Person;
+	person = req.body.person;
+	if( variables.EMAIL_REGEX.test(person.email) ){
+		console.log("Email accepted");
+	}
+	if( variables.SEX_REGEX.test(person.sex) ){
+		console.log("sex accepted");
+	}
+	if( variables.NAME_REGEX.test(person.name) ){
+		console.log("name accepted");
+	}
+	personModel.insertOne(person).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
 	}).catch((err) => {
-		console.log(err);
+		res.send(err);
+		res.end();
 	});
+
 });
-
-export default apiRoutes;
-
