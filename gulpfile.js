@@ -7,10 +7,24 @@
 	var tsconfig = require('./tsconfig.json');
 	var fs = require('fs-extra');
 	var replace = require("replace");
+	var webapps = ['rest-tester'];
 
 /**
  * Items
  */
+
+	// Webapps
+        gulp.task('webapps:init', function() {
+            webapps.forEach( function(webapp) {
+                shell.exec('cd ./src/server/webapps/' + webapp + ' && npm install && webpack');
+            });
+        });
+
+        gulp.task('webapps:build', function() {
+            webapps.forEach( function(webapp) {
+                shell.exec('cd ./src/server/webapps/' + webapp + ' && webpack');
+            });
+        });
 
 	// Servers
 		gulp.task('server:start', function () {
@@ -27,6 +41,7 @@
 	// Build
 		gulp.task('build', function () {
 			runSequence([
+				'webapps:init',
 				'server:build'
 			]);
 		});
@@ -36,6 +51,9 @@
 			var sequence = [];
 			if (build || buildAll) {
 				sequence.push('server:build');
+			}
+			if (buildAll){
+				sequence.push('webapps:build');
 			}
 			sequence.push('server:start');
 			runSequence(sequence);
