@@ -17,22 +17,41 @@ apiRoutes.addRoute('POST', '/addperson', (req, res) => {
 	let personModel: MongoModel = new MongoModel('Person');
 	let person: dbModels.Person;
 	person = req.body.person;
-	if( variables.EMAIL_REGEX.test(person.email) ){
-		console.log("Email accepted");
+	if( 
+		variables.EMAIL_REGEX.test(person.email) &&
+		variables.SEX_REGEX.test(person.sex) &&
+		variables.NAME_REGEX.test(person.name)
+	){
+		personModel.insertOne(person).then( (data) => {
+			res.status(200);
+			res.send(data);
+			res.end();
+		}).catch((err) => {
+			res.send(err);
+			res.end();
+		});
 	}
-	if( variables.SEX_REGEX.test(person.sex) ){
-		console.log("sex accepted");
+
+});
+
+apiRoutes.addRoute('POST', '/addorder', (req, res) => {
+
+	let personModel: MongoModel = new MongoModel('Person');
+	let person: dbModels.Person;
+	person = req.body.person;
+	if(
+		variables.EMAIL_REGEX.test(person.email) &&
+		variables.SEX_REGEX.test(person.sex) &&
+		variables.NAME_REGEX.test(person.name)
+	){
+		personModel.insertOne(person).then( (data) => {
+			res.status(200);
+			res.send(data);
+			res.end();
+		}).catch((err) => {
+			res.send(err);
+			res.end();
+		});
 	}
-	if( variables.NAME_REGEX.test(person.name) ){
-		console.log("name accepted");
-	}
-	personModel.insertOne(person).then( (data) => {
-		res.status(200);
-		res.send(data);
-		res.end();
-	}).catch((err) => {
-		res.send(err);
-		res.end();
-	});
 
 });
