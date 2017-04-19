@@ -12,19 +12,21 @@ export class MainComponent implements OnInit {
     resources: Resources;
     routes: any;
     addperson: string;
+    addPersonRes: any;
 
   // Methods
     constructor (resources: Resources) {
       this.resources = resources;
       this.routes = require('../../routes.json').services;
       this.addperson = '';
+      this.addPersonRes = null;
     }
 
     ngOnInit () {
     }
 
     addPersonFunction () {
-      this.resources.addPerson(JSON.parse(this.addperson));
+      this.addPersonRes = this.resources.addPerson(JSON.parse(this.addperson));
     }
 
 }

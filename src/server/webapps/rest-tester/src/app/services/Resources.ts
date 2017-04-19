@@ -22,7 +22,7 @@ export class Resources {
           headers.append('Content-Type', 'application/json');
           this.http.post(this.routes.addperson.url, {person: person}, {headers: headers}).subscribe(
             (res) => {
-
+              return res;
             },
             (err) => {
               console.log(err);
