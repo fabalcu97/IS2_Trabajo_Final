@@ -2,8 +2,8 @@ import {BaseModel} from './BaseModel';
 
 export interface Product extends BaseModel
 {
-     category : string;
-     subcategory : string;
+     name : string;
+     idCategory : string;
      unitPrice : number;
      unitWeight : number;
      unitOfMeasurement : number;

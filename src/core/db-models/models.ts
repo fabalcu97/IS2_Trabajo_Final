@@ -3,3 +3,7 @@ export {Product} from './Product';
 export {Order} from './Order';
 export {Bill} from './Bill';
 export {Detail} from './Detail';
+export {Type} from './Type';
+export {Subtype} from './Subtype';
+export {ProductType} from './ProductType';
+export {Category} from './Category';
