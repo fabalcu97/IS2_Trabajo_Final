@@ -1,6 +1,4 @@
 import {BaseModel} from './BaseModel';
-import {RemissionGuide} from './RemissionGuide';
-import {Bill} from './Bill';
 
 export interface Order extends BaseModel	//Pedido
 {
