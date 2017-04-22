@@ -24,3 +24,16 @@ export function registerOrder( orderData: dbModels.Order) {
 	});
 	return deferred.promise;
 }
+
+export function getOrderById(orderId: string) {
+
+	let order: MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.findById(orderId).then( ( respOrderData: dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}

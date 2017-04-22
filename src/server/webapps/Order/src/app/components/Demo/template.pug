@@ -1,0 +1,185 @@
+doctype html
+html
+  head
+    link(type='text/css', rel='stylesheet', href='/site.css')
+    |     
+    title Ingreso de datos b&aacute;sicos
+  body
+    .wrapper
+      h1.pageTitle Ingreso de datos b&aacute;sicos
+      |   
+      .container
+        h3.articleTitle Factura
+        |     
+        form(action='/action_page.php', method='post')
+          table
+            tr
+              td
+                h3.pageSubtitle Fecha:
+              |           
+              td
+                input(type='date', name='FechaLlegada')
+            |         
+            tr
+              td
+                h3.pageSubtitle Subtotal:
+              |           
+              td
+                | S/.
+                input(name='Subtotal', value='', type='number', min='0.00', max='10000.00', step='0.01')
+            |         
+            tr
+              td
+                h3.pageSubtitle IGV:
+              |           
+              td
+                input(type='number', name='IGV', value='')
+                | %
+            |         
+            tr
+              td
+                h3.pageSubtitle  Total:
+              |           
+              td
+                | S/.
+                input(name='Subtotal', value='', type='number', min='0.00', max='10000.00', step='0.01')
+        |     
+        .clear
+      |  
+      .container
+        h3.articleTitle Pedido
+        |     
+        form(action='/action_page.php', method='post')
+          table
+            tr
+              td
+                h3.pageSubtitle Control de bultos:
+              |           
+              td
+                label.switch
+                  input(type='checkbox', name='ControlBultos')
+                  |         
+                  .slider.round
+            |         
+            tr
+              td
+                h3.pageSubtitle Fecha de llegada:
+              |           
+              td
+                input(type='date', name='FechaLlegada')
+            |         
+            tr
+              td
+                h3.pageSubtitle Recibido:
+              |           
+              td
+                label.switch
+                  input(type='checkbox', name='Recibido')
+                  |         
+                  .slider.round
+            |         
+            tr
+              td
+                h3.pageSubtitle  Con retraso:
+              |           
+              td
+                label.switch
+                  input(type='checkbox', name='ConRetraso')
+                  |         
+                  .slider.round
+            |         
+            tr
+              td
+                h3.pageSubtitle Detalle:
+              |           
+              td
+                table#myTable
+                  tr
+                    td Nombre
+                    |     
+                    td Cantidad
+                    |     
+                    td Unidad
+                br
+                button(onclick='myFunction()') Add
+        |     
+        .clear
+      |   
+      .container
+        h3.articleTitle Gu&iacute;a de remisi&oacute;n
+        |     
+        form(action='/action_page.php', method='post')
+          table
+            tr
+              td
+                h3.pageSubtitle Motivo:
+              |           
+              td
+                input(type='text', name='Motivo', value='')
+            |         
+            tr
+              td
+                h3.pageSubtitle Partida:
+              |           
+              td
+                input(type='text', name='Partida', value='')
+            |         
+            tr
+              td
+                h3.pageSubtitle Llegada:
+              |           
+              td
+                input(type='text', name='Llegada', value='')
+            |        
+            tr
+              td
+                h3.pageSubtitle Destinatario:
+              |           
+              td
+                input(type='text', name='Destinatario', value='')
+            |         
+            tr
+              td
+                h3.pageSubtitle Empresa de transporte:
+              |           
+              td
+                input(type='text', name='EmpresaTransporte', value='')
+            |         
+            tr
+              td
+                h3.pageSubtitle Placa del Veh&iacute;culo:
+              |           
+              td
+                input(type='text', name='PlacaVehiculo', value='')
+            |         
+            tr
+              td
+                h3.pageSubtitle Peso total:
+              |           
+              td
+                input(type='number', name='Peso', value='', min='0.00', step='0.01')
+                |             
+                input(type='text', name='Unidad', value='')
+        |     
+        .clear
+      |   
+      .container
+        table
+          tr
+            td
+              button.button.btnPush.btnBlueGreen(href='', title='Button push blue/green') Confirmar
+        |     
+        .clear
+      |     
+      |  
+      script.
+        function myFunction() {
+        var table = document.getElementById("myTable");
+        var row = table.insertRow(document.getElementById("myTable").rows.length);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = "<div contenteditable>Edit</div>";
+        cell1.innerHTML = "<div contenteditable>Edit</div>";
+        cell1.innerHTML = "<div contenteditable>Edit</div>";
+        }
