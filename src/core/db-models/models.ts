@@ -1,9 +1,9 @@
-/**
- * Created by fabalcu97 on 13/04/17.
- */
-
-export {Person} from './Person';
-export {Order} from './Order';
+export {RemissionGuide} from './RemissionGuide';
 export {Product} from './Product';
-export {Provider} from './Provider';
-export {Lot} from './Lot';
+export {Order} from './Order';
+export {Bill} from './Bill';
+export {Detail} from './Detail';
+export {Type} from './Type';
+export {Subtype} from './Subtype';
+export {ProductType} from './ProductType';
+export {Category} from './Category';
