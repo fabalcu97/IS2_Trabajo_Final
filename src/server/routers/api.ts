@@ -37,7 +37,7 @@ apiRoutes.addRoute('POST', '/addperson', (req, res) => {
 apiRoutes.addRoute('POST', '/addorder', (req, res) => {
 
 	let personModel: MongoModel = new MongoModel('Person');
-	let person: dbModels.Person;
+	let person: dbModels.Order; //dbModels.Person;
 	person = req.body.person;
 	if(
 		variables.EMAIL_REGEX.test(person.email) &&
