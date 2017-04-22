@@ -1,0 +1,57 @@
+doctype html
+html
+  head
+    link(type='text/css', rel='stylesheet', href='/site.css')
+    |     
+    title Ingreso de datos b&aacute;sicos
+  body
+    .wrapper
+      h1.pageTitle Ingreso de datos b&aacute;sicos
+      |   
+      .container
+        form(action='/action_page.php', method='post')
+          table
+            tr
+              td
+                h3.pageSubtitle Control de bultos:
+              |           
+              td
+                label.switch
+                  input(type='checkbox', name='ControlBultos')
+                  |         
+                  .slider.round
+            |         
+            tr
+              td
+                h3.pageSubtitle Fecha de llegada:
+              |           
+              td
+                input(type='date', name='FechaLlegada')
+            |         
+            tr
+              td
+                h3.pageSubtitle Recibido:
+              |           
+              td
+                label.switch
+                  input(type='checkbox', name='Recibido')
+                  |         
+                  .slider.round
+            |         
+            tr
+              td
+                h3.pageSubtitle  Con retraso:
+              |           
+              td
+                label.switch
+                  input(type='checkbox', name='ConRetraso')
+                  |         
+                  .slider.round
+            |         
+            tr
+              td
+              |           
+              td
+                button.button.btnPush.btnBlueGreen(href='', title='Button push blue/green') Confirmar
+        |     
+        .clear
