@@ -9,6 +9,7 @@ import * as dbModels from '../../core/db-models/models'
 import * as Order from '../../core/db-transactions/order';
 import * as Bill from '../../core/db-transactions/bill';
 import * as Guide from '../../core/db-transactions/guide';
+import * as Detail from '../../core/db-transactions/detail';
 
 export let apiRoutes: ExpressRouter;
 
@@ -40,6 +41,18 @@ apiRoutes.addRoute('POST', '/add/bill', (req, res) => {
 
 apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
     Guide.registerGuide(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('POST', '/add/detail', (req, res) => {
+    Detail.registerDetail(req.body).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
