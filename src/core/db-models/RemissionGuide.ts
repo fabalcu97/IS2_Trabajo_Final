@@ -8,6 +8,8 @@ export interface RemissionGuide	extends BaseModel
 	arrival : string;
 	addressee : string;
 	departureDate : number;
+	arrivalDate : number;
 	transportCompany : string;
 	vehiclePlate : string;	//(Placa del Vehículo)
+	totalWeight : number;
 }
