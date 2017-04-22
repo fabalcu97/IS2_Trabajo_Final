@@ -6,5 +6,5 @@ import { webappsRoutes } from "./webapps";
 
 export function setupRouters(server: any){
     server.use('/api', apiRoutes.router);
-    server.use('/view', webappsRoutes.router);
+    server.use('/', webappsRoutes.router);
 }
