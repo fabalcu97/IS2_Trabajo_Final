@@ -27,7 +27,7 @@ apiRoutes.addRoute('POST', '/add/order', (req, res) => {
 	});
 });
 
-apiRoutes.addRoute('POST', '/get/order', (req, res) => {
+apiRoutes.addRoute('GET', '/get/order', (req, res) => {
 	
 	Order.getOrderById(req.body.orderId)
 	.then( (data) => {
@@ -54,9 +54,8 @@ apiRoutes.addRoute('POST', '/add/bill', (req, res) => {
 	});
 });
 
-apiRoutes.addRoute('POST', '/get/bill', (req, res) => {
-	
-	Bill.getBillById(req.body.billId)
+apiRoutes.addRoute('GET', '/get/bill', (req, res) => {
+	Bill.getBillById(req.query.billId)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
@@ -80,7 +79,7 @@ apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
 	});
 });
 
-apiRoutes.addRoute('POST', '/get/guide', (req, res) => {
+apiRoutes.addRoute('GET', '/get/guide', (req, res) => {
 	
 	Guide.getGuideById(req.body.remissionGuideId)
 	.then( (data) => {

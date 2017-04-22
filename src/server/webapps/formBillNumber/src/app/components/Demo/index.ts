@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {  } from "../../sha";
 import {UIRouter} from 'ui-router-ng2';
 
 @Component({
@@ -8,13 +9,23 @@ import {UIRouter} from 'ui-router-ng2';
 export class DemoComponent implements OnInit {
 
     // Attributes
+        http: Http;
         router: UIRouter;
+        billId: string;
 
     // Methods
-        constructor (router: UIRouter) {
+        constructor (router: UIRouter, http: Http) {
+            this.http = http;
             this.router = router;
+            this.billId = "";
         }
 
-        ngOnInit () {}
+        ngOnInit () {
+
+        }
+
+        searchBill(){
+            this.resources.
+        }
 
 }
