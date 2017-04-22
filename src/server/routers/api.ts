@@ -27,6 +27,21 @@ apiRoutes.addRoute('POST', '/add/order', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('POST', '/get/order', (req, res) => {
+	
+	Order.getOrderById(req.body.orderId)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+
 apiRoutes.addRoute('POST', '/add/bill', (req, res) => {
     Bill.registerBill(req.body).then( (data) => {
 		res.status(200);
@@ -37,6 +52,20 @@ apiRoutes.addRoute('POST', '/add/bill', (req, res) => {
 		res.send(err.description);
 		res.end();
 	});
+});
+
+apiRoutes.addRoute('POST', '/get/bill', (req, res) => {
+	
+	Bill.getBillById(req.body.billId)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
 });
 
 apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
@@ -51,8 +80,34 @@ apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('POST', '/get/guide', (req, res) => {
+	
+	Guide.getGuideById(req.body.remissionGuideId)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
 apiRoutes.addRoute('POST', '/add/detail', (req, res) => {
     Detail.registerDetail(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('GET', '/get/detail', (res, req) => {
+	Detail.getDetailByBillId(req.body).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();

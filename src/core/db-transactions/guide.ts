@@ -28,3 +28,16 @@ export function registerGuide( guideData: dbModels.RemissionGuide) {
 	});
 	return deferred.promise;
 }
+
+export function getGuideById(guideId: string) {
+
+	let guide: MongoModel = new MongoModel('remissionGuide');
+	let deferred = Q.defer();
+
+	guide.findById(guideId).then( ( respGuideData: dbModels.RemissionGuide ) => {
+		deferred.resolve(respGuideData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}

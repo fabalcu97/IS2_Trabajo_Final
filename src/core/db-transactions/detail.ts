@@ -23,3 +23,15 @@ export function registerDetail( DetailData: dbModels.Detail) {
 	});
 	return deferred.promise;
 }
+
+export function getDetailByBillId(billId: string){
+	let detail: MongoModel = new MongoModel('detail');
+	let deferred = Q.defer();
+
+	detail.findAll({idBill: billId}).then( ( respDetail: dbModels.Detail[] ) => {
+		deferred.resolve(respDetail);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
