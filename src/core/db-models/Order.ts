@@ -1,11 +1,8 @@
-import {BaseModel} from './BaseModel';
+import {BaseModel} from "./BaseModel";
+/**
+ * Created by fabalcu97 on 13/04/17.
+ */
 
-export interface Order extends BaseModel	//Pedido
-{
-	idBill : string;
-	idGuide : string;
-	bulkControl : boolean;
-	arrivalDate : number;
-	received : boolean;
-	late : boolean;
+export interface Order extends BaseModel{
+
 }

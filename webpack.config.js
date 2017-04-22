@@ -3,8 +3,7 @@ var path = require('path');
 
 module.exports = {
 	entry: {
-		server: './src/server/start.ts',
-		test: './test/index.ts'
+		server: './src/server/start.ts'
 	},
 	output: {
 		filename: '[name].bundle.js',

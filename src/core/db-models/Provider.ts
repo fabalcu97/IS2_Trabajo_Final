@@ -1,5 +1,5 @@
 import {BaseModel} from './BaseModel';
 
-export interface Product extends BaseModel {
+export interface Provider extends BaseModel {
     
 }
