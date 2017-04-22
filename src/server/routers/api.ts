@@ -15,7 +15,7 @@ apiRoutes = new ExpressRouter();
 apiRoutes.addRoute('POST', '/addperson', (req, res) => {
 
 	let personModel: MongoModel = new MongoModel('Person');
-	let person: dbModels.Person;
+	let person: any; // dbModels.Person;
 	person = req.body.person;
 	if( 
 		variables.EMAIL_REGEX.test(person.email) &&
