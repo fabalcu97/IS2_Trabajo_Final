@@ -63,6 +63,14 @@
             console.log('Webapp created..');
 		});
 
+	// Test
+		gulp.task('test:build', function () {
+            return shell.exec('node_modules/.bin/webpack');
+        });
+		gulp.task('start:test', function () {
+			return shell.exec('node_modules/.bin/mocha ./dist/test.bundle.js');
+		});
+
 	// Servers
 		gulp.task('start:server', function () {
 			require('./dist/server.bundle.js');
@@ -88,7 +96,13 @@
 				'servers:build'
 			]);
 		});
-	
+	// Test
+		gulp.task('run:test', function () {
+			runSequence([
+				'test:build',
+				'start:test'
+			]);
+		});
 	// Serve
 		gulp.task('serve', function (build, buildAll) {
 			var sequence = [];
