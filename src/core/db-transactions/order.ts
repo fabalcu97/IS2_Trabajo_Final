@@ -44,7 +44,7 @@ export function updateBulkControlOrder(orderId : string , OrderBulkControl : boo
 	let deferred = Q.defer();
 
 	order.updateOne(orderId,{
-		bulkControl:OrderBulkControl
+		$set:{bulkControl:OrderBulkControl}
 	}).then( ( respOrderData : dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
@@ -59,7 +59,7 @@ export function updateArrivalDateOrder(orderId : string , OrderArrivalDate : num
 	let deferred = Q.defer();
 
 	order.updateOne(orderId,{
-		arrivalDate:OrderArrivalDate
+		$set:{arrivalDate:OrderArrivalDate}
 	}).then( ( respOrderData : dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
@@ -75,7 +75,7 @@ export function updateReceivedOrder(orderId : string , OrderReceived : boolean)/
 	let deferred = Q.defer();
 
 	order.updateOne(orderId,{
-		received:OrderReceived
+		$set:{received:OrderReceived}
 	}).then( ( respOrderData : dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
@@ -92,7 +92,7 @@ export function updateLateOrder(orderId : string , OrderLate : boolean)//(idOrde
 	let deferred = Q.defer();
 
 	order.updateOne(orderId,{
-		late:OrderLate
+		$set:{late:OrderLate}
 	}).then( ( respOrderData : dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
