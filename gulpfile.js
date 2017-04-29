@@ -39,12 +39,14 @@
 				shell.exec('sh -c \'cd ' + entryPath + ' && npm install\'');
 			});
 
-			gulp.task('shared:update', function() {
-                var sharedPath = path.join(__dirname, 'src/server/webapps/.shared/src/app/shared');
-                var webappPath = path.join(__dirname, 'src/server/webapps/', entryName, 'src/app/shared');
-                fs.copySync(sharedPath, webappPath);
-			});
+		});
+		gulp.task('shared:update', function() {
+			var sharedPath = path.join(__dirname, 'src/server/webapps/.shared/src/app/shared/');
+			webappsEntries.forEach(function (entryName) {
+				var webappPath = path.join(__dirname, 'src/server/webapps/', entryName, 'src/app/shared/');
+				fs.copySync(sharedPath, webappPath);
 
+			});
 		});
 		gulp.task('webapps:build', function () {
 			runSequence(webappsEntries.map(function (entryName) {
