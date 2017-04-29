@@ -41,6 +41,61 @@ apiRoutes.addRoute('POST', '/get/order', (req, res) => {
 	})
 });
 
+apiRoutes.addRoute('POST', '/get/order', (req, res) => {
+	
+	Order.updateBulkControlOrder(req.body.orderId,req.body.bulkControl)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/get/order', (req, res) => {
+	
+	Order.updateArrivalDateOrder(req.body.orderId,req.body.arrivalDate)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/get/order', (req, res) => {
+	
+	Order.updateReceivedOrder(req.body.orderId,req.body.received)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/get/order', (req, res) => {
+	
+	Order.updateLateOrder(req.body.orderId,req.body.late)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
 
 apiRoutes.addRoute('POST', '/add/bill', (req, res) => {
     Bill.registerBill(req.body).then( (data) => {
