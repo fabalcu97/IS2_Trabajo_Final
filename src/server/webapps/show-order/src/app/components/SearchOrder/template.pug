@@ -1,0 +1,17 @@
+
+div.container
+    h1.text-center Search Bill
+    br
+    br
+    h4.text-center(
+        *ngIf="billId!=''"
+    ) El ID de la factura es: {{billId}}
+    input.center-block(
+        type="text",
+        name="search",
+        placeholder="Search bill..",
+        [(ngModel)]='billId'
+    )
+    button.btn.center-block(
+        (click)="searchBill()"
+    ) Search

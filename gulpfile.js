@@ -60,9 +60,7 @@
 
 			console.log('Installing webapp dependencies');
 			shell.exec('sh -c \'cd ' + webappPath + ' && npm install\'');
-			runSequence([
-                'shared:update'
-            ]);
+
             console.log('Webapp created..');
 		});
 

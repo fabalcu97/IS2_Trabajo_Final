@@ -29,7 +29,7 @@ apiRoutes.addRoute('POST', '/add/order', (req, res) => {
 
 apiRoutes.addRoute('GET', '/get/order', (req, res) => {
 	
-	Order.getOrderById(req.body.orderId)
+	Order.getOrderByBillId(req.query.billId)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);

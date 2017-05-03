@@ -37,3 +37,17 @@ export function getOrderById(orderId: string) {
 	});
 	return deferred.promise;
 }
+
+export function getOrderByBillId (billId: String) {
+	let order: MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.findOne({
+		billId: billId
+	}).then( ( respOrderData: dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
