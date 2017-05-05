@@ -105,7 +105,6 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 	
 	Order.getOrderByBillId(req.params.billId)
 	.then( (data) => {
-		console.log(data);
 		res.status(200);
 		res.send(data);
 		res.end();
