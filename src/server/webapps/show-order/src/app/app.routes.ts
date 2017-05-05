@@ -13,9 +13,11 @@ export let statesConfig: any = {
     },
     {
       name: 'show',
-      url: '/show',
+      url: '/show/{billId}',
       params: {
-        billId: null
+        billId: {
+          type: 'string'
+        }
       },
       component: components.ShowOrderComponent
     }
