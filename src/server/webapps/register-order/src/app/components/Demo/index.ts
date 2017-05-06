@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import { ResourcesService } from "../../shared/services/Resources";
 import { FormGroup,FormArray,FormBuilder,Validators } from '@angular/forms';
+import * as dbModels from "../../../../../../../core/db-models/models";
 
 
 @Component({
@@ -9,28 +11,109 @@ import { FormGroup,FormArray,FormBuilder,Validators } from '@angular/forms';
 export class DemoComponent implements OnInit {
 
     // Attributes
-      rowData: any[];
+      resources: ResourcesService;
+      products: dbModels.Product[];
+      detailList: dbModels.Detail[];
+      bill: dbModels.Bill;
+      order: dbModels.Order;
+      guide: dbModels.RemissionGuide;
 
     // Methods
-      constructor () {
-         console.log('myTable constructed');
-         this.rowData = [];
+      constructor (resources: ResourcesService) {
+        this.resources = resources;
+        this.bill = {
+          iva: 0,
+          subtotal: 0,
+          total: 0
+        };
+        this.order = {
+          arrivalDate: 0,
+          guideId: '0',
+          billId: '0',
+          bulkControl: false,
+          late: false,
+          received: false
+        };
+        this.guide = {
+          addressee: '',
+          arrivalDate: 0,
+          departureDate: 0,
+          reason: '',
+          totalWeight: 0,
+          transportCompany: '',
+          vehiclePlate: ''
+        };
+        this.detailList = [];
+        this.products = [];
       }
-   
-      addRow() {
-         this.rowData.push({
-               nameProduct: '',
-               lots: 'Anot@th.er',
-               unitsPerLot: 'AQUI VA LA COnSULTA A LA BS'
-         });
-      }
-
-      deleteRow(){
-         this.rowData.pop()
-      }
-      
+         
       ngOnInit() {
+        this.resources.getProducts().subscribe(
+          (data) => {
+            this.products = data;
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+      }
 
+      addProduct () {
+        this.detailList.push({
+          billId: '',
+          lotQuantity: 0,
+          productId: '',
+          quantity: 0,
+          totalPrice: 0,
+          totalWeight: 0
+        })
+      }
+
+      deleteProduct (index: number) {
+        this.detailList.splice(index, 1);
+      }
+
+      submitForm () {
+        this.resources.registerBill(this.bill).subscribe(
+          (billData) => {
+            this.resources.registerRemisionGuide(this.guide).subscribe(
+              (guideData) => {
+                this.order.billId = billData.id;
+                this.order.guideId = guideData.id;
+                this.resources.registerOrder(this.order).subscribe(
+                  (orderData) => {
+                    this.detailList.forEach( (detail) => {
+                      detail.billId = billData.id;
+                      this.products.forEach( (product) => {
+                        if (detail.productId == product.id) {
+                          detail.quantity = product.quantityPerLot * detail.lotQuantity;
+                          detail.totalPrice = detail.quantity * product.unitPrice
+                          detail.totalWeight = detail.quantity * product.unitWeight;
+                          return;
+                        }
+                      });
+                      this.resources.registerDetail(detail).subscribe(
+                        (detailData) => {
+                        },
+                        (err) => {
+                         console.log(err);
+                        });
+                    });
+                  },
+                  (err) => {
+                   console.log(err);
+                  });
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+            alert("PLease store your bill id: " + billData.id);
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
       }
 
 }
