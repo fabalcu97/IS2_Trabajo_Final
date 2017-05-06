@@ -1,13 +1,9 @@
-/**
- * Created by fabalcu97 on 13/04/17.
- */
-
 import { ExpressRouter } from '../../core/classes/ExpressRouter';
 import { MongoModel } from '../../core/classes/MongoModel';
 import { config } from '../../settings/index';
 import * as dbModels from '../../core/db-models/models'
-import * as Order from '../../core/db-transactions/order';
 import * as Bill from '../../core/db-transactions/bill';
+import * as Order from '../../core/db-transactions/order';
 import * as Guide from '../../core/db-transactions/guide';
 import * as Detail from '../../core/db-transactions/detail';
 import * as Product from '../../core/db-transactions/Product';
@@ -50,61 +46,6 @@ apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
 		res.send(err.description);
 		res.end();
 	});
-});
-
-apiRoutes.addRoute('POST', '/updateBulkControl/order', (req, res) => {
-	
-	Order.updateBulkControlOrder(req.body.orderId, req.body.orderBulkControl)
-	.then( (data) => {
-		res.status(200);
-		res.send(data);
-		res.end();
-	}).catch( (err) => {
-		res.status(err.httpStatus);
-		res.send(err.description);
-		res.end();
-	});
-});
-
-apiRoutes.addRoute('POST', '/updateArrivalDate/order', (req, res) => {
-	
-	Order.updateArrivalDateOrder(req.body.orderId,req.body.orderArrivalDate)
-	.then( (data) => {
-		res.status(200);
-		res.send(data);
-		res.end();
-	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
-		res.end();
-	})
-});
-
-apiRoutes.addRoute('POST', '/updateReceived/order', (req, res) => {
-	Order.updateReceivedOrder(req.body.orderId, req.body.orderReceived)
-	.then( (data) => {
-		res.status(200);
-		res.send(data);
-		res.end();
-	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
-		res.end();
-	})
-});
-
-apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
-	
-	Order.updateLateOrder(req.body.orderId,req.body.orderLate)
-	.then( (data) => {
-		res.status(200);
-		res.send(data);
-		res.end();
-	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
-		res.end();
-	})
 });
 
 apiRoutes.addRoute('POST', '/add/detail', (req, res) => {
@@ -206,3 +147,69 @@ apiRoutes.addRoute('GET', '/get/product', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('GET', '/get/products', (req, res) => {
+	Product.getAllProduct(req.query.productName).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('POST', '/updateBulkControl/order', (req, res) => {
+	
+	Order.updateBulkControlOrder(req.body.orderId, req.body.orderBulkControl)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('POST', '/updateArrivalDate/order', (req, res) => {
+	
+	Order.updateArrivalDateOrder(req.body.orderId,req.body.orderArrivalDate)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/updateReceived/order', (req, res) => {
+	Order.updateReceivedOrder(req.body.orderId, req.body.orderReceived)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
+	
+	Order.updateLateOrder(req.body.orderId,req.body.orderLate)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
