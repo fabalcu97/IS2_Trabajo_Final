@@ -10,6 +10,7 @@ import * as Order from '../../core/db-transactions/order';
 import * as Bill from '../../core/db-transactions/bill';
 import * as Guide from '../../core/db-transactions/guide';
 import * as Detail from '../../core/db-transactions/detail';
+import * as Product from '../../core/db-transactions/Product';
 
 export let apiRoutes: ExpressRouter;
 
@@ -41,6 +42,20 @@ apiRoutes.addRoute('POST', '/add/bill', (req, res) => {
 
 apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
     Guide.registerGuide(req.body).then( (data) => {
+			res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('POST', '/updateBulkControl/order', (req, res) => {
+	
+	Order.updateBulkControlOrder(req.body.orderId, req.body.orderBulkControl)
+	.then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
@@ -49,6 +64,47 @@ apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
 		res.send(err.description);
 		res.end();
 	});
+});
+
+apiRoutes.addRoute('POST', '/updateArrivalDate/order', (req, res) => {
+	
+	Order.updateArrivalDateOrder(req.body.orderId,req.body.orderArrivalDate)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/updateReceived/order', (req, res) => {
+	Order.updateReceivedOrder(req.body.orderId, req.body.orderReceived)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
+	
+	Order.updateLateOrder(req.body.orderId,req.body.orderLate)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
 });
 
 apiRoutes.addRoute('POST', '/add/detail', (req, res) => {
@@ -62,3 +118,91 @@ apiRoutes.addRoute('POST', '/add/detail', (req, res) => {
 		res.end();
 	});
 });
+
+apiRoutes.addRoute('POST', '/add/product', (req, res) => {
+    Product.registerProduct(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('GET', '/get/detail/:billId', (req, res) => {
+	Detail.getDetailByBillId(req.params.billId).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('GET', '/get/guide/:remissionGuideId', (req, res) => {
+	Guide.getGuideById(req.params.remissionGuideId)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('GET', '/get/bill/:billId', (req, res) => {
+	Bill.getBillById(req.params.billId)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
+	Order.getOrderByBillId(req.params.billId)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
+	Product.getProductById(req.params.productId).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('GET', '/get/product', (req, res) => {
+	Product.getProductByName(req.query.productName).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+

@@ -9,7 +9,6 @@ export function registerGuide( guideData: dbModels.RemissionGuide) {
 	let deferred = Q.defer();
 
 	let baseGuideData: dbModels.RemissionGuide = {
-		date : guideData.date,
 		reason : guideData.reason,
 		departure : guideData.departure,
 		arrival : guideData.arrival,
@@ -22,6 +21,19 @@ export function registerGuide( guideData: dbModels.RemissionGuide) {
 	};
 
 	guide.insertOne(baseGuideData).then( ( respGuideData: dbModels.Order ) => {
+		deferred.resolve(respGuideData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
+export function getGuideById(guideId: string) {
+
+	let guide: MongoModel = new MongoModel('remissionGuide');
+	let deferred = Q.defer();
+
+	guide.findById(guideId).then( ( respGuideData: dbModels.RemissionGuide ) => {
 		deferred.resolve(respGuideData);
 	}).catch( () => {
 		returnServerError(deferred)
