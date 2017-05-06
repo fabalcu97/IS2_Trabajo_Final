@@ -1,99 +1,74 @@
 div.container
     h2 Bill
-    div.row
-        div.col-sm-3
-            p Date: 
-        div.col-sm-6
-            p {{bill.timestamp}}
-    div.row
-        div.col-sm-3
-            p Subtotal: 
-        div.col-sm-6
-            p {{bill.subtotal}}
-    div.row
-        div.col-sm-3
-            p IGV: 
-        div.col-sm-6
-            p {{bill.iva}}
-    div.row
-        div.col-sm-3
-            p Total: 
-        div.col-sm-6
-            p {{bill.total}}
+    table.table.table-bordered
+        tr
+            th Date
+            td {{bill.timestamp}} 
+        tr
+            th Subtotal: 
+            td {{bill.subtotal}}
+        tr
+            th IGV: 
+            td {{bill.iva}}
+        tr
+            th Total: 
+            td {{bill.total}}
 
 div.container
     h2 Order
-    div.row
-        div.col-sm-3
-            label.switch
-                p Bulk control            
-        div.col-sm-2
-            input(
-                type="checkbox"
-                checked='{{order.bulkControl}}'
-            )
-    div.row
-        div.col-sm-3
-            label.switch
-                p Received
-        div.col-sm-2
-            input(
-                type="checkbox"
-                checked='{{order.received}}'
-            )
+    table.table.table-bordered
+        tr
+            th Bulk control            
+            td
+                input(
+                    type="checkbox"
+                    checked='{{order.bulkControl}}'
+                )
+        tr
+            th Received
+            td
+                input(
+                    type="checkbox"
+                    checked='{{order.received}}'
+                )
     
 div.container
     h2 Remision guide
-    div.row
-        div.col-sm-3
-            p Reason: 
-        div.col-sm-6
-            p {{remisionGuide.reason}}
-    div.row
-        div.col-sm-3
-            p Departure: 
-        div.col-sm-6
-            p {{remisionGuide.departure}}
-    div.row
-        div.col-sm-3
-            p Llegada:
-        div.col-sm-6
-            p {{remisionGuide.arrival}}
-    div.row
-        div.col-sm-3
-            p Destinatario:
-        div.col-sm-6
-            p {{remisionGuide.addressee}}
-    div.row
-        div.col-sm-3
-            p Enterprise:
-        div.col-sm-6
-            p {{remisionGuide.transportCompany}}
-    div.row
-        div.col-sm-3
-            p Plate of vehicle:
-        div.col-sm-6
-            p {{remisionGuide.vehiclePlate}}
-    div.row
-        div.col-sm-3
-            p Total weight:
-        div.col-sm-6
-            p {{remisionGuide.totalWeight}} kg
-
-div.detail
-    div.row
-        div.col-sm-6
-            p Name
-        div.col-sm-3
-            p Quantity
-        div.col-sm-3
-            p Unit
-    div.row(
-        *ngFor='let product of products; let i = index'
-    )
-        div.col-sm-6
-            p {{product.name}}
-        div.col-sm-3
-            p {{detail[i].quantity}}
-        div.col-sm-3
-            p {{product.unitPrice}}
+    table.table.table-bordered
+        tr
+            th Reason: 
+            td {{remisionGuide.reason}}
+        tr
+            th Departure: 
+            td {{remisionGuide.departure}}
+        tr
+            th Llegada:
+            td {{remisionGuide.arrival}}
+        tr
+            th Destinatario:
+            td {{remisionGuide.addressee}}
+        tr
+            th Enterprise:
+            td {{remisionGuide.transportCompany}}
+        tr
+            th Plate of vehicle:
+            td {{remisionGuide.vehiclePlate}}
+        tr
+            th Total weight:
+            td {{remisionGuide.totalWeight}} kg
+            
+div.container
+    h2 Detail
+    table.table.table-bordered
+        thead
+            tr
+                th Name
+                th Quantity
+                th Unit
+        tbody
+            tr(
+                *ngFor='let product of products; let i = index'
+            )
+                td {{product.name}}
+                td {{detail[i].quantity}}
+                td {{product.unitPrice}}
