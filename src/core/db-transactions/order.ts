@@ -51,3 +51,66 @@ export function getOrderByBillId (billId: String) {
 	});
 	return deferred.promise;
 }
+
+export function updateBulkControlOrder(orderId : string , OrderBulkControl : boolean)
+{
+	let order : MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.updateOne(orderId,{
+		$set:{bulkControl:OrderBulkControl}
+	}).then( ( respOrderData : dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
+export function updateArrivalDateOrder(orderId : string , OrderArrivalDate : number)
+{
+	let order : MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.updateOne(orderId,{
+		$set:{arrivalDate:OrderArrivalDate}
+	}).then( ( respOrderData : dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
+
+export function updateReceivedOrder(orderId : string , OrderReceived : boolean)//(idOrder,Recibido|noRecibido)
+{
+	let order : MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.updateOne(orderId,{
+		$set:{received:OrderReceived}
+	}).then( ( respOrderData : dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
+
+
+export function updateLateOrder(orderId : string , OrderLate : boolean)//(idOrder,tarde|temprano)
+{
+	let order : MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.updateOne(orderId,{
+		$set:{late:OrderLate}
+	}).then( ( respOrderData : dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
