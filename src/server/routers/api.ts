@@ -10,6 +10,7 @@ import * as Order from '../../core/db-transactions/order';
 import * as Bill from '../../core/db-transactions/bill';
 import * as Guide from '../../core/db-transactions/guide';
 import * as Detail from '../../core/db-transactions/detail';
+import * as Product from '../../core/db-transactions/Product';
 
 export let apiRoutes: ExpressRouter;
 
@@ -63,7 +64,19 @@ apiRoutes.addRoute('POST', '/add/detail', (req, res) => {
 	});
 });
 
-apiRoutes.addRoute('GET', '/get/detail/:billId', (res, req) => {
+apiRoutes.addRoute('POST', '/add/product', (req, res) => {
+    Product.registerProduct(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('GET', '/get/detail/:billId', (req, res) => {
 	Detail.getDetailByBillId(req.params.billId).then( (data) => {
 		res.status(200);
 		res.send(data);
@@ -102,7 +115,6 @@ apiRoutes.addRoute('GET', '/get/bill/:billId', (req, res) => {
 });
 
 apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
-	
 	Order.getOrderByBillId(req.params.billId)
 	.then( (data) => {
 		res.status(200);
@@ -114,3 +126,28 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 		res.end();
 	})
 });
+
+apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
+	Product.getProductById(req.params.productId).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('GET', '/get/product', (req, res) => {
+	Product.getProductByName(req.query.productName).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
