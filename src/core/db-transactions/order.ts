@@ -9,8 +9,8 @@ export function registerOrder( orderData: dbModels.Order) {
 	let deferred = Q.defer();
 
 	let baseOrderData: dbModels.Order = {
-		idBill : orderData.idBill,
-        idGuide : orderData.idGuide,
+		billId : orderData.billId,
+        guideId : orderData.guideId,
         bulkControl : false,
         arrivalDate : orderData.arrivalDate,
         received : false,
