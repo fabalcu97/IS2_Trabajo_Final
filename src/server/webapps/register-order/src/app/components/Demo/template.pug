@@ -7,76 +7,75 @@ body
       form
           fieldset
             legend 
-              h3.articleTitle Factura
+              h3.articleTitle Bill
             table
               tr
                 td
-                  h3.pageSubtitle Fecha:
+                  h3.pageSubtitle Date
 
                 td
                   input(type='date', name='FechaLlegada')                
               tr
                 td
-                  h3.pageSubtitle Subtotal:                          
+                  h3.pageSubtitle Subtotal                        
                 td
                   | S/.
                   input(name='Subtotal', value='', type='number', min='0.00', max='10000.00', step='0.01')                       
               tr
                 td
-                  h3.pageSubtitle IGV:                           
+                  h3.pageSubtitle IGV                           
                 td
                   input(type='number', name='IGV', value='')
                   | %                     
               tr
                 td
-                  h3.pageSubtitle  Total:                         
+                  h3.pageSubtitle  Total                        
                 td
                   | S/.
                   input(name='Subtotal', value='', type='number', min='0.00', max='10000.00', step='0.01')               
 
           fieldset
             legend 
-              h3.articleTitle Pedido
+              h3.articleTitle Order
             table
               tr
                 td
-                  h3.pageSubtitle Control de bultos:                           
+                  h3.pageSubtitle Bulk control                          
                 td
                   label.switch
                     input(type='checkbox', name='ControlBultos')                           
                     .slider.round                     
               tr
                 td
-                  h3.pageSubtitle Fecha de llegada:                           
+                  h3.pageSubtitle Arrival Date                           
                 td
                   input(type='date', name='FechaLlegada')            
               tr
                 td
-                  h3.pageSubtitle Recibido:                         
+                  //-Recibido
+                  h3.pageSubtitle Received                         
                 td
                   label.switch
                     input(type='checkbox', name='Recibido')                      
                     .slider.round            
               tr
                 td
-                  h3.pageSubtitle  Con retraso:              
+                  //-Con retraso
+                  h3.pageSubtitle Delayed  
                 td
                   label.switch
                     input(type='checkbox', name='ConRetraso')                            
                     .slider.round                     
               tr
                 td
-                  h3.pageSubtitle Detalle:                         
+                  h3.pageSubtitle Detail                         
                 td
                   table
                     tr
-                        td 
-                          h4 name Product
-                        td 
-                          h4 Lots
-                        td 
-                          h4 Units Per Lot
-                        td
+                        th.a1 Name Product
+                        th.a1 Lots                          
+                        th.a1 Units Per Lot
+                        th.a1
                           
                     tr(*ngFor='let row of rowData')
                         td 
@@ -96,41 +95,43 @@ body
         
           fieldset
             legend 
-              h3.articleTitle Gu&iacute;a de remisi&oacute;n
+              h3.articleTitle Remission guide
             table
               tr
                 td
-                  h3.pageSubtitle Motivo:                          
+                  h3.pageSubtitle Motive                          
                 td
                   input(type='text', name='Motivo', value='')
               tr
                 td
-                  h3.pageSubtitle Partida:                         
+                  //-Partida
+                  h3.pageSubtitle Departure                         
                 td
                   input(type='text', name='Partida', value='')                  
               tr
                 td
-                  h3.pageSubtitle Llegada:                  
+                  //-Llegada
+                  h3.pageSubtitle Arrive                 
                 td
                   input(type='text', name='Llegada', value='')                      
               tr
                 td
-                  h3.pageSubtitle Destinatario:                        
+                  h3.pageSubtitle Destinatario                        
                 td
                   input(type='text', name='Destinatario', value='')                       
               tr
                 td
-                  h3.pageSubtitle Empresa de transporte:                          
+                  h3.pageSubtitle Empresa de transporte                          
                 td
                   input(type='text', name='EmpresaTransporte', value='')                       
               tr
                 td
-                  h3.pageSubtitle Placa del Veh&iacute;culo:                         
+                  h3.pageSubtitle Placa del Veh&iacute;culo                       
                 td
                   input(type='text', name='PlacaVehiculo', value='')                         
               tr
                 td
-                  h3.pageSubtitle Peso total:                          
+                  h3.pageSubtitle Peso total                          
                 td
                   input(type='number', name='Peso', value='', min='0.00', step='0.01')
                 td             
