@@ -17,6 +17,8 @@ export class ShowOrderComponent implements OnInit {
         bill: any;
         order: any;
         remisionGuide: any;
+        detail: any;
+        products: any[];
 
     // Methods
         constructor (trans: Transition, resources: ResourcesService) {
@@ -26,12 +28,13 @@ export class ShowOrderComponent implements OnInit {
             this.bill = {};
             this.order = {};
             this.remisionGuide = {};
+            this.detail = {};
+            this.products = [];
         }
 
         ngOnInit () {
             this.resources.getBill(this.billId).subscribe(
                 (billData) => {
-                    console.log(billData);
                     this.bill = billData;
                 },
                 (err) => {
@@ -42,18 +45,35 @@ export class ShowOrderComponent implements OnInit {
             this.resources.getOrder(this.billId).subscribe(
                 (orderData) => {
 
-                    console.log(orderData);
                     this.order = orderData;
 
-                    /*this.resources.getRemisionGuide(orderData.idGuide).subscribe(
+                    this.resources.getRemisionGuide(orderData.guideId).subscribe(
                         (guideData) => {
-                            console.log(guideData);
                             this.remisionGuide = guideData;
                         },
                         (err) => {
                             console.log(err);
                         }
-                    )*/
+                    )
+                },
+                (err) => {
+                    console.log(err);
+                }
+            )
+
+            this.resources.getDetail (this.billId).subscribe(
+                (detailData) => {
+                    this.detail = detailData;
+                    this.detail.forEach( (product) => {
+                        this.resources.getProduct(product.productId).subscribe(
+                            (productData) => {
+                                this.products.push(productData);
+                            },
+                            (err) => {
+                                console.log(err);
+                            }
+                        )
+                    })
                 },
                 (err) => {
                     console.log(err);

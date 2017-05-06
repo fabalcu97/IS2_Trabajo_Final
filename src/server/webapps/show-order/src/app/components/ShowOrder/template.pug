@@ -30,7 +30,7 @@ div.container
         div.col-sm-2
             input(
                 type="checkbox"
-                checked
+                checked='{{order.bulkControl}}'
             )
     div.row
         div.col-sm-3
@@ -39,7 +39,7 @@ div.container
         div.col-sm-2
             input(
                 type="checkbox"
-                checked
+                checked='{{order.received}}'
             )
     
 div.container
@@ -48,37 +48,37 @@ div.container
         div.col-sm-3
             p Reason: 
         div.col-sm-6
-            p sflkñsdjf
+            p {{remisionGuide.reason}}
     div.row
         div.col-sm-3
             p Departure: 
         div.col-sm-6
-            p sflkñsdjf
+            p {{remisionGuide.departure}}
     div.row
         div.col-sm-3
             p Llegada:
         div.col-sm-6
-            p sflkñsdjf
+            p {{remisionGuide.arrival}}
     div.row
         div.col-sm-3
             p Destinatario:
         div.col-sm-6
-            p sflkñsdjf
+            p {{remisionGuide.addressee}}
     div.row
         div.col-sm-3
             p Enterprise:
         div.col-sm-6
-            p sflkñsdjf
+            p {{remisionGuide.transportCompany}}
     div.row
         div.col-sm-3
             p Plate of vehicle:
         div.col-sm-6
-            p sflkñsdjf
+            p {{remisionGuide.vehiclePlate}}
     div.row
         div.col-sm-3
             p Total weight:
         div.col-sm-6
-            p sflkñsdjf kg
+            p {{remisionGuide.totalWeight}} kg
 
 div.detail
     div.row
@@ -89,4 +89,11 @@ div.detail
         div.col-sm-3
             p Unit
     div.row(
+        *ngFor='let product of products; let i = index'
     )
+        div.col-sm-6
+            p {{product.name}}
+        div.col-sm-3
+            p {{detail[i].quantity}}
+        div.col-sm-3
+            p {{product.unitPrice}}

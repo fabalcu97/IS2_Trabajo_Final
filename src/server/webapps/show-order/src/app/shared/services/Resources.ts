@@ -26,4 +26,12 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/api/get/guide/' + remissionGuideId).map((res: Response) => res.json());
   }
 
+  public getDetail (billId: String): Observable<Interfaces.Detail> {
+    return this.$http.get('http://localhost:8000/api/get/detail/' + billId).map((res: Response) => res.json());
+  }
+
+  public getProduct (productId: String): Observable<Interfaces.Detail> {
+    return this.$http.get('http://localhost:8000/api/get/product/' + productId).map((res: Response) => res.json());
+  }
+
 }
