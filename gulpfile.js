@@ -60,6 +60,7 @@
 
 			console.log('Installing webapp dependencies');
 			shell.exec('sh -c \'cd ' + webappPath + ' && npm install\'');
+
             console.log('Webapp created..');
 		});
 

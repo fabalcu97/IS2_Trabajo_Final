@@ -9,11 +9,12 @@ export function registerDetail( DetailData: dbModels.Detail) {
 	let deferred = Q.defer();
 
 	let baseDetailData: dbModels.Detail = {
-		idBill : DetailData.idBill,
-        idProduct : DetailData.idProduct,
+		billId : DetailData.billId,
+        productId : DetailData.productId,
         quantity : DetailData.quantity,
         totalPrice : DetailData.totalPrice,
-        totalWeight : DetailData.totalWeight
+        totalWeight : DetailData.totalWeight,
+		lotQuantity: DetailData.lotQuantity
 	};
 
 	detail.insertOne(baseDetailData).then( ( respDetailData: dbModels.Detail ) => {
@@ -28,7 +29,7 @@ export function getDetailByBillId(billId: string){
 	let detail: MongoModel = new MongoModel('detail');
 	let deferred = Q.defer();
 
-	detail.findAll({idBill: billId}).then( ( respDetail: dbModels.Detail[] ) => {
+	detail.findAll({billId: billId}).then( ( respDetail: dbModels.Detail[] ) => {
 		deferred.resolve(respDetail);
 	}).catch( () => {
 		returnServerError(deferred)
