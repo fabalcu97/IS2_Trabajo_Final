@@ -55,8 +55,50 @@ export class ResourcesService {
     }).map((res: Response) => res.json());
   }
 
-  public getProducts (): Observable<Interfaces.Product[]> {
+  public getProducts (): Observable<Array<Interfaces.Product>> {
     return this.$http.get('http://localhost:8000/api/get/products').map((res: Response) => res.json());
+  }
+
+  public registerBill (bill: Interfaces.Bill): Observable<Interfaces.Bill> {
+    return this.$http.post('http://localhost:8000/api/add/bill/', {
+        subtotal : bill.subtotal,
+        iva : bill.iva,
+        total : bill.total
+	  }).map((res: Response) => res.json());
+  }
+
+  public registerRemisionGuide (guide: Interfaces.RemissionGuide): Observable<Interfaces.RemissionGuide> {
+    return this.$http.post('http://localhost:8000/api/add/guide/', {
+      reason : guide.reason,
+      addressee : guide.addressee,
+      departureDate : guide.departureDate,
+      arrivalDate : guide.arrivalDate,
+      transportCompany : guide.transportCompany,
+      vehiclePlate : guide.vehiclePlate,
+      totalWeight : guide.totalWeight
+    }).map((res: Response) => res.json());
+  }
+
+  public registerOrder (order: Interfaces.Order): Observable<Interfaces.Order> {
+    return this.$http.post('http://localhost:8000/api/add/order/', {
+      billId : order.billId,
+      guideId : order.guideId,
+      bulkControl : order.bulkControl,
+      arrivalDate : order.arrivalDate,
+      received : order.received,
+      late : order.late
+    }).map((res: Response) => res.json());
+  }
+
+  public registerDetail (detail: Interfaces.Detail): Observable<Interfaces.Detail> {
+    return this.$http.post('http://localhost:8000/api/add/detail/', {
+      billId : detail.billId,
+      productId : detail.productId,
+      quantity : detail.quantity,
+      totalPrice : detail.totalPrice,
+      totalWeight : detail.totalWeight,
+      lotQuantity: detail.lotQuantity
+    }).map((res: Response) => res.json());
   }
   
 }

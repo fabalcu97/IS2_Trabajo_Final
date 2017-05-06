@@ -55,8 +55,4 @@ export class ResourcesService {
     }).map((res: Response) => res.json());
   }
 
-  public getProducts (): Observable<Interfaces.Product[]> {
-    return this.$http.get('http://localhost:8000/api/get/products').map((res: Response) => res.json());
-  }
-  
 }
