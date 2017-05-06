@@ -24,6 +24,12 @@ webappsEntries = webappsEntries.filter(function (entry) {
 	return entry;
 });
 
+
+webappsRoutes.addRoute('GET', '/', (req, res) => {
+	res.sendFile(path.join(__dirname, webappsDir, 'home', 'src/index.html'));
+});
+
+
 webappsEntries.forEach( (webapp) => {
 	let tmpRoute: string = '/' + webapp;
 

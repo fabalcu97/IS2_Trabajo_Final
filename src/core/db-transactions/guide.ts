@@ -9,7 +9,6 @@ export function registerGuide( guideData: dbModels.RemissionGuide) {
 	let deferred = Q.defer();
 
 	let baseGuideData: dbModels.RemissionGuide = {
-		date : guideData.date,
 		reason : guideData.reason,
 		departure : guideData.departure,
 		arrival : guideData.arrival,
