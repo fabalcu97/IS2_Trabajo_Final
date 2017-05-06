@@ -11,6 +11,7 @@ import * as Bill from '../../core/db-transactions/bill';
 import * as Guide from '../../core/db-transactions/guide';
 import * as Detail from '../../core/db-transactions/detail';
 import * as Product from '../../core/db-transactions/Product';
+import * as StorageLocation from '../../core/db-transactions/storagelocation';
 
 export let apiRoutes: ExpressRouter;
 
@@ -239,3 +240,26 @@ apiRoutes.addRoute('GET', '/get/product', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('POST', '/add/storagelocation', (req, res) => {
+    StorageLocation.registerStorageLocation(req.body).then( (data) => {
+			res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('GET', '/get/storagelocation/:category', (req, res) => {
+	StorageLocation.getStorageLocationByCategory(req.params.category).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
