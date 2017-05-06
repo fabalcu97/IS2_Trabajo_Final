@@ -9,7 +9,6 @@ export function registerBill( billData: dbModels.Bill) {
 	let deferred = Q.defer();
 
 	let baseBillData: dbModels.Bill = {
-		date : billData.date,
         subtotal : billData.subtotal,
         iva : billData.iva,
         total : billData.total
