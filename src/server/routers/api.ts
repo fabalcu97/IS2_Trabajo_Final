@@ -54,7 +54,7 @@ apiRoutes.addRoute('POST', '/add/guide', (req, res) => {
 
 apiRoutes.addRoute('POST', '/updateBulkControl/order', (req, res) => {
 	
-	Order.updateBulkControlOrder(req.body.orderId, req.body.OrderBulkControl)
+	Order.updateBulkControlOrder(req.body.orderId, req.body.orderBulkControl)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
@@ -68,7 +68,7 @@ apiRoutes.addRoute('POST', '/updateBulkControl/order', (req, res) => {
 
 apiRoutes.addRoute('POST', '/updateArrivalDate/order', (req, res) => {
 	
-	Order.updateArrivalDateOrder(req.body.orderId,req.body.OrderArrivalDate)
+	Order.updateArrivalDateOrder(req.body.orderId,req.body.orderArrivalDate)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
@@ -81,8 +81,7 @@ apiRoutes.addRoute('POST', '/updateArrivalDate/order', (req, res) => {
 });
 
 apiRoutes.addRoute('POST', '/updateReceived/order', (req, res) => {
-	
-	Order.updateReceivedOrder(req.body.orderId,req.body.OrderReceived)
+	Order.updateReceivedOrder(req.body.orderId, req.body.orderReceived)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
@@ -94,9 +93,9 @@ apiRoutes.addRoute('POST', '/updateReceived/order', (req, res) => {
 	})
 });
 
-apiRoutes.addRoute('POST', '/updateLater/order', (req, res) => {
+apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
 	
-	Order.updateLateOrder(req.body.orderId,req.body.OrderLate)
+	Order.updateLateOrder(req.body.orderId,req.body.orderLate)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
