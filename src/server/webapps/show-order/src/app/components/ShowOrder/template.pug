@@ -20,17 +20,45 @@ div.container
         tr
             th Bulk control            
             td
-                input(
-                    type="checkbox"
-                    checked='{{order.bulkControl}}'
-                )
+                label.switch
+                    input(
+                        type="checkbox",
+                        [(ngModel)]='order.bulkControl',
+                        [checked]='order.bulkControl'
+                    )
+                    div.slider.round
+            td
+                button.btn(
+                    (click)='updateBulk()'
+                ) Update Bulk Control
         tr
             th Received
             td
-                input(
-                    type="checkbox"
-                    checked='{{order.received}}'
-                )
+                label.switch
+                    input(
+                        type="checkbox",
+                        [(ngModel)]='order.received',
+                        [checked]='order.received'
+                    )
+                    div.slider.round
+            td
+                button.btn(
+                    (click)='updateReceived()'
+                ) Update Received
+        tr
+            th Late
+            td
+                label.switch
+                    input(
+                        type="checkbox",
+                        [(ngModel)]='order.late',
+                        [checked]='order.late'
+                    )
+                    div.slider.round
+            td
+                button.btn(
+                    (click)='updateLate()'
+                ) Update Late
     
 div.container
     h2 Remision guide

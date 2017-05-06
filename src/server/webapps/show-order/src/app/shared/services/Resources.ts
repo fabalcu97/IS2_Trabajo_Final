@@ -34,4 +34,25 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/api/get/product/' + productId).map((res: Response) => res.json());
   }
 
+  public updateBulkControl (orderId: String, bulkControl: boolean): Observable<Interfaces.Order> {
+    return this.$http.post('http://localhost:8000/api/updateBulkControl/order/', {
+      orderId: orderId,
+      orderBulkControl: bulkControl
+    }).map((res: Response) => res.json());
+  }
+
+  public updateOrderReceived (orderId: String, received: boolean): Observable<Interfaces.Order> {
+    return this.$http.post('http://localhost:8000/api/updateReceived/order/', {
+        orderId: orderId,
+        orderReceived: received
+    }).map((res: Response) => res.json());
+  }
+
+  public updateLateOrder (orderId: String, late: boolean): Observable<Interfaces.Order> {
+    return this.$http.post('http://localhost:8000/api/updateLate/order/', {
+      orderId: orderId,
+      orderLate: late
+    }).map((res: Response) => res.json());
+  }
+
 }

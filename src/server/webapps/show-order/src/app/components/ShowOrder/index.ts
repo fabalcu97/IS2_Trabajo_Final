@@ -44,7 +44,6 @@ export class ShowOrderComponent implements OnInit {
 
             this.resources.getOrder(this.billId).subscribe(
                 (orderData) => {
-
                     this.order = orderData;
 
                     this.resources.getRemisionGuide(orderData.guideId).subscribe(
@@ -74,6 +73,40 @@ export class ShowOrderComponent implements OnInit {
                             }
                         )
                     })
+                },
+                (err) => {
+                    console.log(err);
+                }
+            )
+        }
+
+        updateBulk () {
+            console.log(this.order);
+            this.resources.updateBulkControl(this.order.id, this.order.bulkControl).subscribe(
+                (data) => {
+                    alert("Actualización exitosa");
+                },
+                (err) => {
+                    console.log(err);
+                }
+            )
+        }
+
+        updateReceived () {
+            this.resources.updateOrderReceived(this.order.id, this.order.received).subscribe(
+                (data) => {
+                    alert("Actualización exitosa");
+                },
+                (err) => {
+                    console.log(err);
+                }
+            )
+        }
+
+        updateLate () {
+            this.resources.updateLateOrder(this.order.id, this.order.late).subscribe(
+                (data) => {
+                    alert("Actualización exitosa");
                 },
                 (err) => {
                     console.log(err);
