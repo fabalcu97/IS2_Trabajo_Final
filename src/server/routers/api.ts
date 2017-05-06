@@ -263,3 +263,17 @@ apiRoutes.addRoute('GET', '/get/storagelocation/:category', (req, res) => {
 		res.end();
 	});
 });
+
+apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
+	
+	StorageLocation.updateAvailableStorageLocation(req.body.storageLocationId, req.body.available)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});

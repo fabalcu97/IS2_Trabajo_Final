@@ -35,3 +35,18 @@ export function getStorageLocationByCategory(category: string){
 	});
 	return deferred.promise;
 }
+
+export function updateAvailableStorageLocation(storageLocationId : string , available : boolean)
+{
+	let StorageLocation : MongoModel = new MongoModel('storagelocation');
+	let deferred = Q.defer();
+
+	StorageLocation.updateOne(storageLocationId,{
+		$set:{available:available}
+	}).then( ( respStorageLocationData : dbModels.StorageLocation ) => {
+		deferred.resolve(respStorageLocationData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
