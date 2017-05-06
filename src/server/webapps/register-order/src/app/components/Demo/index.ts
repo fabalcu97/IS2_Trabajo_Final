@@ -28,6 +28,11 @@ export class DemoComponent implements OnInit {
         unitsPerLot: 'AQUI VA LA COnSULTA A LA BS' 
         })
     }
+
+    deleteRow(){
+        this.rowData.pop()
+    }
+    
     ngOnInit() {        
         
     }    

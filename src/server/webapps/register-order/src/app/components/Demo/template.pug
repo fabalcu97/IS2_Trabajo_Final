@@ -76,7 +76,8 @@ body
                           h4 Lots
                         td 
                           h4 Units Per Lot
-
+                        td
+                          
                     tr(*ngFor='let row of rowData')
                         td 
                             select(name='products')
@@ -84,8 +85,11 @@ body
                               option(value='') product2  
                         td 
                             input(type='number', name='')
-                        td {{row.unitsPerLot}}                
-                    button((click)='addRow()') Add a row
+                        td {{row.unitsPerLot}}     
+                        td 
+                          button((click)='deleteRow()') Delete           
+                    button((click)='addRow()') Add
+                    
                         
 
 
