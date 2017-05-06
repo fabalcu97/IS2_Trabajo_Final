@@ -2,7 +2,6 @@ import {BaseModel} from './BaseModel';
 
 export interface RemissionGuide	extends BaseModel
 {
-	date : number;
 	reason : string;
 	departure : string;
 	arrival : string;

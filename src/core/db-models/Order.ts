@@ -1,11 +1,11 @@
 import {BaseModel} from './BaseModel';
 
-export interface Order extends BaseModel	//Pedido
+export interface Order extends BaseModel
 {
-	idBill : string;
-	idGuide : string;
-	bulkControl : boolean;
-	arrivalDate : number;
-	received : boolean;
-	late : boolean;
+	billId: string;
+	guideId: string;
+	bulkControl: boolean;
+	arrivalDate: number;
+	received: boolean;
+	late: boolean;
 }
