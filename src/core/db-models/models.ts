@@ -6,4 +6,6 @@ export {Detail} from './Detail';
 export {Type} from './Type';
 export {Subtype} from './Subtype';
 export {ProductType} from './ProductType';
-export {Category} from './Category';
+export {Lot} from './Lot';
+export {StorageLocation} from './StorageLocation';
+
