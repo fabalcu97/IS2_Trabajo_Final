@@ -10,8 +10,6 @@ export function registerGuide( guideData: dbModels.RemissionGuide) {
 
 	let baseGuideData: dbModels.RemissionGuide = {
 		reason : guideData.reason,
-		departure : guideData.departure,
-		arrival : guideData.arrival,
 		addressee : guideData.addressee,
 		departureDate : guideData.departureDate,
 		arrivalDate : guideData.arrivalDate,

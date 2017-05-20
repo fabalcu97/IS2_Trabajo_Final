@@ -12,7 +12,8 @@ export function registerProduct (productData: dbModels.Product) {
         category: productData.category,
 		name: productData.name,
 		unitPrice: productData.unitPrice,
-		unitWeight: productData.unitWeight
+		unitWeight: productData.unitWeight,
+		quantityPerLot: productData.quantityPerLot
 	};
 
 	product.insertOne(baseProductData).then( ( respProductData: dbModels.Product ) => {
@@ -43,6 +44,21 @@ export function getProductByName (productName: string) {
 
 	product.findAll({
 		name: productName
+	}).then( ( respProductData: dbModels.Product ) => {
+		deferred.resolve(respProductData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
+export function getAllProduct (productName: string) {
+
+	let product: MongoModel = new MongoModel('product');
+	let deferred = Q.defer();
+
+	product.findAll({
+		
 	}).then( ( respProductData: dbModels.Product ) => {
 		deferred.resolve(respProductData);
 	}).catch( () => {

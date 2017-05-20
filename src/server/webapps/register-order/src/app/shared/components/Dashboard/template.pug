@@ -1,0 +1,20 @@
+nav.navbar.navbar-default(
+    role='navigation'
+  )
+  .container-fluid
+    .navbar-collapse
+      ul.nav.navbar-nav
+        li.dropdown(
+            *ngFor="let module of modules"
+          )
+          a.dropdown-toggle(
+              data-toggle='dropdown'
+            ) {{module.name}}
+            b.caret
+          ul.dropdown-menu
+            li(
+              *ngFor="let submodule of module.submodules"
+              )
+              a(
+                  uiSref='{{submodule.route}}'
+                ) {{submodule.name}}
