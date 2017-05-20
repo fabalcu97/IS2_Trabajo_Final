@@ -10,6 +10,7 @@ export function registerOrder( orderData: dbModels.Order) {
 
 	let baseOrderData: dbModels.Order = {
 		billId : orderData.billId,
+		output : orderData.output,
         guideId : orderData.guideId,
         bulkControl : false,
         arrivalDate : orderData.arrivalDate,
