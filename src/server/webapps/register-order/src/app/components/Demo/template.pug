@@ -1,141 +1,173 @@
 body
 
   .wrapper
-    h1.pageTitle Ingreso de datos b&aacute;sicos
-    .container  
+    h1.pageTitle Order Information
+    div.container
 
-      form
-          fieldset
-            legend 
-              h3.articleTitle Bill
-            table
-              tr
-                td
-                  h3.pageSubtitle Date
+          legend 
+            h3.articleTitle Bill
+          table
+            tr
+              td
+                h3.pageSubtitle Subtotal:
+              td
+                input(
+                    type='number',
+                    min='0.00',
+                    max='10000.00',
+                    step='0.01',
+                    [(ngModel)]='bill.subtotal',
+                    required
+                  )
+            tr
+              td
+                h3.pageSubtitle IGV:    
+              td
+                input(
+                    type='number',
+                    [(ngModel)]='bill.iva',
+                    required
+                  )
+                p %                     
+            tr
+              td
+                h3.pageSubtitle  Total:  
+              td
+                | S/.
+                input(
+                    type='number',
+                    min='0.00',
+                    max='10000.00',
+                    step='0.01',
+                    [(ngModel)]='bill.total',
+                    required
+                  )
 
-                td
-                  input(type='date', name='FechaLlegada')                
-              tr
-                td
-                  h3.pageSubtitle Subtotal                        
-                td
-                  | S/.
-                  input(name='Subtotal', value='', type='number', min='0.00', max='10000.00', step='0.01')                       
-              tr
-                td
-                  h3.pageSubtitle IGV                           
-                td
-                  input(type='number', name='IGV', value='')
-                  | %                     
-              tr
-                td
-                  h3.pageSubtitle  Total                        
-                td
-                  | S/.
-                  input(name='Subtotal', value='', type='number', min='0.00', max='10000.00', step='0.01')               
+          legend 
+            h3.articleTitle Order
+          table
+            tr
+              td
+                h3.pageSubtitle Bulk Control:
+              td
+                label.switch
+                  input(
+                      type="checkbox",
+                      [(ngModel)]='order.bulkControl',
+                      [checked]='order.bulkControl'
+                  )
+                  div.slider.round
+                  p {{order.bulkControl}}
+            tr
+              td
+                h3.pageSubtitle Arrival Date:
+              td
+                input(
+                    type='number',
+                    [(ngModel)]='order.arrivalDate',
+                      required
+                  )
+            tr
+              td
+                h3.pageSubtitle Detail:
+              td
+                table
+                  tr
+                      td 
+                        h4 Product name
+                      td 
+                        h4 Lots
 
-          fieldset
-            legend 
-              h3.articleTitle Order
-            table
-              tr
-                td
-                  h3.pageSubtitle Bulk control                          
-                td
-                  label.switch
-                    input(type='checkbox', name='ControlBultos')                           
-                    .slider.round                     
-              tr
-                td
-                  h3.pageSubtitle Arrival Date                           
-                td
-                  input(type='date', name='FechaLlegada')            
-              tr
-                td
-                  //-Recibido
-                  h3.pageSubtitle Received                         
-                td
-                  label.switch
-                    input(type='checkbox', name='Recibido')                      
-                    .slider.round            
-              tr
-                td
-                  //-Con retraso
-                  h3.pageSubtitle Delayed  
-                td
-                  label.switch
-                    input(type='checkbox', name='ConRetraso')                            
-                    .slider.round                     
-              tr
-                td
-                  h3.pageSubtitle Detail                         
-                td
-                  table
-                    tr
-                        th.a1 Name Product
-                        th.a1 Lots                          
-                        th.a1 Units Per Lot
-                        th.a1
-                          
-                    tr(*ngFor='let row of rowData')
-                        td 
-                            select(name='products')
-                              option(value='') product1  
-                              option(value='') product2  
-                        td 
-                            input(type='number', name='')
-                        td {{row.unitsPerLot}}     
-                        td 
-                          button((click)='deleteRow()') Delete           
-                    button((click)='addRow()') Add
-                    
-                        
+                  tr(*ngFor='let detail of detailList; let i = index')
+                      td 
+                          select(
+                              name='products',
+                              [(ngModel)]='detailList[i].productId'
+                            )
+                            option(
+                              *ngFor='let product of products',
+                              [ngValue]='product.id',
+                            ) {{product.name}} ({{product.quantityPerLot}}/lot)
+                      td 
+                          input(
+                              type='number',
+                              [(ngModel)]='detailList[i].lotQuantity',
+                              required
+                            )
+                      td 
+                        button((click)='deleteProduct(i)') Delete           
+                  button((click)='addProduct()') Add
 
+          legend 
+            h3.articleTitle Remision guide
+          table
+              tr
+                td
+                  h3.pageSubtitle Reason:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.reason',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Departure:
+                td
+                  input(
+                    type='number',
+                    [(ngModel)]='guide.departureDate',
+                    required
+                  )                  
+              tr
+                td
+                  h3.pageSubtitle Arrival:
+                td
+                  input(
+                    type='number',
+                    [(ngModel)]='guide.arrivalDate',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Addressee:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.addressee',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Courier:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.transportCompany',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Vehicle Plate:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.vehiclePlate',
+                    required
+                  )   
+              tr
+                td
+                  h3.pageSubtitle Total Weight:
+                td
+                  input(
+                    type='number',
+                    min='0.00',
+                    step='0.01',
+                    [(ngModel)]='guide.totalWeight',
+                    required
+                  )
+                  p kg
 
-        
-          fieldset
-            legend 
-              h3.articleTitle Remission guide
-            table
-              tr
-                td
-                  h3.pageSubtitle Motive                          
-                td
-                  input(type='text', name='Motivo', value='')
-              tr
-                td
-                  //-Partida
-                  h3.pageSubtitle Departure                         
-                td
-                  input(type='text', name='Partida', value='')                  
-              tr
-                td
-                  //-Llegada
-                  h3.pageSubtitle Arrive                 
-                td
-                  input(type='text', name='Llegada', value='')                      
-              tr
-                td
-                  h3.pageSubtitle Destinatario                        
-                td
-                  input(type='text', name='Destinatario', value='')                       
-              tr
-                td
-                  h3.pageSubtitle Empresa de transporte                          
-                td
-                  input(type='text', name='EmpresaTransporte', value='')                       
-              tr
-                td
-                  h3.pageSubtitle Placa del Veh&iacute;culo                       
-                td
-                  input(type='text', name='PlacaVehiculo', value='')                         
-              tr
-                td
-                  h3.pageSubtitle Peso total                          
-                td
-                  input(type='number', name='Peso', value='', min='0.00', step='0.01')
-                td             
-                  input(type='text', name='Unidad', value='')
-
-          button.button.btnPush.btnBlueGreen(type='submit', title='Button push blue/green') Confirmar
-
+          button.button.btnPush.btnBlueGreen(
+            (click)='submitForm()'
+            ) Confirmar
