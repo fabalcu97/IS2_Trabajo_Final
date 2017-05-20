@@ -245,7 +245,6 @@ apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
 		console.log(err);
 		res.status(404);
 		res.end();
-<<<<<<< HEAD
 	});
 });
 
@@ -286,7 +285,4 @@ apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
 		res.end();
 	});
 });
-=======
-	})
-});
->>>>>>> 6c1d33692ce6b09e774dfa0d412bd2eb1c9cb36d
+
