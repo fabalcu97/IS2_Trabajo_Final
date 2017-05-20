@@ -5,7 +5,7 @@ import {UIRouter} from 'ui-router-ng2';
     styles: [require('./styles.styl').toString()],
     template: require('./template.pug')(),
 })
-export class DemoComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
     // Attributes
         router: UIRouter;

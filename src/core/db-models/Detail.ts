@@ -7,5 +7,5 @@ export interface Detail extends BaseModel
 	 quantity : number;
 	 totalPrice : number;
 	 totalWeight : number;
-	 lotQuantity: number
+	 lotQuantity: number;
 }
