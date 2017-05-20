@@ -65,7 +65,7 @@ export class DemoComponent implements OnInit {
           let product = this.products.filter( (products) => {
             return products.id == detail.productId;
           });
-          if (!product) {
+          if (product.length == 0) {
             return;
           }
           
