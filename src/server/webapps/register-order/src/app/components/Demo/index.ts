@@ -51,7 +51,6 @@ export class DemoComponent implements OnInit {
         this.resources.getProducts().subscribe(
           (data) => {
             this.products = data;
-            console.log('Products: ', data);
           },
           (err) => {
             console.log(err);
