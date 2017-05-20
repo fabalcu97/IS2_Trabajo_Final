@@ -213,3 +213,16 @@ apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
 		res.end();
 	})
 });
+
+apiRoutes.addRoute('GET', '/getOrderByOutput/order', (req, res) => {
+	Order.getOrderByOutput(req.body.output)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		console.log(err);
+		res.status(404);
+		res.end();
+	})
+});
