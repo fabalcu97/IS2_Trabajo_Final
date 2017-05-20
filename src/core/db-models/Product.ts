@@ -6,4 +6,5 @@ export interface Product extends BaseModel
     category: string;
     unitPrice: number;
     unitWeight: number;
+    quantityPerLot: number;
 }

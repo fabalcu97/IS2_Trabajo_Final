@@ -12,10 +12,10 @@ export function registerOrder( orderData: dbModels.Order) {
 		billId : orderData.billId,
 		output : orderData.output,
         guideId : orderData.guideId,
-        bulkControl : false,
         arrivalDate : orderData.arrivalDate,
-        received : false,
-        late : false
+        bulkControl : (orderData.bulkControl || false),
+        received : (orderData.received || false),
+        late : (orderData.late || false)
 	};
 
 	order.insertOne(baseOrderData).then( ( respOrderData: dbModels.Order ) => {
