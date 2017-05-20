@@ -65,15 +65,16 @@ export class DemoComponent implements OnInit {
           let product = this.products.filter( (products) => {
             return products.id == detail.productId;
           });
+          if (!product) {
+            return;
+          }
           
           detail.lotQuantity = product[0].quantityPerLot;
           this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
           this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;
-          // console.log(product[0].name, ": ", detail.lotQuantity * product[0].unitPrice * detail.quantity);
 
         });
 
-        // console.log("Total", this.bill.subtotal);
         this.bill.total = this.bill.subtotal + this.bill.subtotal*(this.bill.iva/100);
 
       }
