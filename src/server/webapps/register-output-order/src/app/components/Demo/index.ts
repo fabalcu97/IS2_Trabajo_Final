@@ -47,9 +47,9 @@ export class DemoComponent implements OnInit {
         this.detailList = [];
         this.products = [];
       }
-         
+
       ngOnInit() {
-        /*this.resources.getProducts().subscribe*/(
+        this.resources.getProducts().subscribe(
           (data) => {
             this.products = data;
           },
@@ -69,7 +69,7 @@ export class DemoComponent implements OnInit {
           if (product.length == 0) {
             return;
           }
-          
+
           detail.lotQuantity = product[0].quantityPerLot;
           this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
           this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;

@@ -70,9 +70,9 @@ export class ConfirmOrderComponent implements OnInit{
   }
 
   requestLocation () {
+    console.log(this.currentProduct);
     this.resources.getAvailableLocations(this.currentProduct.category).subscribe(
       (data) => {
-        console.log(data.length)
         console.log(data)
         if (data.length < this.currentProduct.detail.lotQuantity) {
           this.alertMessage = true;
