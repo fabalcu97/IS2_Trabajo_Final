@@ -1,0 +1,96 @@
+div.container
+    h2 Bill
+    table.table.table-bordered
+        tr
+            th Date
+            td {{bill.timestamp}} 
+        tr
+            th Subtotal: 
+            td {{bill.subtotal}}
+        tr
+            th IGV: 
+            td {{bill.iva}}
+        tr
+            th Total: 
+            td {{bill.total}}
+
+div.container
+    h2 Order
+    table.table.table-bordered
+        tr
+            th Bulk control            
+            td
+                label.switch
+                    input(
+                        type="checkbox",
+                        [(ngModel)]='order.bulkControl',
+                        [checked]='order.bulkControl'
+                    )
+                    div.slider.round
+            td
+                a.button.btnPush.btnLightBlue(
+                    (click)='updateBulk()'
+                ) Update Bulk Control
+        tr
+            th Received
+            td
+                label.switch
+                    input(
+                        type="checkbox",
+                        [(ngModel)]='order.received',
+                        [checked]='order.received'
+                    )
+                    div.slider.round
+            td
+                a.button.btnPush.btnLightBlue(
+                    (click)='updateReceived()'
+                ) Update Received
+        tr
+            th Late
+            td
+                label.switch
+                    input(
+                        type="checkbox",
+                        [(ngModel)]='order.late',
+                        [checked]='order.late'
+                    )
+                    div.slider.round
+            td
+                a.button.btnPush.btnLightBlue(
+                    (click)='updateLate()'
+                ) Update Late
+    
+div.container
+    h2 Remision guide
+    table.table.table-bordered
+        tr
+            th Reason: 
+            td {{remisionGuide.reason}}
+        tr
+            th Addressee:
+            td {{remisionGuide.addressee}}
+        tr
+            th Enterprise:
+            td {{remisionGuide.transportCompany}}
+        tr
+            th Plate of vehicle:
+            td {{remisionGuide.vehiclePlate}}
+        tr
+            th Total weight:
+            td {{remisionGuide.totalWeight}} kg
+            
+div.container
+    h2 Detail
+    table.table.table-bordered
+        thead
+            tr
+                th Name
+                th Quantity
+                th Unit
+        tbody
+            tr(
+                *ngFor='let product of products; let i = index'
+            )
+                td {{product.name}}
+                td {{detail[i].quantity}}
+                td {{product.unitPrice}}

@@ -2,10 +2,9 @@ import {BaseModel} from './BaseModel';
 
 export interface Product extends BaseModel
 {
-     name : string;
-     idCategory : string;
-     unitPrice : number;
-     unitWeight : number;
-     unitOfMeasurement : number;
-     date : number;
+    name: string;
+    category: string;
+    unitPrice: number;
+    unitWeight: number;
+    quantityPerLot: number;
 }
