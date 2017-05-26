@@ -14,7 +14,8 @@ export function registerDetail( DetailData: dbModels.Detail) {
         quantity : DetailData.quantity,
         totalPrice : DetailData.totalPrice,
         totalWeight : DetailData.totalWeight,
-		lotQuantity: DetailData.lotQuantity
+		lotQuantity: DetailData.lotQuantity,
+		stored : false
 	};
 
 	detail.insertOne(baseDetailData).then( ( respDetailData: dbModels.Detail ) => {
@@ -31,6 +32,21 @@ export function getDetailByBillId(billId: string){
 
 	detail.findAll({billId: billId}).then( ( respDetail: dbModels.Detail[] ) => {
 		deferred.resolve(respDetail);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
+export function updateStoredDetail(detailId : string , detailStored : boolean)
+{
+	let detail : MongoModel = new MongoModel('detail');
+	let deferred = Q.defer();
+
+	detail.updateOne(detailId,{
+		$set:{stored:detailStored}
+	}).then( ( respDetailData : dbModels.Detail ) => {
+		deferred.resolve(respDetailData);
 	}).catch( () => {
 		returnServerError(deferred)
 	});

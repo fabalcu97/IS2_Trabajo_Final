@@ -84,6 +84,20 @@ apiRoutes.addRoute('GET', '/get/detail/:billId', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('POST', '/updateStored/detail', (req, res) => {
+	
+	Detail.updateStoredDetail(req.body.detailId,req.body.detailStored)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
 apiRoutes.addRoute('GET', '/get/guide/:remissionGuideId', (req, res) => {
 	Guide.getGuideById(req.params.remissionGuideId)
 	.then( (data) => {
@@ -239,7 +253,7 @@ apiRoutes.addRoute('GET', '/get/storagelocation/:category', (req, res) => {
 });
 
 apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
-	StorageLocation.updateAvailableStorageLocation(req.body.storageLocationId, req.body.available)
+	StorageLocation.updateAvailableStorageLocation(req.body.storageLocations)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
