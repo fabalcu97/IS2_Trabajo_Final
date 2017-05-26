@@ -22,7 +22,7 @@ export class DemoComponent implements OnInit {
       constructor (resources: ResourcesService) {
         this.resources = resources;
         this.bill = {
-          iva: 0,
+          iva: 19,
           subtotal: 0,
           total: 0
         };
@@ -56,6 +56,27 @@ export class DemoComponent implements OnInit {
             console.log(err);
           }
         )
+      }
+
+      addProductToDetail () {
+        this.bill.subtotal = 0;
+        this.guide.totalWeight = 0;
+        this.detailList.forEach( (detail) => {
+          let product = this.products.filter( (products) => {
+            return products.id == detail.productId;
+          });
+          if (product.length == 0) {
+            return;
+          }
+          
+          detail.lotQuantity = product[0].quantityPerLot;
+          this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
+          this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;
+
+        });
+
+        this.bill.total = this.bill.subtotal + this.bill.subtotal*(this.bill.iva/100);
+
       }
 
       addProduct () {
