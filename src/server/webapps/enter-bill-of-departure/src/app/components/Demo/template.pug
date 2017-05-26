@@ -1,44 +1,157 @@
 body
 
   .wrapper
-    h1.pageTitle Bill
+    h1.pageTitle Order Information
     div.container
+
+          legend 
+            h3.articleTitle Bill
           table
-            tr
-              td
-                h3.pageSubtitle Date:
-              td 
-                form(action='/action_page.php')
-                input(type='date', name='billDate')
             tr
               td
                 h3.pageSubtitle Subtotal:
               td
-                input(
-                    type='number',
-                    [(ngModel)]='order.billSubtotal',
-                      required
-                  )
+                label S/. {{bill.subtotal}}
             tr
               td
                 h3.pageSubtitle IGV:    
-              td 
-                input(
-                    type='number',
-                    [(ngModel)]='order.billIva',
-                      required
-                  )                    
+              td
+                label {{bill.iva}} %                     
             tr
               td
                 h3.pageSubtitle  Total:  
               td
+                label S/. {{bill.total}}
+
+          legend
+            h3.articleTitle Order
+          table
+            tr
+              td
+                h3.pageSubtitle Bulk Control:
+              td
+                label.switch
+                  input(
+                      type="checkbox",
+                      [(ngModel)]='order.bulkControl',
+                      [checked]='order.bulkControl'
+                  )
+                  div.slider.round
+            tr
+              td
+                h3.pageSubtitle Arrival Date:
+              td
                 input(
                     type='number',
-                    [(ngModel)]='order.billTotal',
+                    [(ngModel)]='order.arrivalDate',
                       required
                   )
+            tr
+              td
+                h3.pageSubtitle Detail:
+              td
+                table
+                  tr
+                      td 
+                        h4 Product name
+                      td 
+                        h4 Lots
 
-        
+                  tr(*ngFor='let detail of detailList; let i = index')
+                      td 
+                          select(
+                              name='products',
+                              [(ngModel)]='detailList[i].productId',
+                              (change)="addProductToDetail()"
+                            )
+                            option(
+                              value=""
+                            ) Products
+                            option(
+                              *ngFor='let product of products',
+                              [ngValue]='product.id',
+                            ) {{product.name}} ({{product.quantityPerLot}}/lot)
+                      td 
+                          input(
+                              type='number',
+                              [(ngModel)]='detailList[i].quantity',
+                              (change)="addProductToDetail()",
+                              required
+                            )
+                      td 
+                        button((click)='deleteProduct(i)') Delete           
+                  button((click)='addProduct()') Add
+
+          legend 
+            h3.articleTitle Remision guide
+          table
+              tr
+                td
+                  h3.pageSubtitle Reason:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.reason',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Departure:
+                td
+                  input(
+                    type='number',
+                    [(ngModel)]='guide.departureDate',
+                    required
+                  )                  
+              tr
+                td
+                  h3.pageSubtitle Arrival:
+                td
+                  input(
+                    type='number',
+                    [(ngModel)]='guide.arrivalDate',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Addressee:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.addressee',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Courier:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.transportCompany',
+                    required
+                  )
+              tr
+                td
+                  h3.pageSubtitle Vehicle Plate:
+                td
+                  input(
+                    type='text',
+                    [(ngModel)]='guide.vehiclePlate',
+                    required
+                  )   
+              tr
+                td
+                  h3.pageSubtitle Total Weight:
+                td
+                  input(
+                    type='number',
+                    min='0.00',
+                    step='0.01',
+                    [(ngModel)]='guide.totalWeight',
+                    disabled,
+                    required
+                  )
+                  p kg
 
           button.button.btnPush.btnBlueGreen(
             (click)='submitForm()'
