@@ -265,7 +265,7 @@ apiRoutes.addRoute('GET', '/get/storagelocation/:category', (req, res) => {
 });
 
 apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
-	StorageLocation.updateAvailableStorageLocation(req.body.storageLocationId, req.body.aviable)
+	StorageLocation.updateAvailableStorageLocation(req.body.storageLocationId, req.body.available)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
