@@ -1,0 +1,2 @@
+import './GetDetailByBillId';
+import './RegisterDetail';

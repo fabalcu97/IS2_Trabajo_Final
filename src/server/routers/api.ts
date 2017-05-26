@@ -7,6 +7,7 @@ import * as Order from '../../core/db-transactions/order';
 import * as Guide from '../../core/db-transactions/guide';
 import * as Detail from '../../core/db-transactions/detail';
 import * as Product from '../../core/db-transactions/Product';
+import * as Lot from  '../../core/db-transactions/lot';
 
 export let apiRoutes: ExpressRouter;
 
@@ -213,6 +214,7 @@ apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
 		res.end();
 	})
 });
+
 
 apiRoutes.addRoute('GET', '/getOrderByOutput/order', (req, res) => {
 	Order.getOrderByOutput(req.body.output)

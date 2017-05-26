@@ -11,39 +11,19 @@ body
               td
                 h3.pageSubtitle Subtotal:
               td
-                input(
-                    type='number',
-                    min='0.00',
-                    max='10000.00',
-                    step='0.01',
-                    [(ngModel)]='bill.subtotal',
-                    required
-                  )
+                label S/. {{bill.subtotal}}
             tr
               td
                 h3.pageSubtitle IGV:    
               td
-                input(
-                    type='number',
-                    [(ngModel)]='bill.iva',
-                    required
-                  )
-                p %                     
+                label {{bill.iva}} %                     
             tr
               td
                 h3.pageSubtitle  Total:  
               td
-                | S/.
-                input(
-                    type='number',
-                    min='0.00',
-                    max='10000.00',
-                    step='0.01',
-                    [(ngModel)]='bill.total',
-                    required
-                  )
+                label S/. {{bill.total}}
 
-          legend 
+          legend
             h3.articleTitle Order
           table
             tr
@@ -57,7 +37,6 @@ body
                       [checked]='order.bulkControl'
                   )
                   div.slider.round
-                  p {{order.bulkControl}}
             tr
               td
                 h3.pageSubtitle Arrival Date:
@@ -82,8 +61,12 @@ body
                       td 
                           select(
                               name='products',
-                              [(ngModel)]='detailList[i].productId'
+                              [(ngModel)]='detailList[i].productId',
+                              (change)="addProductToDetail()"
                             )
+                            option(
+                              value=""
+                            ) Products
                             option(
                               *ngFor='let product of products',
                               [ngValue]='product.id',
@@ -91,7 +74,8 @@ body
                       td 
                           input(
                               type='number',
-                              [(ngModel)]='detailList[i].lotQuantity',
+                              [(ngModel)]='detailList[i].quantity',
+                              (change)="addProductToDetail()",
                               required
                             )
                       td 
@@ -164,6 +148,7 @@ body
                     min='0.00',
                     step='0.01',
                     [(ngModel)]='guide.totalWeight',
+                    disabled,
                     required
                   )
                   p kg
@@ -171,4 +156,3 @@ body
           button.button.btnPush.btnBlueGreen(
             (click)='submitForm()'
             ) Confirmar
-
