@@ -91,8 +91,8 @@ apiRoutes.addRoute('GET', '/get/guide/:remissionGuideId', (req, res) => {
 		res.send(data);
 		res.end();
 	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
 	})
 });
@@ -104,8 +104,8 @@ apiRoutes.addRoute('GET', '/get/bill/:billId', (req, res) => {
 		res.send(data);
 		res.end();
 	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
 	})
 });
@@ -117,8 +117,8 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 		res.send(data);
 		res.end();
 	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
 	})
 });
@@ -181,8 +181,8 @@ apiRoutes.addRoute('POST', '/updateArrivalDate/order', (req, res) => {
 		res.send(data);
 		res.end();
 	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
 	})
 });
@@ -194,8 +194,8 @@ apiRoutes.addRoute('POST', '/updateReceived/order', (req, res) => {
 		res.send(data);
 		res.end();
 	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
 	})
 });
@@ -208,8 +208,8 @@ apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
 		res.send(data);
 		res.end();
 	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
 	});
 });
@@ -245,8 +245,8 @@ apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
 		res.send(data);
 		res.end();
 	}).catch( (err) => {
-		console.log(err);
-		res.status(404);
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
 	})
 });
