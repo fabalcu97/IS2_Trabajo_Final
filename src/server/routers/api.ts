@@ -13,48 +13,15 @@ export let apiRoutes: ExpressRouter;
 apiRoutes = new ExpressRouter();
 
 apiRoutes.addRoute('POST', '/add/order', (req, res) => {
-	let respData = {
-		orderData: {},
-		billData: {},
-		guideData: {},
-		detailData: []
-	};
-    Order.registerOrder(req.body.order).then( (orderData) => {
-		respData.orderData = orderData;
-		Bill.registerBill(req.body.bill).then( (billData) => {
-			respData.billData = billData;
-			Guide.registerGuide(req.body.guide).then( (guideData) => {
-				respData.guideData = guideData;
-				let arrDetail: dbModels.Detail[] = req.body.details;
-				arrDetail.forEach((element) => {
-					Detail.registerDetail(element).then( (detailData) => {
-						respData.detailData.push(detailData);
-					}).catch((err) => {
-						res.status(err.httpStatus);
-						res.send(err.description);
-						res.end();
-					});
-				});
-			}).catch( (err) => {
-				res.status(err.httpStatus);
-				res.send(err.description);
-				res.end();
-			});
-
-		}).catch( (err) => {
-			res.status(err.httpStatus);
-			res.send(err.description);
-			res.end();
-		});
+	Order.registerOrder(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
 	}).catch( (err) => {
 		res.status(err.httpStatus);
 		res.send(err.description);
 		res.end();
 	});
-
-	res.status(200);
-	res.send(respData);
-	res.end();
 });
 
 apiRoutes.addRoute('POST', '/add/bill', (req, res) => {
