@@ -262,3 +262,15 @@ apiRoutes.addRoute('POST', '/add/lot', (req, res) => {
 		res.end();
 	});
 });
+
+apiRoutes.addRoute('GET', '/get/lot/:productId', (req, res) => {
+	Lot.getLotByProductId(req.params.productId).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
