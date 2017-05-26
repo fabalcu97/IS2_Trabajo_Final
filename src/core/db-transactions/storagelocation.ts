@@ -44,15 +44,18 @@ export function updateAvailableStorageLocation(storageLocations : storageLocatio
 {
 	let StorageLocation : MongoModel = new MongoModel('storagelocation');
 	let deferred = Q.defer();
-	storageLocations.forEach((location) =>{
-		StorageLocation.updateOne(location.id,{
-			$set:{available:location.available}
-		}).then( ( respStorageLocationData : dbModels.StorageLocation ) => {
-			deferred.resolve(respStorageLocationData);
-		}).catch( () => {
-			returnServerError(deferred)
-		});
-	})
+	
+	if(storageLocations.length >0){
+		storageLocations.forEach((location) =>{
+			StorageLocation.updateOne(location.id,{
+				$set:{available:location.available}
+			}).then( ( respStorageLocationData : dbModels.StorageLocation ) => {
+				deferred.resolve(respStorageLocationData);
+			}).catch( () => {
+				returnServerError(deferred)
+			});
+		})
+	}
 	
 	
 	return deferred.promise;
