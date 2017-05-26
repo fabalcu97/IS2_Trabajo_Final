@@ -1,6 +1,4 @@
 import { ExpressRouter } from '../../core/classes/ExpressRouter';
-import { MongoModel } from '../../core/classes/MongoModel';
-import { config } from '../../settings/index';
 import * as dbModels from '../../core/db-models/models'
 import * as Bill from '../../core/db-transactions/bill';
 import * as Order from '../../core/db-transactions/order';
@@ -8,13 +6,14 @@ import * as Guide from '../../core/db-transactions/guide';
 import * as Detail from '../../core/db-transactions/detail';
 import * as Product from '../../core/db-transactions/Product';
 import * as Lot from  '../../core/db-transactions/lot';
+import * as StorageLocation from '../../core/db-transactions/storagelocation';
 
 export let apiRoutes: ExpressRouter;
 
 apiRoutes = new ExpressRouter();
 
 apiRoutes.addRoute('POST', '/add/order', (req, res) => {
-    Order.registerOrder(req.body).then( (data) => {
+	Order.registerOrder(req.body).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
@@ -212,13 +211,48 @@ apiRoutes.addRoute('POST', '/updateLate/order', (req, res) => {
 		console.log(err);
 		res.status(404);
 		res.end();
-	})
+	});
 });
 
+apiRoutes.addRoute('POST', '/add/storagelocation', (req, res) => {
+    StorageLocation.registerStorageLocation(req.body).then( (data) => {
+			res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
 
+apiRoutes.addRoute('GET', '/get/storagelocation/:category', (req, res) => {
+	StorageLocation.getStorageLocationByCategory(req.params.category).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
+	StorageLocation.updateAvailableStorageLocation(req.body.storageLocationId, req.body.available)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
 
 apiRoutes.addRoute('POST', '/add/lot', (req, res) => {
-    Lot.registerLot(req.body).then( (data) => {
+	Lot.registerLot(req.body).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
