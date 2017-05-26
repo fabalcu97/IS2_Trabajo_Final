@@ -1,0 +1,45 @@
+body
+
+  .wrapper
+    h1.pageTitle Bill
+    div.container
+          table
+            tr
+              td
+                h3.pageSubtitle Date:
+              td 
+                form(action='/action_page.php')
+                input(type='date', name='billDate')
+            tr
+              td
+                h3.pageSubtitle Subtotal:
+              td
+                input(
+                    type='number',
+                    [(ngModel)]='order.billSubtotal',
+                      required
+                  )
+            tr
+              td
+                h3.pageSubtitle IGV:    
+              td 
+                input(
+                    type='number',
+                    [(ngModel)]='order.billIva',
+                      required
+                  )                    
+            tr
+              td
+                h3.pageSubtitle  Total:  
+              td
+                input(
+                    type='number',
+                    [(ngModel)]='order.billTotal',
+                      required
+                  )
+
+        
+
+          button.button.btnPush.btnBlueGreen(
+            (click)='submitForm()'
+            ) Confirmar
