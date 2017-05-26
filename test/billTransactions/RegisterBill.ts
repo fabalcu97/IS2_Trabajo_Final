@@ -4,9 +4,7 @@ import 'chai';
 import 'mocha';
 
 describe('Register Bill', function () {
-
   it('Should return 202', (done) => {
-    
     request.post('http://localhost:8000/api/add/bill', {
         form: {
           date :"actualdate",
@@ -17,9 +15,6 @@ describe('Register Bill', function () {
     }, (err, httpResponse, body) => {
       assert.equal(  202  , httpResponse.statusCode);
       done();
-    
     });
-
   });
-
 });
