@@ -3,11 +3,6 @@ import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
 import { returnServerError } from '../services/returnServerError';
 
-interface storageLocationObject {
-	id: string,
-	available: boolean	
-}
-
 export function registerStorageLocation (storageLocationData: dbModels.StorageLocation) {
 	let storageLocation: MongoModel = new MongoModel('storagelocation');
 	let deferred = Q.defer();
@@ -40,23 +35,17 @@ export function getStorageLocationByCategory(category: string){
 	return deferred.promise;
 }
 
-export function updateAvailableStorageLocation(storageLocations : storageLocationObject[])
+export function updateAvailableStorageLocation(storageLocationId : string , available : boolean)
 {
 	let StorageLocation : MongoModel = new MongoModel('storagelocation');
 	let deferred = Q.defer();
-	
-	if(storageLocations.length >0){
-		storageLocations.forEach((location) =>{
-			StorageLocation.updateOne(location.id,{
-				$set:{available:location.available}
-			}).then( ( respStorageLocationData : dbModels.StorageLocation ) => {
-				deferred.resolve(respStorageLocationData);
-			}).catch( () => {
-				returnServerError(deferred)
-			});
-		})
-	}
-	
-	
+
+	StorageLocation.updateOne(storageLocationId,{
+		$set:{available:available}
+	}).then( ( respStorageLocationData : dbModels.StorageLocation ) => {
+		deferred.resolve(respStorageLocationData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
 	return deferred.promise;
 }

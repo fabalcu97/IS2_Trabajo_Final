@@ -38,6 +38,18 @@ export function getDetailByBillId(billId: string){
 	return deferred.promise;
 }
 
+export function getValidDetail(billId: string){
+	let detail: MongoModel = new MongoModel('detail');
+	let deferred = Q.defer();
+
+	detail.findAll({billId: billId, stored: false}).then( ( respDetail: dbModels.Detail[] ) => {
+		deferred.resolve(respDetail);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
 export function updateStoredDetail(detailId : string , detailStored : boolean)
 {
 	let detail : MongoModel = new MongoModel('detail');

@@ -84,6 +84,18 @@ apiRoutes.addRoute('GET', '/get/detail/:billId', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('GET', '/get/validDetail/:billId', (req, res) => {
+	Detail.getValidDetail(req.params.billId).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
 apiRoutes.addRoute('POST', '/updateStored/detail', (req, res) => {
 	
 	Detail.updateStoredDetail(req.body.detailId,req.body.detailStored)
@@ -253,7 +265,7 @@ apiRoutes.addRoute('GET', '/get/storagelocation/:category', (req, res) => {
 });
 
 apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
-	StorageLocation.updateAvailableStorageLocation(req.body.storageLocations)
+	StorageLocation.updateAvailableStorageLocation(req.body.storageLocationId, req.body.available)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
