@@ -9,6 +9,7 @@ export function registerLot( lotData: dbModels.Lot) {
 	let deferred = Q.defer();
 
 	let baseLotData: dbModels.Lot = {
+		productId : lotData.productId,
 		classification : lotData.classification,
         locationId : lotData.locationId
 	};
@@ -18,6 +19,21 @@ export function registerLot( lotData: dbModels.Lot) {
 	}).catch( () => {
 		returnServerError(deferred)
 	});
+	return deferred.promise;
+}
+
+export function getLotByProductId (productId : string)
+{
+	let lot : MongoModel = new MongoModel('lot');
+	let deferred = Q.defer();
+
+	lot.findAll(productId).then( ( respLotData: dbModels.Lot ) => {
+		deferred.resolve(respLotData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+
+	
 	return deferred.promise;
 }
 
