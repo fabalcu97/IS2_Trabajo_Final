@@ -9,12 +9,20 @@ body
         
         label.switch
             input(
-                type="checkbox",            
-                [checked]="switchIE",
-                (change)="switchIE = !switchIE"           
+                type="checkbox",          
+                [(ngModel)]='switchIE',
+                (click)='changeSwitch()'                
             )
             div.slider.round
+            br
+            h4.text-center(
+               *ngIf="switchIE!=true"
+            ) Expenses
 
+            h4.text-center(
+               *ngIf="switchIE==true"
+            ) Incomes
+            
         br
                 
         .columns

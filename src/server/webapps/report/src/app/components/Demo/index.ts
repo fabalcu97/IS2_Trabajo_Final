@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UIRouter} from 'ui-router-ng2';
+import { ResourcesService } from "../../shared/services/Resources";
 
 @Component({
     styles: [require('./styles.styl').toString()],
@@ -10,6 +11,7 @@ export class DemoComponent implements OnInit {
     // Attributes
        // router: UIRouter;
        private switchIE: boolean = true;
+       
 
     // Methods
         /*constructor (router: UIRouter) {
@@ -22,5 +24,15 @@ export class DemoComponent implements OnInit {
         }
 
         ngOnInit () {}
+
+        changeSwitch(){
+            this.switchIE =! this.switchIE;
+            if (this.switchIE == true){
+                console.log('Income');
+            }
+            else{
+                console.log('expense');
+            }
+        }
 
 }
