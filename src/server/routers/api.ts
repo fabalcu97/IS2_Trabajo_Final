@@ -98,7 +98,7 @@ apiRoutes.addRoute('GET', '/get/validDetail/:billId', (req, res) => {
 
 apiRoutes.addRoute('POST', '/updateStored/detail', (req, res) => {
 	
-	Detail.updateStoredDetail(req.body.detailId,req.body.detailStored)
+	Detail.updateStoredDetail(req.body.detailId, req.body.detailStored)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
@@ -201,7 +201,7 @@ apiRoutes.addRoute('POST', '/updateBulkControl/order', (req, res) => {
 
 apiRoutes.addRoute('POST', '/updateArrivalDate/order', (req, res) => {
 	
-	Order.updateArrivalDateOrder(req.body.orderId,req.body.orderArrivalDate)
+	Order.updateArrivalDateOrder(req.body.orderId, req.body.orderArrivalDate)
 	.then( (data) => {
 		res.status(200);
 		res.send(data);
@@ -278,7 +278,7 @@ apiRoutes.addRoute('POST', '/updateAvailable/storagelocation', (req, res) => {
 });
 
 apiRoutes.addRoute('POST', '/add/lot', (req, res) => {
-	Lot.registerLot(req.body).then( (data) => {
+	Lot.registerLot(req.body.Lot).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
