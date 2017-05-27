@@ -86,7 +86,7 @@ body
       legend
         h3.articleTitle Locations
       table(
-        *ngFor="let locations of locationStorages"
+        *ngFor="let locations of locationStorages; let i = index"
       )
         thead
           tr
@@ -98,7 +98,7 @@ body
           tr(
             *ngFor="let location of locations"
           )
-            td {{ getProductName(location.productId) }}
+            td {{ getProductName(i) }}
             td {{location.x}}
             td {{location.y}}
             td {{location.z}}
