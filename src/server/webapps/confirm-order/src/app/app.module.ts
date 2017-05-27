@@ -2,7 +2,6 @@ import { NgModule, Component } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-// import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UIRouterModule } from 'ui-router-ng2';
 import { componentsList } from './components';
 import { sharedComponentList } from './shared/components';
