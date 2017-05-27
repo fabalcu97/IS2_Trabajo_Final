@@ -7,7 +7,7 @@ describe ( ' Register Lot' , function () {
     it ( 'Should return 200' , (done) => {
         request.post('http://localhost:8000/api/add/lot', {
             form : {
-                productId : "product01" ,
+                productId : "product01",
                 locationId : "123"
             }
         },( err , httpResponse , body ) => {

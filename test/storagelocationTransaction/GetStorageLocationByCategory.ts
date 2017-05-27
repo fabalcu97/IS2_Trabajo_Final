@@ -5,16 +5,16 @@ import 'mocha' ;
 
 describe ( 'Get Storage Location By Category' , function() {
     it( 'Should Return 200' , (done) => {
-        request.get('http://localhost:8000/api/get/storagelocation/:category' , function() {
+        request.get('http://localhost:8000/api/get/storagelocation/:category' , {
             form : {
-                x: 1 ,
-                y: 2 ,
-                z: 3 ,
-                available : true ,
+                x: 1,
+                y: 2,
+                z: 3,
+                available : true,
                 category : "categoryA"
             }
         },( err , httpResponse , body) => {
-            assert.equal( 200 , httpResponse.StatusCode ) ;
+            assert.equal( 200 , httpResponse.statusCode ) ;
             done();
         });
     });

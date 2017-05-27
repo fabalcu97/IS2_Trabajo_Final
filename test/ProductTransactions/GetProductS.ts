@@ -7,7 +7,7 @@ import 'mocha' ;
      it('Should Return 200', (done) => {
          request.get('http://localhost:8000/api/get/products',{
              form : {
-                 idProduct : "product01" ,
+                 idProduct : "product01",
                  idType : "Type_productA"
              }
          },( err , httpResponse ,body ) => {

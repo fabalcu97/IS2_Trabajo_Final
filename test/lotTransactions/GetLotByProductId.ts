@@ -7,7 +7,7 @@ describe ( ' Get Lot By Product Id ' , function () {
     it ( 'Should return 200' , (done) => {
         request.get('http://localhost:8000/api/get/lot/:productId', {
             form : {
-                productId : "product01" ,
+                productId : "product01",
                 locationId : "123"
             }
         },( err , httpResponse , body ) => {
