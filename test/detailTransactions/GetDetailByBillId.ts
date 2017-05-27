@@ -9,10 +9,10 @@ describe ('Get Detail By Bill Id', function (){
             form: {
                 billId : "234567",
                 productId : "0001101",
-                quantity : 100,
-                totalPrice :  10000.00,
-                totalWeight : 20000.00,
-                lotQuantity : 100
+                quantity : "100",
+                totalPrice :  "10000.00",
+                totalWeight : "20000.00",
+                lotQuantity : "100"
             }
         },(err, httpResponse , body )=> {
             assert.equal ( 200 , httpResponse.statusCode );

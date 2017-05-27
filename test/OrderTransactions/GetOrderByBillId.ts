@@ -11,9 +11,9 @@ describe('Get Order By Bill Id', function () {
         form: {
           idBill : "123ab123ca13a",
           idGuide : "123ab123ca13a",
-          bulkControl : false,
+          bulkControl : true,
           arrivalDate : "tomorrow",
-          received : false,
+          received : true,
           late : false
         }
     }, (err, httpResponse, body) => {

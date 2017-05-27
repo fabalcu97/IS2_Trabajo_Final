@@ -7,10 +7,10 @@ describe ( ' Update available Storage Location' , function() {
     it( 'Should Return 200' , (done) => {
         request.post('http://localhost:8000/api/udpdateAvailable/storagelocation' , {
             form : {
-                x: 1,
-                y: 2,
-                z: 3,
-                available : false,
+                x: "1",
+                y: "2",
+                z: "3",
+                available : true,
                 category : "categoryA"
             }
         },( err , httpResponse , body) => {

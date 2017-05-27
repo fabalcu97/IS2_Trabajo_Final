@@ -9,9 +9,9 @@ describe('Register UpDate Bulk Control',function () {
             form: {
                 idBill : "123ab123ca13a",
                 idGuide : "123ab123c13a",
-                bulkControl : false,
+                bulkControl : true,
                 arrivalDate : "date",
-                received : false,
+                received : true,
                 late : false 
             }
         },(err,httpResponse ,body) => {

@@ -9,11 +9,11 @@ describe ( 'Register Guide ' , function () {
             form : {
                 reason : "order request",
                 addressee : " Av. Moon ",
-                departureDate : 33,
-                arrivalDate : 240717,
+                departureDate : "33",
+                arrivalDate : "240717",
                 transportCompany : "Angelitos negros  no heaven",
                 vehiclePlate : "v8e-086",
-                totalWeight : 20000.00
+                totalWeight : "20000.00"
             }
         },( err ,httpResponse , body ) => {
             assert.equal ( 200 , httpResponse.statusCode );

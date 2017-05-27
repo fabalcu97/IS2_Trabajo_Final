@@ -9,7 +9,7 @@ describe ('Register Update Order Late' , function () {
             form : {
                 idBill : "123ab123ca13a",
                 idGuide : "123ab123ca13a",
-                bulkControl : false,
+                bulkControl : true,
                 arrivalDate : "lateDate",
                 received : true,
                 late : false

@@ -9,7 +9,7 @@ describe(' Register Update Order Received', function () {
             form : {
                 idBill : "123ab123ca13a",
                 idGuide : "123ab123ca13a",
-                bulkControl :true,
+                bulkControl : true,
                 arrivalDate : "good date",
                 received : true,
                 late : false 

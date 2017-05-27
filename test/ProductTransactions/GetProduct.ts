@@ -9,9 +9,9 @@ describe(' Get Product ', function () {
             form : {
                 name : "product01",
                 category : "list01",
-                unitPrice : 10.00,
-                unitWeight : 5.00,
-                quantityPerLot : 100 
+                unitPrice : "10.00",
+                unitWeight : "5.00",
+                quantityPerLot : "100" 
             }
         },( err , httpResponse , body ) => {
             assert.equal( 200 , httpResponse.statusCode );
