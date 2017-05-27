@@ -1,4 +1,3 @@
-
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
@@ -43,8 +42,8 @@ export class ResourcesService {
 
   public updateOrderReceived (orderId: String, received: boolean): Observable<Interfaces.Order> {
     return this.$http.post('http://localhost:8000/api/updateReceived/order/', {
-        orderId: orderId,
-        orderReceived: received
+      orderId: orderId,
+      orderReceived: received
     }).map((res: Response) => res.json());
   }
 
@@ -55,16 +54,16 @@ export class ResourcesService {
     }).map((res: Response) => res.json());
   }
 
-  public getProducts (): Observable<Array<Interfaces.Product>> {
+  public getProducts (): Observable<Interfaces.Product[]> {
     return this.$http.get('http://localhost:8000/api/get/products').map((res: Response) => res.json());
   }
 
   public registerBill (bill: Interfaces.Bill): Observable<Interfaces.Bill> {
     return this.$http.post('http://localhost:8000/api/add/bill/', {
-        subtotal : bill.subtotal,
-        iva : bill.iva,
-        total : bill.total
-	  }).map((res: Response) => res.json());
+      subtotal : bill.subtotal,
+      iva : bill.iva,
+      total : bill.total
+    }).map((res: Response) => res.json());
   }
 
   public registerRemisionGuide (guide: Interfaces.RemissionGuide): Observable<Interfaces.RemissionGuide> {
@@ -100,5 +99,13 @@ export class ResourcesService {
       lotQuantity: detail.lotQuantity
     }).map((res: Response) => res.json());
   }
-  
+
+  public getAvailableLots (productId: String): Observable<Interfaces.Lot[]> {
+    return this.$http.get('http://localhost:8000/api/get/lot/' + productId).map((res: Response) => res.json());
+  }
+
+  public getStorageLocation (storageLocationId: String): Observable<Interfaces.StorageLocation> {
+    return this.$http.get('http://localhost:8000/api/get/slocation/' + storageLocationId).map((res: Response) => res.json());
+  }
+
 }
