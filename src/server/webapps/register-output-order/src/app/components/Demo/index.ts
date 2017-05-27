@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { ResourcesService } from "../../shared/services/Resources";
-import { FormGroup,FormArray,FormBuilder,Validators } from '@angular/forms';
 import * as dbModels from "../../../../../../../core/db-models/models";
 
 
@@ -14,12 +13,11 @@ export class DemoComponent implements OnInit {
       resources: ResourcesService;
       products: dbModels.Product[];
       lots: dbModels.Lot[][];
-      locationList: dbModels.StorageLocation[];
+      locationStorages: dbModels.StorageLocation[][];
       detailList: dbModels.Detail[];
       bill: dbModels.Bill;
       order: dbModels.Order;
       guide: dbModels.RemissionGuide;
-      index: number;
 
     // Methods
       constructor (resources: ResourcesService) {
@@ -36,7 +34,7 @@ export class DemoComponent implements OnInit {
           bulkControl: false,
           late: false,
           received: false,
-          output:true
+          output: true
         };
         this.guide = {
           addressee: '',
@@ -50,6 +48,7 @@ export class DemoComponent implements OnInit {
         this.detailList = [];
         this.products = [];
         this.lots = [];
+        this.locationStorages = [];
       }
 
       ngOnInit() {
@@ -63,11 +62,45 @@ export class DemoComponent implements OnInit {
         )
       }
 
+      verifyLots(index) {
+        this.resources.getAvailableLots(this.detailList[index].productId).subscribe(
+          (data) => {
+            if(this.lots[index]) {
+              this.lots[index] = data;
+            }
+            else {
+              this.lots.push(data);
+            }
+            this.addProductToDetail();
+            let tempStorage = [];
+            if(this.detailList[index].lotQuantity > this.lots[index].length) {
+              return;
+            }
+            for (let i = 0; i < this.detailList[index].lotQuantity; ++i) {
+              this.resources.getStorageLocation(this.lots[index][i].locationId).subscribe(
+                (data) => {
+                  tempStorage.push(data);
+                },
+                (err) => {
+                  console.log(err);
+                }
+              )
+            }
+            if(this.locationStorages[index]) {
+              this.locationStorages[index] = tempStorage;
+            }
+            else {
+              this.locationStorages.push(tempStorage);
+            }
+            console.log(this.locationStorages);
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+      }
+
       addProductToDetail () {
-        
-        this.locationList = [];
-        
-        this.index = 0;
         this.bill.subtotal = 0;
         this.guide.totalWeight = 0;
         this.detailList.forEach( (detail) => {
@@ -77,33 +110,10 @@ export class DemoComponent implements OnInit {
           if (product.length == 0) {
             return;
           }
-          
-          this.resources.getAviableLots(product[0].id).subscribe(
-            (data) => {
-              this.lots[this.index] = data;
-            },
-            (err) => {
-              console.log(err);
-            }
-          )
 
-          console.log(this.lots[this.index].length);
-
-          for(let j=0; j<detail.quantity; ++j){
-            this.resources.getStorageLocation(this.lots[this.index][j].locationId).subscribe(
-              (data) => {
-                this.locationList.push(data);
-              },
-              (err) => {
-                console.log(err);
-              }
-            )
-          }
-
-          detail.lotQuantity = product[0].quantityPerLot;
-          this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
-          this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;
-          this.index++;
+          detail.quantity = product[0].quantityPerLot * detail.lotQuantity;
+          this.bill.subtotal += product[0].unitPrice * detail.quantity;
+          this.guide.totalWeight += product[0].unitWeight * detail.quantity;
 
         });
 
@@ -120,11 +130,20 @@ export class DemoComponent implements OnInit {
           totalPrice: 0,
           totalWeight: 0
         });
-        this.lots.push([]);
+      }
+
+      getProductName(productId: String): String {
+        console.log(123);
+        for (let i = 0; i < this.products.length; ++i) {
+          if(this.products[i].id == productId) {
+            return this.products[i].name;
+          }
+        }
       }
 
       deleteProduct (index: number) {
         this.detailList.splice(index, 1);
+        this.lots.splice(index, 1);
       }
 
       submitForm () {

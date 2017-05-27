@@ -4,165 +4,176 @@ body
     h1.pageTitle Order Information
     div.container
 
-          legend 
-            h3.articleTitle Bill
-          table
-            tr
-              td
-                h3.pageSubtitle Subtotal:
-              td
-                label S/. {{bill.subtotal}}
-            tr
-              td
-                h3.pageSubtitle IGV:    
-              td
-                label {{bill.iva}} %                     
-            tr
-              td
-                h3.pageSubtitle  Total:  
-              td
-                label S/. {{bill.total}}
+      legend
+        h3.articleTitle Bill
+      table
+        tr
+          td
+            h3.pageSubtitle Subtotal:
+          td
+            label S/. {{bill.subtotal}}
+        tr
+          td
+            h3.pageSubtitle IGV:
+          td
+            label {{bill.iva}} %
+        tr
+          td
+            h3.pageSubtitle  Total:
+          td
+            label S/. {{bill.total}}
 
-          legend
-            h3.articleTitle Order
-          table
-            tr
-              td
-                h3.pageSubtitle Bulk Control:
-              td
-                label.switch
-                  input(
-                      type="checkbox",
-                      [(ngModel)]='order.bulkControl',
-                      [checked]='order.bulkControl'
-                  )
-                  div.slider.round
-            tr
-              td
-                h3.pageSubtitle Arrival Date:
-              td
-                input(
-                    type='number',
-                    [(ngModel)]='order.arrivalDate',
-                      required
-                  )
-            tr
-              td
-                h3.pageSubtitle Detail:
-              td
-                table
-                  tr
-                      td 
-                        h4 Product name
-                      td 
-                        h4 Lots
+      legend
+        h3.articleTitle Order
+      table
+        tr
+          td
+            h3.pageSubtitle Bulk Control:
+          td
+            label.switch
+              input(
+                type="checkbox",
+                [(ngModel)]='order.bulkControl',
+                [checked]='order.bulkControl'
+              )
+              div.slider.round
+        tr
+          td
+            h3.pageSubtitle Arrival Date:
+          td
+            input(
+              type='number',
+              [(ngModel)]='order.arrivalDate',
+              required
+            )
+        tr
+          td
+            h3.pageSubtitle Detail:
+          td
+            table
+              thead
+                tr
+                  th Product
+                  th Lots
+                  th Lots available
 
-                  tr(*ngFor='let detail of detailList; let i = index')
-                      td 
-                          select(
-                              name='products',
-                              [(ngModel)]='detailList[i].productId',
-                              (change)="addProductToDetail()"
-                            )
-                            option(
-                              value=""
-                            ) Products
-                            option(
-                              *ngFor='let product of products',
-                              [ngValue]='product.id',
-                            ) {{product.name}} ({{product.quantityPerLot}}/lot)
-                      td 
-                          input(
-                              type='number',
-                              [(ngModel)]='detailList[i].quantity',
-                              (change)="addProductToDetail()",
-                              required
-                            )
-                      td
-                          label {{lots[i].length}} aviable lots
-                      td 
-                        button((click)='deleteProduct(i)') Delete           
-                  button((click)='addProduct()') Add
-            tr
-              td
-                h3.pageSubtitle Lots Locations:
-              td
-                table
-                  tr(*ngFor='let location of locationList; let i = index')
-                    td
-                      label x:{{locationList[i].x}} y:{{locationList[i].y}} z:{{locationList[i].z}}
-
-          legend 
-            h3.articleTitle Remision guide
-          table
-              tr
+              tr(*ngFor='let detail of detailList; let i = index')
                 td
-                  h3.pageSubtitle Reason:
-                td
-                  input(
-                    type='text',
-                    [(ngModel)]='guide.reason',
-                    required
+                  select(
+                    name='products',
+                    [(ngModel)]='detailList[i].productId'
                   )
-              tr
-                td
-                  h3.pageSubtitle Departure:
+                    option(
+                      *ngFor='let product of products',
+                      [ngValue]='product.id',
+                    ) {{product.name}} ({{product.quantityPerLot}}/lot)
                 td
                   input(
                     type='number',
-                    [(ngModel)]='guide.departureDate',
-                    required
-                  )                  
-              tr
-                td
-                  h3.pageSubtitle Arrival:
-                td
-                  input(
-                    type='number',
-                    [(ngModel)]='guide.arrivalDate',
+                    min=0,
+                    [(ngModel)]='detailList[i].lotQuantity',
+                    (change)="verifyLots(i)"
                     required
                   )
-              tr
                 td
-                  h3.pageSubtitle Addressee:
+                  label(
+                    *ngIf="lots[i]",
+                    [ngClass]="{'alert':lots[i].length<detailList[i].lotQuantity}"
+                  ) {{lots[i].length}}
                 td
-                  input(
-                    type='text',
-                    [(ngModel)]='guide.addressee',
-                    required
-                  )
-              tr
-                td
-                  h3.pageSubtitle Courier:
-                td
-                  input(
-                    type='text',
-                    [(ngModel)]='guide.transportCompany',
-                    required
-                  )
-              tr
-                td
-                  h3.pageSubtitle Vehicle Plate:
-                td
-                  input(
-                    type='text',
-                    [(ngModel)]='guide.vehiclePlate',
-                    required
-                  )   
-              tr
-                td
-                  h3.pageSubtitle Total Weight:
-                td
-                  input(
-                    type='number',
-                    min='0.00',
-                    step='0.01',
-                    [(ngModel)]='guide.totalWeight',
-                    disabled,
-                    required
-                  )
-                  p kg
+                  button((click)='deleteProduct(i)') Delete
+              button((click)='addProduct()') Add
+      legend
+        h3.articleTitle Locations
+      table(
+        *ngFor="let locations of locationStorages"
+      )
+        thead
+          tr
+            th Product
+            th X coordinate
+            th Y coordinate
+            th Z coordinate
+        tbody
+          tr(
+            *ngFor="let location of locations"
+          )
+            td {{ getProductName(location.productId) }}
+            td {{location.x}}
+            td {{location.y}}
+            td {{location.z}}
 
-          button.button.btnPush.btnBlueGreen(
-            (click)='submitForm()'
-            ) Confirmar
+      legend
+        h3.articleTitle Remission guide
+      table
+        tr
+          td
+            h3.pageSubtitle Reason:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.reason',
+              required
+            )
+        tr
+          td
+            h3.pageSubtitle Departure:
+          td
+            input(
+              type='number',
+              [(ngModel)]='guide.departureDate',
+              required
+            )
+        tr
+          td
+            h3.pageSubtitle Arrival:
+          td
+            input(
+              type='number',
+              [(ngModel)]='guide.arrivalDate',
+              required
+            )
+        tr
+          td
+            h3.pageSubtitle Addressee:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.addressee',
+              required
+            )
+        tr
+          td
+            h3.pageSubtitle Courier:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.transportCompany',
+              required
+            )
+        tr
+          td
+            h3.pageSubtitle Vehicle Plate:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.vehiclePlate',
+              required
+            )
+        tr
+          td
+            h3.pageSubtitle Total Weight:
+          td
+            input(
+              type='number',
+              min='0.00',
+              step='0.01',
+              [(ngModel)]='guide.totalWeight',
+              disabled,
+              required
+            )
+            p kg
+
+      button.button.btnPush.btnBlueGreen(
+        (click)='submitForm()'
+      ) Confirmar
