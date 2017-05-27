@@ -39,7 +39,7 @@ export class ConfirmOrderComponent implements OnInit{
 
   ngOnInit () {
 
-    this.resources.getDetail (this.billId).subscribe(
+    this.resources.getValidDetail (this.billId).subscribe(
       (detailData) => {
         this.detail = detailData;
         this.detail.forEach( (product) => {
@@ -66,14 +66,12 @@ export class ConfirmOrderComponent implements OnInit{
     this.currentProduct.detail = this.detail[i];
     this.alertMessage = false;
     this.registerLotButton = false;
-    console.log(this.currentProduct)
   }
 
   requestLocation () {
     console.log(this.currentProduct);
     this.resources.getAvailableLocations(this.currentProduct.category).subscribe(
       (data) => {
-        console.log(data)
         if (data.length < this.currentProduct.detail.lotQuantity) {
           this.alertMessage = true;
           return;
@@ -104,7 +102,6 @@ export class ConfirmOrderComponent implements OnInit{
       );
       this.resources.updateStorageLocation(this.availableLocations[i].id, false).subscribe(
         (data) => {
-
         },
         (err) => {
           console.log(err);
@@ -113,13 +110,14 @@ export class ConfirmOrderComponent implements OnInit{
     }
     this.resources.updateStoredDetail(this.currentProduct.detail.id, true).subscribe(
       (data) => {
-
+        alert("Se ingresaron los lotes.")
       },
       (err) => {
         console.log(err);
       }
     );
     this.detail = [];
+    this.products = [];
     this.resources.getValidDetail (this.billId).subscribe(
       (detailData) => {
         this.detail = detailData;

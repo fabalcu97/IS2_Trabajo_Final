@@ -2,7 +2,7 @@ import * as Q from 'q';
 import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
 import { Error } from '../interface/Error'
-import { returnServerError } from '../../core/services/returnServerError'
+import { returnServerError } from '../services/returnServerError'
 
 export function registerBill( billData: dbModels.Bill) {
 	let bill: MongoModel = new MongoModel('bill');
