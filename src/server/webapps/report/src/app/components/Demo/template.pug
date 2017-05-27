@@ -2,18 +2,21 @@ body
 
 
     .wrapper
-        h3 Daily
         
-        h5 Incomes
-        label.switch
-            input(
-                type='checkbox'
-            )
-            div.slider.round
-            br 
-        |   Expenses
+        h3 Daily            
+            input(type='date', name='bday')
         br
         
+        label.switch
+            input(
+                type="checkbox",            
+                [checked]="switchIE",
+                (change)="switchIE = !switchIE"           
+            )
+            div.slider.round
+
+        br
+                
         .columns
             ul.price
                 li.header(style='background-color:#80bfb0') # Bill 
