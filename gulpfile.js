@@ -69,6 +69,7 @@
 				var sharedPath = path.join(__dirname, '/src/server/webapps/.shared/src/app/shared');
 				webapps.forEach(function (webapp) {
 						if (webapp === '.shared') return;
+      if (webapp === '.seed') return;
 						var webappPath = path.join(__dirname, 'src/server/webapps/', webapp);
 						var webappSharedPath = path.join(webappPath, 'src/app/shared');
       fs.copySync(sharedPath, webappSharedPath);
