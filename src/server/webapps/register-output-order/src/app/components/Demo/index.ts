@@ -132,10 +132,10 @@ export class DemoComponent implements OnInit {
         });
       }
 
-      getProductName(productId: String): String {
-        console.log(123);
+      getProductName(index): String {
+        console.log(index);
         for (let i = 0; i < this.products.length; ++i) {
-          if(this.products[i].id == productId) {
+          if(this.products[i].id == this.detailList[index].productId) {
             return this.products[i].name;
           }
         }
