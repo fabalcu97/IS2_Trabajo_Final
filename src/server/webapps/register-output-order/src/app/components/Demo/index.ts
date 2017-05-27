@@ -28,12 +28,12 @@ export class DemoComponent implements OnInit {
         };
         this.order = {
           arrivalDate: 0,
-          output: false,
           guideId: '0',
           billId: '0',
           bulkControl: false,
           late: false,
-          received: false
+          received: false,
+          output:true
         };
         this.guide = {
           addressee: '',
@@ -70,9 +70,9 @@ export class DemoComponent implements OnInit {
             return;
           }
 
-          detail.quantity = product[0].quantityPerLot * detail.lotQuantity;
-          this.bill.subtotal += product[0].unitPrice * detail.quantity;
-          this.guide.totalWeight += product[0].unitWeight * detail.quantity;
+          detail.lotQuantity = product[0].quantityPerLot;
+          this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
+          this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;
 
         });
 

@@ -4,7 +4,7 @@ body
     h1.pageTitle Order Information
     div.container
 
-          legend
+          legend 
             h3.articleTitle Bill
           table
             tr
@@ -14,12 +14,12 @@ body
                 label S/. {{bill.subtotal}}
             tr
               td
-                h3.pageSubtitle IGV:
+                h3.pageSubtitle IGV:    
               td
-                label {{bill.iva}} %
+                label {{bill.iva}} %                     
             tr
               td
-                h3.pageSubtitle  Total:
+                h3.pageSubtitle  Total:  
               td
                 label S/. {{bill.total}}
 
@@ -52,13 +52,13 @@ body
               td
                 table
                   tr
-                      td
+                      td 
                         h4 Product name
-                      td
+                      td 
                         h4 Lots
 
                   tr(*ngFor='let detail of detailList; let i = index')
-                      td
+                      td 
                           select(
                               name='products',
                               [(ngModel)]='detailList[i].productId',
@@ -71,18 +71,18 @@ body
                               *ngFor='let product of products',
                               [ngValue]='product.id',
                             ) {{product.name}} ({{product.quantityPerLot}}/lot)
-                      td
+                      td 
                           input(
                               type='number',
-                              [(ngModel)]='detailList[i].lotQuantity',
+                              [(ngModel)]='detailList[i].quantity',
                               (change)="addProductToDetail()",
                               required
                             )
-                      td
-                        button((click)='deleteProduct(i)') Delete
+                      td 
+                        button((click)='deleteProduct(i)') Delete           
                   button((click)='addProduct()') Add
 
-          legend
+          legend 
             h3.articleTitle Remision guide
           table
               tr
@@ -102,7 +102,7 @@ body
                     type='number',
                     [(ngModel)]='guide.departureDate',
                     required
-                  )
+                  )                  
               tr
                 td
                   h3.pageSubtitle Arrival:
@@ -138,7 +138,7 @@ body
                     type='text',
                     [(ngModel)]='guide.vehiclePlate',
                     required
-                  )
+                  )   
               tr
                 td
                   h3.pageSubtitle Total Weight:
