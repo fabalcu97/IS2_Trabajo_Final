@@ -78,9 +78,19 @@ body
                               (change)="addProductToDetail()",
                               required
                             )
+                      td
+                          label {{lots[i].length}} aviable lots
                       td 
                         button((click)='deleteProduct(i)') Delete           
                   button((click)='addProduct()') Add
+            tr
+              td
+                h3.pageSubtitle Lots Locations:
+              td
+                table
+                  tr(*ngFor='let location of locationList; let i = index')
+                    td
+                      label x:{{locationList[i].x}} y:{{locationList[i].y}} z:{{locationList[i].z}}
 
           legend 
             h3.articleTitle Remision guide

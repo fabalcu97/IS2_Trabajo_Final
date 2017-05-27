@@ -252,6 +252,19 @@ apiRoutes.addRoute('POST', '/add/storagelocation', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('GET', '/get/slocation/:storageLocationId', (req, res) => {
+	StorageLocation.getStorageLocationById(req.params.storageLocationId).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+
 apiRoutes.addRoute('GET', '/get/storagelocation/:category', (req, res) => {
 	StorageLocation.getStorageLocationByCategory(req.params.category).then( (data) => {
 		res.status(200);

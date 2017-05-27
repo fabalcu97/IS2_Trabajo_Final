@@ -13,10 +13,13 @@ export class DemoComponent implements OnInit {
     // Attributes
       resources: ResourcesService;
       products: dbModels.Product[];
+      lots: dbModels.Lot[][];
+      locationList: dbModels.StorageLocation[];
       detailList: dbModels.Detail[];
       bill: dbModels.Bill;
       order: dbModels.Order;
       guide: dbModels.RemissionGuide;
+      index: number;
 
     // Methods
       constructor (resources: ResourcesService) {
@@ -46,6 +49,7 @@ export class DemoComponent implements OnInit {
         };
         this.detailList = [];
         this.products = [];
+        this.lots = [];
       }
 
       ngOnInit() {
@@ -60,6 +64,10 @@ export class DemoComponent implements OnInit {
       }
 
       addProductToDetail () {
+        
+        this.locationList = [];
+        
+        this.index = 0;
         this.bill.subtotal = 0;
         this.guide.totalWeight = 0;
         this.detailList.forEach( (detail) => {
@@ -69,10 +77,33 @@ export class DemoComponent implements OnInit {
           if (product.length == 0) {
             return;
           }
+          
+          this.resources.getAviableLots(product[0].id).subscribe(
+            (data) => {
+              this.lots[this.index] = data;
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+
+          console.log(this.lots[this.index].length);
+
+          for(let j=0; j<detail.quantity; ++j){
+            this.resources.getStorageLocation(this.lots[this.index][j].locationId).subscribe(
+              (data) => {
+                this.locationList.push(data);
+              },
+              (err) => {
+                console.log(err);
+              }
+            )
+          }
 
           detail.lotQuantity = product[0].quantityPerLot;
           this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
           this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;
+          this.index++;
 
         });
 
@@ -88,7 +119,8 @@ export class DemoComponent implements OnInit {
           quantity: 0,
           totalPrice: 0,
           totalWeight: 0
-        })
+        });
+        this.lots.push([]);
       }
 
       deleteProduct (index: number) {

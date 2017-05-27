@@ -102,4 +102,13 @@ export class ResourcesService {
     }).map((res: Response) => res.json());
   }
 
+  public getAviableLots (productId: String): Observable<Interfaces.Lot[]> {
+    return this.$http.get('http://localhost:8000/api/get/lot/' + productId).map((res: Response) => res.json());
+  }
+
+  public getStorageLocation (storageLocationId: String): Observable<Interfaces.StorageLocation> {
+    return this.$http.get('http://localhost:8000/api/get/slocation/' + storageLocationId).map((res: Response) => res.json());
+  }
+
+
 }
