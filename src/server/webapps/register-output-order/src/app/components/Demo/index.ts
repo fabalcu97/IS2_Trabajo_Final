@@ -70,9 +70,9 @@ export class DemoComponent implements OnInit {
             return;
           }
 
-          detail.lotQuantity = product[0].quantityPerLot;
-          this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
-          this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;
+          detail.quantity = product[0].quantityPerLot * detail.lotQuantity;
+          this.bill.subtotal += product[0].unitPrice * detail.quantity;
+          this.guide.totalWeight += product[0].unitWeight * detail.quantity;
 
         });
 
