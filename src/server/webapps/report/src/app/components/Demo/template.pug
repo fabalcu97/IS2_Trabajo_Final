@@ -1,5 +1,6 @@
 body
 
+
     .wrapper
         h3 Daily
         
@@ -7,14 +8,39 @@ body
         label.switch
             input(type='checkbox')
             .slider.round
-        h6 Expenses
-
+            br 
+        |   Expenses
+        br
         
-        table
-            tr  
-                td Bill number
-                td Expenses
-            tr
-                td 
-                td 
+        .columns
+            ul.price
+                li.header Basic
+                li.grey $ 9.99 / year
+                li 10GB Storage
+                li 10 Emails
+                li 10 Domains
+                li 1GB Bandwidth
+                li.grey
+        .columns
+            ul.price
+                li.header(style='background-color:#4CAF50') Pro
+                li.grey $ 24.99 / year
+                li 25GB Storage
+                li 25 Emails
+                li 25 Domains
+                li 2GB Bandwidth
+                li.grey
+                
+        .columns
+            ul.price
+                li.header Premium
+                li.grey $ 49.99 / year
+                li 50GB Storage
+                li 50 Emails
+                li 50 Domains
+                li 5GB Bandwidth
+                li.grey
+                
+
+
             
