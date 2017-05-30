@@ -64,10 +64,23 @@
             console.log('Webapp created..');
 		});
 
+		gulp.task('webapps:shared:update', function () {
+				var webapps = fs.readdirSync(path.join(__dirname, 'src/server/webapps/'));
+				var sharedPath = path.join(__dirname, '/src/server/webapps/.shared/src/app/shared');
+				webapps.forEach(function (webapp) {
+						if (webapp === '.shared') return;
+      if (webapp === '.seed') return;
+						var webappPath = path.join(__dirname, 'src/server/webapps/', webapp);
+						var webappSharedPath = path.join(webappPath, 'src/app/shared');
+      fs.copySync(sharedPath, webappSharedPath);
+				});
+				console.log('Webapps shared updated!');
+		});
+
 	// Test
 		gulp.task('test:build', function () {
-            return shell.exec('node_modules/.bin/webpack');
-        });
+			return shell.exec('node_modules/.bin/webpack');
+		});
 		gulp.task('start:test', function () {
 			return shell.exec('node_modules/.bin/mocha ./dist/test.bundle.js');
 		});
@@ -92,8 +105,8 @@
 	// Build
 		gulp.task('build', function () {
 			runSequence([
-                'webapps:install',
-                'webapps:build',
+				'webapps:install',
+    'webapps:build',
 				'servers:build'
 			]);
 		});

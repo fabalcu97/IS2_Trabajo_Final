@@ -1,0 +1,2 @@
+import './GetLotByProductId';
+import './RegisterLot';
