@@ -83,8 +83,22 @@ export class ResourcesService {
     }).map((res: Response) => res.json());
   }
 
-  public getProduct (productId: String): Observable<Interfaces.Detail> {
+  public getProduct (productId: String): Observable<Interfaces.Product> {
     return this.$http.get('http://localhost:8000/api/get/product/' + productId).map((res: Response) => res.json());
+  }
+
+  public getProductByName (productName: String): Observable<Interfaces.Detail> {
+    return this.$http.get('http://localhost:8000/api/get/productByName/' + productName).map((res: Response) => res.json());
+  }
+
+  public registerProduct (product: Interfaces.Product): Observable<Interfaces.Product> {
+    return this.$http.post('http://localhost:8000/api/add/product', {
+      category: product.category,
+		  name: product.name,
+		  unitPrice: product.unitPrice,
+		  unitWeight: product.unitWeight,
+		  quantityPerLot: product.quantityPerLot
+    }).map((res: Response) => res.json());
   }
 
   public updateBulkControl (orderId: String, bulkControl: boolean): Observable<Interfaces.Order> {
@@ -137,9 +151,20 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/api/get/lot/' + productId).map((res: Response) => res.json());
   }
 
-  //addproduct
-  //getproductbyname
-  //updateArrivalDate
-  //storagelocation
+  public updateArrivalDateOrder (orderId : string , OrderArrivalDate : number): Observable<any> {
+    return this.$http.post('http://localhost:8000/api/updateArrivalDate/order', {
+      orderId: orderId,
+      OrderArrivalDate: OrderArrivalDate
+    }).map((res: Response) => res.json());
+  }
+  
+  public registerStorageLocation (storageLocation: Interfaces.StorageLocation): Observable<Interfaces.StorageLocation> {
+    return this.$http.post('http://localhost:8000/api/add/storagelocation', {
+      x : storageLocation.x,
+      y : storageLocation.y,
+      z : storageLocation.z,
+      category : storageLocation.category
+    }).map((res: Response) => res.json());
+  }
   
 }
