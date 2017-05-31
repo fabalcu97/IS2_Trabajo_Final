@@ -149,6 +149,19 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 	})
 });
 
+apiRoutes.addRoute('GET', '/get/order/:output', (req, res) => {
+	Order.getOrderByOutput(req.params.output)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
 apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
 	Product.getProductById(req.params.productId).then( (data) => {
 		res.status(200);
