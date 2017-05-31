@@ -23,6 +23,19 @@ export function registerStorageLocation (storageLocationData: dbModels.StorageLo
 	return deferred.promise;
 }
 
+export function getStorageLocationById(storageLocationId: string) {
+
+	let storageLocation: MongoModel = new MongoModel('storagelocation');
+	let deferred = Q.defer();
+
+	storageLocation.findById(storageLocationId).then( ( respStorageLocationData: dbModels.StorageLocation ) => {
+		deferred.resolve(respStorageLocationData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
 export function getStorageLocationByCategory(category: string){
 	let storageLocation: MongoModel = new MongoModel('storagelocation');
 	let deferred = Q.defer();

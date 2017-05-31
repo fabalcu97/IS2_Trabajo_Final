@@ -1,4 +1,3 @@
-
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
@@ -99,6 +98,14 @@ export class ResourcesService {
       totalWeight : detail.totalWeight,
       lotQuantity: detail.lotQuantity
     }).map((res: Response) => res.json());
+  }
+
+  public getAvailableLots (productId: String): Observable<Interfaces.Lot[]> {
+    return this.$http.get('http://localhost:8000/api/get/lot/' + productId).map((res: Response) => res.json());
+  }
+
+  public getStorageLocation (storageLocationId: String): Observable<Interfaces.StorageLocation> {
+    return this.$http.get('http://localhost:8000/api/get/slocation/' + storageLocationId).map((res: Response) => res.json());
   }
 
 }

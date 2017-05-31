@@ -25,7 +25,7 @@ export function getLotByProductId (productId : string)
 	let lot : MongoModel = new MongoModel('lot');
 	let deferred = Q.defer();
 
-	lot.findAll(productId).then( ( respLotData: dbModels.Lot ) => {
+	lot.findAll({productId: productId}).then( ( respLotData: dbModels.Lot ) => {
 		deferred.resolve(respLotData);
 	}).catch( () => {
 		returnServerError(deferred)

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { ResourcesService } from "../../shared/services/Resources";
-import { FormGroup,FormArray,FormBuilder,Validators } from '@angular/forms';
 import * as dbModels from "../../../../../../../core/db-models/models";
 
 
@@ -13,6 +12,8 @@ export class DemoComponent implements OnInit {
     // Attributes
       resources: ResourcesService;
       products: dbModels.Product[];
+      lots: dbModels.Lot[][];
+      locationStorages: dbModels.StorageLocation[][];
       detailList: dbModels.Detail[];
       bill: dbModels.Bill;
       order: dbModels.Order;
@@ -33,7 +34,7 @@ export class DemoComponent implements OnInit {
           bulkControl: false,
           late: false,
           received: false,
-          output:true
+          output: true
         };
         this.guide = {
           addressee: '',
@@ -46,12 +47,52 @@ export class DemoComponent implements OnInit {
         };
         this.detailList = [];
         this.products = [];
+        this.lots = [];
+        this.locationStorages = [];
       }
 
       ngOnInit() {
         this.resources.getProducts().subscribe(
           (data) => {
             this.products = data;
+          },
+          (err) => {
+            console.log(err);
+          }
+        )
+      }
+
+      verifyLots(index) {
+        this.resources.getAvailableLots(this.detailList[index].productId).subscribe(
+          (data) => {
+            if(this.lots[index]) {
+              this.lots[index] = data;
+            }
+            else {
+              this.lots.push(data);
+            }
+            this.addProductToDetail();
+            let tempStorage = [];
+            if(this.detailList[index].lotQuantity > this.lots[index].length) {
+              return;
+            }
+            for (let i = 0; i < this.detailList[index].lotQuantity; ++i) {
+              this.resources.getStorageLocation(this.lots[index][i].locationId).subscribe(
+                (data) => {
+                  tempStorage.push(data);
+                },
+                (err) => {
+                  console.log(err);
+                }
+              )
+            }
+            if(this.locationStorages[index]) {
+              this.locationStorages[index] = tempStorage;
+            }
+            else {
+              this.locationStorages.push(tempStorage);
+            }
+            console.log(this.locationStorages);
           },
           (err) => {
             console.log(err);
@@ -88,11 +129,21 @@ export class DemoComponent implements OnInit {
           quantity: 0,
           totalPrice: 0,
           totalWeight: 0
-        })
+        });
+      }
+
+      getProductName(index): String {
+        console.log(index);
+        for (let i = 0; i < this.products.length; ++i) {
+          if(this.products[i].id == this.detailList[index].productId) {
+            return this.products[i].name;
+          }
+        }
       }
 
       deleteProduct (index: number) {
         this.detailList.splice(index, 1);
+        this.lots.splice(index, 1);
       }
 
       submitForm () {
