@@ -1,0 +1,179 @@
+body
+
+  .wrapper
+    h1.pageTitle Order Information
+    div.container
+
+      legend
+        h3.articleTitle Bill
+      table
+        tr
+          td
+            h5.pageSubtitle Subtotal:
+          td
+            label S/. {{bill.subtotal}}
+        tr
+          td
+            h5.pageSubtitle IGV:
+          td
+            label {{bill.iva}} %
+        tr
+          td
+            h5.pageSubtitle  Total:
+          td
+            label S/. {{bill.total}}
+
+      legend
+        h3.articleTitle Order
+      table
+        tr
+          td
+            h5.pageSubtitle Bulk Control:
+          td
+            label.switch
+              input(
+                type="checkbox",
+                [(ngModel)]='order.bulkControl',
+                [checked]='order.bulkControl'
+              )
+              div.slider.round
+        tr
+          td
+            h5.pageSubtitle Arrival Date:
+          td
+            input(
+              type='number',
+              [(ngModel)]='order.arrivalDate',
+              required
+            )
+        tr
+          td
+            h5.pageSubtitle Detail:
+          td
+            table
+              thead
+                tr
+                  th Product
+                  th Lots
+                  th Lots available
+
+              tr(*ngFor='let detail of detailList; let i = index')
+                td
+                  select(
+                    name='products',
+                    [(ngModel)]='detailList[i].productId'
+                  )
+                    option(
+                      *ngFor='let product of products',
+                      [ngValue]='product.id',
+                    ) {{product.name}} ({{product.quantityPerLot}}/lot)
+                td
+                  input(
+                    type='number',
+                    min=0,
+                    [(ngModel)]='detailList[i].lotQuantity',
+                    (change)="verifyLots(i)"
+                    required
+                  )
+                td
+                  label(
+                    *ngIf="lots[i]",
+                    [ngClass]="{'alert':lots[i].length<detailList[i].lotQuantity}"
+                  ) {{lots[i].length}}
+                td
+                  button((click)='deleteProduct(i)') Delete
+              button((click)='addProduct()') Add
+      legend
+        h3.articleTitle Locations
+      table(
+        *ngFor="let locations of locationStorages; let i = index"
+      )
+        thead
+          tr
+            th Product
+            th X coordinate
+            th Y coordinate
+            th Z coordinate
+        tbody
+          tr(
+            *ngFor="let location of locations"
+          )
+            td {{ getProductName(i) }}
+            td {{location.x}}
+            td {{location.y}}
+            td {{location.z}}
+
+      legend
+        h3.articleTitle Remission guide
+      table
+        tr
+          td
+            h5.pageSubtitle Reason:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.reason',
+              required
+            )
+        tr
+          td
+            h5.pageSubtitle Departure:
+          td
+            input(
+              type='number',
+              [(ngModel)]='guide.departureDate',
+              required
+            )
+        tr
+          td
+            h5.pageSubtitle Arrival:
+          td
+            input(
+              type='number',
+              [(ngModel)]='guide.arrivalDate',
+              required
+            )
+        tr
+          td
+            h5.pageSubtitle Addressee:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.addressee',
+              required
+            )
+        tr
+          td
+            h5.pageSubtitle Courier:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.transportCompany',
+              required
+            )
+        tr
+          td
+            h5.pageSubtitle Vehicle Plate:
+          td
+            input(
+              type='text',
+              [(ngModel)]='guide.vehiclePlate',
+              required
+            )
+        tr
+          td
+            h5.pageSubtitle Total Weight:
+          td
+            input(
+              type='number',
+              min='0.00',
+              step='0.01',
+              [(ngModel)]='guide.totalWeight',
+              disabled,
+              required
+            )
+            p kg
+
+      button.button.btnPush.btnBlueGreen(
+        (click)='submitForm()'
+      ) Confirmar

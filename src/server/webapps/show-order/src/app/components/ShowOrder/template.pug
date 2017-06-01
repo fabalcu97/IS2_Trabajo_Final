@@ -3,22 +3,22 @@ div.container
     table.table.table-bordered
         tr
             th Date
-            td {{bill.timestamp}} 
+            td {{bill.timestamp}}
         tr
-            th Subtotal: 
+            th Subtotal:
             td {{bill.subtotal}}
         tr
-            th IGV: 
+            th IGV:
             td {{bill.iva}}
         tr
-            th Total: 
+            th Total:
             td {{bill.total}}
 
 div.container
     h2 Order
     table.table.table-bordered
         tr
-            th Bulk control            
+            th Bulk control
             td
                 label.switch
                     input(
@@ -59,12 +59,12 @@ div.container
                 a.button.btnPush.btnLightBlue(
                     (click)='updateLate()'
                 ) Update Late
-    
+
 div.container
     h2 Remision guide
     table.table.table-bordered
         tr
-            th Reason: 
+            th Reason:
             td {{remisionGuide.reason}}
         tr
             th Addressee:
@@ -78,7 +78,7 @@ div.container
         tr
             th Total weight:
             td {{remisionGuide.totalWeight}} kg
-            
+
 div.container
     h2 Detail
     table.table.table-bordered
@@ -94,3 +94,7 @@ div.container
                 td {{product.name}}
                 td {{detail[i].quantity}}
                 td {{product.unitPrice}}
+
+a.button.btnPush.btnLightBlue(
+  href="/confirm-order/#/confirm/{{billId}}",
+) Confirm order
