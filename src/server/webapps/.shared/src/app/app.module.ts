@@ -7,6 +7,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UIRouterModule } from 'ui-router-ng2';
 import { DashboardComponent } from './shared/components/Dashboard';
 import { DashboardService } from './shared/services/Dashboard';
+import { ResourcesService } from './shared/services/Resources';
 import { AppComponent } from './app';
 import { statesConfig } from './app.routes';
 
@@ -20,7 +21,7 @@ import { statesConfig } from './app.routes';
     HttpModule,
     UIRouterModule.forRoot(statesConfig)
   ],
-  providers: [ DashboardService ],
+  providers: [ DashboardService, ResourcesService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
