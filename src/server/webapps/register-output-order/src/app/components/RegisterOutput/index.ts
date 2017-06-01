@@ -7,7 +7,7 @@ import * as dbModels from "../../../../../../../core/db-models/models";
     styles: [require('./styles.styl').toString()],
     template: require('./template.pug')()
 })
-export class DemoComponent implements OnInit {
+export class RegisterOutputOrderComponent implements OnInit {
 
     // Attributes
       resources: ResourcesService;
@@ -160,7 +160,7 @@ export class DemoComponent implements OnInit {
                       this.products.forEach( (product) => {
                         if (detail.productId == product.id) {
                           detail.quantity = product.quantityPerLot * detail.lotQuantity;
-                          detail.totalPrice = detail.quantity * product.unitPrice
+                          detail.totalPrice = detail.quantity * product.unitPrice;
                           detail.totalWeight = detail.quantity * product.unitWeight;
                           return;
                         }

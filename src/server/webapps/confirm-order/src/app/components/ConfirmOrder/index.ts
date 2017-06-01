@@ -110,7 +110,7 @@ export class ConfirmOrderComponent implements OnInit{
     }
     this.resources.updateStoredDetail(this.currentProduct.detail.id, true).subscribe(
       (data) => {
-        alert("Se ingresaron los lotes.")
+        alert("Se ingresaron los lotes")
       },
       (err) => {
         console.log(err);
