@@ -161,8 +161,8 @@ apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
 	});
 });
 
-apiRoutes.addRoute('GET', '/get/product', (req, res) => {
-	Product.getProductByName(req.query.productName).then( (data) => {
+apiRoutes.addRoute('GET', '/get/productByName/:productName', (req, res) => {
+	Product.getProductByName(req.params.productName).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
