@@ -1,11 +1,9 @@
-import { DemoComponent } from './Demo';
-import { MainComponent } from './Main';
+import { RegisterOutputOrderComponent } from './RegisterOutput';
 
 export let components = {
-    DemoComponent: DemoComponent,
-    MainComponent: MainComponent,
-}
+  RegisterOutputOrderComponent: RegisterOutputOrderComponent,
+};
 
 export let componentsList = Object.keys(components).map((key) => {
     return components[key];
-})
+});

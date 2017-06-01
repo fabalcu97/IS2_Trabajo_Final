@@ -149,7 +149,7 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 	})
 });
 
-apiRoutes.addRoute('GET', '/get/order/:output', (req, res) => {
+apiRoutes.addRoute('GET', '/get/order/true', (req, res) => {
 	Order.getOrderByOutput(req.params.output)
 	.then( (data) => {
 		res.status(200);
@@ -161,6 +161,8 @@ apiRoutes.addRoute('GET', '/get/order/:output', (req, res) => {
 		res.end();
 	})
 });
+
+
 
 apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
 	Product.getProductById(req.params.productId).then( (data) => {
@@ -174,8 +176,8 @@ apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
 	});
 });
 
-apiRoutes.addRoute('GET', '/get/product', (req, res) => {
-	Product.getProductByName(req.query.productName).then( (data) => {
+apiRoutes.addRoute('GET', '/get/productByName/:productName', (req, res) => {
+	Product.getProductByName(req.params.productName).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
@@ -326,3 +328,5 @@ apiRoutes.addRoute('GET', '/get/lot/:productId', (req, res) => {
 		res.end();
 	});
 });
+
+

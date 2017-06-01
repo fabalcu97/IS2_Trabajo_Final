@@ -19,14 +19,14 @@ export class ReportComponent implements OnInit {
             this.resources = resources;
         }
 
-        getOrders(){
-            this.resources.getOrders(this.switchIO).subscribe(
+            getOrders(){
+                this.resources.getOrders(this.switchIO).subscribe(
                 (data) => {
                     this.orders = data;
                     console.log(this.orders);                    
                 },
                 (err) => {
-                    alert("pr_11 ho");
+                    alert("pr ho");
                     console.log(err);
                 }
             )

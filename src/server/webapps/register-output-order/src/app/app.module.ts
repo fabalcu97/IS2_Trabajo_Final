@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UIRouterModule } from 'ui-router-ng2';
 import { components, componentsList } from './components';
-import { services, servicesList } from './services';
 import { sharedServicesList } from './shared/services';
 import { sharedComponentList } from './shared/components';
 import { AppComponent } from './app';
@@ -22,7 +21,7 @@ import { statesConfig } from './app.routes';
     HttpModule,
     UIRouterModule.forRoot(statesConfig)
   ],
-  providers: [].concat(servicesList, sharedServicesList),
+  providers: [].concat(sharedServicesList),
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
