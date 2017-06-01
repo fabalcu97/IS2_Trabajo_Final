@@ -20,7 +20,7 @@ export class ReportComponent implements OnInit {
         }
 
             getOrders(){
-                this.resources.getOrders(this.switchIO).subscribe(
+                this.resources.getOrdersByOutput(this.switchIO).subscribe(
                 (data) => {
                     this.orders = data;
                     console.log(this.orders);                    

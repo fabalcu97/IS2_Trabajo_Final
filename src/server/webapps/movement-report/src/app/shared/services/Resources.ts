@@ -63,5 +63,9 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/get/order/' + output).map((res: Response) => res.json());
   }
 
+  //Esta funcion tambien esta en .shared/.../services/Resources.ts  -Xime
+  public getOrdersByOutput (output: boolean): Observable<Interfaces.Order[]> {
+    return this.$http.get('http://localhost:8000/api/get/orders?output=' + output).map((res: Response) => res.json());
+  }
   
 }
