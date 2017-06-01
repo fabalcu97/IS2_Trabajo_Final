@@ -138,11 +138,24 @@ apiRoutes.addRoute('GET', '/get/bill/:billId', (req, res) => {
 
 apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 	Order.getOrderByBillId(req.params.billId)
-	.then( (data) => {
-		res.status(200);
-		res.send(data);
+        .then( (data) => {
+			res.status(200);
+			res.send(data);
+			res.end();
+		}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
 		res.end();
-	}).catch( (err) => {
+	})
+});
+
+apiRoutes.addRoute('GET', '/get/orders', (req, res) => {
+	Order.getOrderByOutput(req.query.output)
+        .then( (data) => {
+			res.status(200);
+			res.send(data);
+			res.end();
+		}).catch( (err) => {
 		res.status(err.httpStatus);
 		res.send(err.description);
 		res.end();
