@@ -326,3 +326,29 @@ apiRoutes.addRoute('GET', '/get/lot/:productId', (req, res) => {
 		res.end();
 	});
 });
+
+apiRoutes.addRoute('POST', '/updateDepartureDate/lot', (req, res) => {
+	Lot.updateDepartureDateLot(req.body.lotId, req.body.lotDeparturelDate)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/updateActive/lot', (req, res) => {
+	Lot.updateActiveLot(req.body.lotId, req.body.lotActive)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});

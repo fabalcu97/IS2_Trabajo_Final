@@ -37,3 +37,33 @@ export function getLotByProductId (productId : string)
 	return deferred.promise;
 }
 
+export function updateDepartureDateLot(lotId : string , lotDeparturelDate : number)
+{
+	let lot : MongoModel = new MongoModel('lot');
+	let deferred = Q.defer();
+
+	lot.updateOne(lotId,{
+		$set:{departureDate:lotDeparturelDate}
+	}).then( ( respOrderData : dbModels.Lot ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
+export function updateActiveLot(lotId : string , lotActive : boolean)
+{
+	let lot : MongoModel = new MongoModel('lot');
+	let deferred = Q.defer();
+
+	lot.updateOne(lotId,{
+		$set:{active:lotActive}
+	}).then( ( respOrderData : dbModels.Lot ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
+
