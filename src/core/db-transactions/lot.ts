@@ -9,7 +9,7 @@ export function registerLot( lotData: dbModels.Lot) {
 
 	let baseLotData: dbModels.Lot = {
 		productId : lotData.productId,
-        locationId : lotData.locationId,
+        	locationId : lotData.locationId,
 		departureDate : lotData.departureDate,
 		active : lotData.active
 	};
