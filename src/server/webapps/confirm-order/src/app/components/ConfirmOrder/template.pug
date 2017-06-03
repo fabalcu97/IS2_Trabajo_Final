@@ -1,0 +1,39 @@
+div.title
+  h2 Detail
+div.container
+  table.table.table-bordered
+    thead
+      tr
+        th Name
+        th Quantity
+        th Quantity per Lot
+        th Lot Quantity
+    tbody
+      tr(
+        *ngFor='let product of products; let i = index',
+        (click)="setProduct(product, i)"
+      )
+        td {{product.name}}
+        td {{detail[i].quantity}}
+        td {{product.quantityPerLot}}
+        td {{detail[i].quantity/product.quantityPerLot}}
+
+
+div.container(
+    *ngIf="currentProduct"
+  )
+  div.row Product: {{currentProduct.name}}
+  div.row Category: {{currentProduct.category}}
+  div.row Quantity: {{currentProduct.detail.quantity}}
+  div.row Lot quantity: {{currentProduct.detail.lotQuantity}}
+  div.row(
+    *ngIf="alertMessage"
+  ) Not enough space in the warehouse
+  button(
+  (click)="requestLocation()",
+  *ngIf="!registerLotButton"
+  ) Request Location
+  button(
+  (click)="storeLot()",
+  *ngIf="registerLotButton"
+  ) Store Lot

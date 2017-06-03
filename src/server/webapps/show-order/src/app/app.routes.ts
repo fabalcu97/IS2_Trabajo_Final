@@ -22,4 +22,4 @@ export let statesConfig: any = {
       component: components.ShowOrderComponent
     }
   ]
-}
+};

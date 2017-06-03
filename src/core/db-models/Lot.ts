@@ -2,6 +2,6 @@ import {BaseModel} from './BaseModel';
 
 export interface Lot extends BaseModel
 {
-    classification: string;
+    productId: string;
     locationId: string;
 }

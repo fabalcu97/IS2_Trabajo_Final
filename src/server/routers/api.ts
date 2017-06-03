@@ -325,4 +325,4 @@ apiRoutes.addRoute('GET', '/get/lot/:productId', (req, res) => {
 		res.send(err.description);
 		res.end();
 	});
-});s
+});

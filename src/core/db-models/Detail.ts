@@ -8,4 +8,5 @@ export interface Detail extends BaseModel
 	 totalPrice : number;
 	 totalWeight : number;
 	 lotQuantity: number;
+	 stored?: boolean;
 }

@@ -28,6 +28,7 @@ export class DemoComponent implements OnInit {
         };
         this.order = {
           arrivalDate: 0,
+          output: false,
           guideId: '0',
           billId: '0',
           bulkControl: false,
@@ -46,7 +47,7 @@ export class DemoComponent implements OnInit {
         this.detailList = [];
         this.products = [];
       }
-         
+
       ngOnInit() {
         this.resources.getProducts().subscribe(
           (data) => {
@@ -68,10 +69,10 @@ export class DemoComponent implements OnInit {
           if (product.length == 0) {
             return;
           }
-          
-          detail.lotQuantity = product[0].quantityPerLot;
-          this.bill.subtotal += detail.lotQuantity * product[0].unitPrice * detail.quantity;
-          this.guide.totalWeight += detail.lotQuantity * product[0].unitWeight * detail.quantity;
+
+          detail.quantity = product[0].quantityPerLot * detail.lotQuantity;
+          this.bill.subtotal += product[0].unitPrice * detail.quantity;
+          this.guide.totalWeight += product[0].unitWeight * detail.quantity;
 
         });
 

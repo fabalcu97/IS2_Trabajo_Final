@@ -1,15 +1,14 @@
 import * as Q from 'q';
 import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
-import { Error } from '../interface/Error'
-import { returnServerError } from '../../core/services/returnServerError'
+import { returnServerError } from '../services/returnServerError'
 
 export function registerLot( lotData: dbModels.Lot) {
 	let lot: MongoModel = new MongoModel('lot');
 	let deferred = Q.defer();
 
 	let baseLotData: dbModels.Lot = {
-		classification : lotData.classification,
+		productId : lotData.productId,
         locationId : lotData.locationId
 	};
 
@@ -18,6 +17,21 @@ export function registerLot( lotData: dbModels.Lot) {
 	}).catch( () => {
 		returnServerError(deferred)
 	});
+	return deferred.promise;
+}
+
+export function getLotByProductId (productId : string)
+{
+	let lot : MongoModel = new MongoModel('lot');
+	let deferred = Q.defer();
+
+	lot.findAll({productId: productId}).then( ( respLotData: dbModels.Lot ) => {
+		deferred.resolve(respLotData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+
+	
 	return deferred.promise;
 }
 
