@@ -57,7 +57,6 @@ export class ResourcesService {
   public getProducts (): Observable<Interfaces.Product[]> {
     return this.$http.get('http://localhost:8000/api/get/products').map((res: Response) => res.json());
   }
-
     
   public getOrders (output: boolean): Observable<Interfaces.Order[]> {
     return this.$http.get('http://localhost:8000/get/order/' + output).map((res: Response) => res.json());

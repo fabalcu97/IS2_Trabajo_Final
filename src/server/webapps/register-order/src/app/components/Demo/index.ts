@@ -89,8 +89,7 @@ export class DemoComponent implements OnInit {
           totalPrice: 0,
           totalWeight: 0
         })
-      }      detailList: dbMo      detailList: dbModels.Detail[];
-dels.Detail[];
+      }     
 
 
       deleteProduct (index: number) {
