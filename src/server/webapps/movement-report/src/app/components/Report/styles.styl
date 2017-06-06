@@ -1,0 +1,105 @@
+.wrapper
+    width 600px
+    margin 20px auto
+
+.switch
+    position relative
+    display inline-block
+    width 60px
+    height 34px
+    input
+        display none
+
+.slider
+    position absolute
+    cursor pointer
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background-color #1bd330
+    -webkit-transition .4s
+    transition .4s
+    &:before
+        position absolute
+        content ""
+        height 26px
+        width 26px
+        left 4px
+        bottom 4px
+        background-color white
+        -webkit-transition .4s
+        transition .4s
+    &.round
+        border-radius 34px
+        &:before
+            border-radius 50%
+
+input
+    &:checked
+        & + .slider
+            background-color #2196F3
+            &:before
+                -webkit-transform translateX(26px)
+                -ms-transform translateX(26px)
+                transform translateX(26px)
+    &:focus
+        & + .slider
+            box-shadow 0 0 1px #2196F3
+
+
+/* TABLAA */
+
+* {
+    box-sizing: border-box;
+}
+
+/* Create three columns of equal width */
+.columns {
+    float: left;
+    width: 33.3%;
+    padding: 8px;
+}
+
+/* Style the list */
+.price {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+/* Add shadows on hover */
+.price:hover {
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.5)
+}
+
+/* Pricing header */
+.price .header {
+    background-color: #6ab7a5;
+    color: white;
+    font-size: 25px;
+}
+
+/* List items */
+.price li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Grey list item */
+.price .grey {
+    background-color: #c1bfbf;
+    font-size: 20px;
+}
+
+/* Change the width of the three columns to 100% 
+(to stack horizontally on small screens) */
+@media only screen and (max-width: 600px) {
+    .columns {
+        width: 100%;
+    }
+}            
