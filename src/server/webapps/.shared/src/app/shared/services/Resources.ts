@@ -147,6 +147,21 @@ export class ResourcesService {
     }).map((res: Response) => res.json());
   }
 
+  public updateDepartureDateLot (lotId : string , lotDeparturelDate : number): Observable<any> {
+    return this.$http.post('http://localhost:8000/api/updateDepartureDate/lot', {
+      lotId: lotId,
+      lotDeparturelDate: lotDeparturelDate
+    }).map((res: Response) => res.json());
+  }
+
+  public updateActiveLot (lotId : string , lotActive : boolean): Observable<Interfaces.Order> {
+    return this.$http.post('http://localhost:8000/api/updateActive/lot', {
+      lotId: lotId,
+      lotActive: lotActive
+    }).map((res: Response) => res.json());
+  }
+
+
   public getAvailableLots (productId: String): Observable<Interfaces.Lot[]> {
     return this.$http.get('http://localhost:8000/api/get/lot/' + productId).map((res: Response) => res.json());
   }

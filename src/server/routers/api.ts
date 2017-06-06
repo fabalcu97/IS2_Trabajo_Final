@@ -162,21 +162,6 @@ apiRoutes.addRoute('GET', '/get/orders', (req, res) => {
 	})
 });
 
-apiRoutes.addRoute('GET', '/get/order/true', (req, res) => {
-	Order.getOrderByOutput(req.params.output)
-	.then( (data) => {
-		res.status(200);
-		res.send(data);
-		res.end();
-	}).catch( (err) => {
-		res.status(err.httpStatus);
-		res.send(err.description);
-		res.end();
-	})
-});
-
-
-
 apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
 	Product.getProductById(req.params.productId).then( (data) => {
 		res.status(200);
@@ -342,4 +327,28 @@ apiRoutes.addRoute('GET', '/get/lot/:productId', (req, res) => {
 	});
 });
 
+apiRoutes.addRoute('POST', '/updateDepartureDate/lot', (req, res) => {
+	Lot.updateDepartureDateLot(req.body.lotId, req.body.lotDeparturelDate)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
 
+apiRoutes.addRoute('POST', '/updateActive/lot', (req, res) => {
+	Lot.updateActiveLot(req.body.lotId, req.body.lotActive)
+	.then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
