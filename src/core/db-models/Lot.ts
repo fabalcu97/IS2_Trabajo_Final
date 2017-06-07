@@ -4,6 +4,6 @@ export interface Lot extends BaseModel
 {
     productId: string;
     locationId: string;
-    departureDate : string;
-    active : boolean;
+    departureDate: number;
+    active: boolean;
 }

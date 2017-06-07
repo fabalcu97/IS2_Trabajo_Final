@@ -91,7 +91,9 @@ export class ConfirmOrderComponent implements OnInit{
     for (let i = 0; i < this.currentProduct.detail.lotQuantity; ++i) {
       this.resources.addLot({
         productId: this.currentProduct.id,
-        locationId: this.availableLocations[i].id
+        locationId: this.availableLocations[i].id,
+        departureDate: new Date().getMilliseconds(),
+        active: false
       }).subscribe(
         (data) => {
 
