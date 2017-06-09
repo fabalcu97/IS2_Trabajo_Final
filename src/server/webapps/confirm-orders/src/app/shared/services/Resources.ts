@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import * as Interfaces from '../../../../../../../core/db-models/models'
 
@@ -19,9 +19,9 @@ export class ResourcesService {
 
   public registerBill (bill: Interfaces.Bill): Observable<Interfaces.Bill> {
     return this.$http.post('http://localhost:8000/api/add/bill/', {
-        subtotal : bill.subtotal,
-        iva : bill.iva,
-        total : bill.total
+        subtotal: bill.subtotal,
+        iva: bill.iva,
+        total: bill.total
 	  }).map((res: Response) => res.json());
   }
 
@@ -31,12 +31,13 @@ export class ResourcesService {
 
   public registerOrder (order: Interfaces.Order): Observable<Interfaces.Order> {
     return this.$http.post('http://localhost:8000/api/add/order/', {
-      billId : order.billId,
-      guideId : order.guideId,
-      bulkControl : order.bulkControl,
-      arrivalDate : order.arrivalDate,
-      received : order.received,
-      late : order.late
+      billId: order.billId,
+      guideId: order.guideId,
+      bulkControl: order.bulkControl,
+      arrivalDate: order.arrivalDate,
+      received: order.received,
+      late: order.late,
+      output: order.output
     }).map((res: Response) => res.json());
   }
 
@@ -46,13 +47,13 @@ export class ResourcesService {
 
   public registerRemisionGuide (guide: Interfaces.RemissionGuide): Observable<Interfaces.RemissionGuide> {
     return this.$http.post('http://localhost:8000/api/add/guide/', {
-      reason : guide.reason,
-      addressee : guide.addressee,
-      departureDate : guide.departureDate,
-      arrivalDate : guide.arrivalDate,
-      transportCompany : guide.transportCompany,
-      vehiclePlate : guide.vehiclePlate,
-      totalWeight : guide.totalWeight
+      reason: guide.reason,
+      addressee: guide.addressee,
+      departureDate: guide.departureDate,
+      arrivalDate: guide.arrivalDate,
+      transportCompany: guide.transportCompany,
+      vehiclePlate: guide.vehiclePlate,
+      totalWeight: guide.totalWeight
     }).map((res: Response) => res.json());
   }
 
@@ -73,11 +74,11 @@ export class ResourcesService {
 
   public registerDetail (detail: Interfaces.Detail): Observable<Interfaces.Detail> {
     return this.$http.post('http://localhost:8000/api/add/detail/', {
-      billId : detail.billId,
-      productId : detail.productId,
-      quantity : detail.quantity,
-      totalPrice : detail.totalPrice,
-      totalWeight : detail.totalWeight,
+      billId: detail.billId,
+      productId: detail.productId,
+      quantity: detail.quantity,
+      totalPrice: detail.totalPrice,
+      totalWeight: detail.totalWeight,
       lotQuantity: detail.lotQuantity
     }).map((res: Response) => res.json());
   }
@@ -147,14 +148,14 @@ export class ResourcesService {
     }).map((res: Response) => res.json());
   }
 
-  public updateDepartureDateLot (lotId : string , lotDeparturelDate : number): Observable<any> {
+  public updateDepartureDateLot (lotId: string , lotDeparturelDate: number): Observable<any> {
     return this.$http.post('http://localhost:8000/api/updateDepartureDate/lot', {
       lotId: lotId,
       lotDeparturelDate: lotDeparturelDate
     }).map((res: Response) => res.json());
   }
 
-  public updateActiveLot (lotId : string , lotActive : boolean): Observable<Interfaces.Order> {
+  public updateActiveLot (lotId: string , lotActive: boolean): Observable<Interfaces.Order> {
     return this.$http.post('http://localhost:8000/api/updateActive/lot', {
       lotId: lotId,
       lotActive: lotActive
@@ -166,7 +167,7 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/api/get/lot/' + productId).map((res: Response) => res.json());
   }
 
-  public updateArrivalDateOrder (orderId : string , OrderArrivalDate : number): Observable<any> {
+  public updateArrivalDateOrder (orderId: string , OrderArrivalDate: number): Observable<any> {
     return this.$http.post('http://localhost:8000/api/updateArrivalDate/order', {
       orderId: orderId,
       OrderArrivalDate: OrderArrivalDate
@@ -175,15 +176,14 @@ export class ResourcesService {
 
   public registerStorageLocation (storageLocation: Interfaces.StorageLocation): Observable<Interfaces.StorageLocation> {
     return this.$http.post('http://localhost:8000/api/add/storagelocation', {
-      x : storageLocation.x,
-      y : storageLocation.y,
-      z : storageLocation.z,
-      category : storageLocation.category
+      x: storageLocation.x,
+      y: storageLocation.y,
+      z: storageLocation.z,
+      category: storageLocation.category
     }).map((res: Response) => res.json());
   }
 
   public getOrdersByOutput (output: boolean): Observable<Interfaces.Order[]> {
-    return this.$http.get('http://localhost:8000/api/get/orders?output=' + output).map((res: Response) => res.json());
+    return this.$http.get('http://localhost:8000/api/get/orders/' + output).map((res: Response) => res.json());
   }
-
 }

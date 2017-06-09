@@ -149,7 +149,7 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 	})
 });
 
-apiRoutes.addRoute('GET', '/get/orders', (req, res) => {
+apiRoutes.addRoute('GET', '/get/orders/:output', (req, res) => {
 	Order.getOrderByOutput(req.query.output)
         .then( (data) => {
 			res.status(200);

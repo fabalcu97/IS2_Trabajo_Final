@@ -184,7 +184,6 @@ export class ResourcesService {
   }
 
   public getOrdersByOutput (output: boolean): Observable<Interfaces.Order[]> {
-    return this.$http.get('http://localhost:8000/api/get/orders?output=' + output).map((res: Response) => res.json());
+    return this.$http.get('http://localhost:8000/api/get/orders/' + output).map((res: Response) => res.json());
   }
-
 }

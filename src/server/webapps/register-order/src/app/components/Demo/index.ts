@@ -75,7 +75,8 @@ export class DemoComponent implements OnInit {
           this.guide.totalWeight += product[0].unitWeight * detail.quantity;
 
         });
-
+        //probamdo output true, sin esta linea el output sale null
+        this.order.output = true;
         this.bill.total = this.bill.subtotal + this.bill.subtotal*(this.bill.iva/100);
 
       }
