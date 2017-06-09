@@ -9,7 +9,7 @@ export function registerLot( lotData: dbModels.Lot) {
 
 	let baseLotData: dbModels.Lot = {
 		productId : lotData.productId,
-        	locationId : lotData.locationId,
+		locationId : lotData.locationId,
 		departureDate : lotData.departureDate,
 		active : lotData.active
 	};
@@ -27,7 +27,10 @@ export function getLotByProductId (productId : string)
 	let lot : MongoModel = new MongoModel('lot');
 	let deferred = Q.defer();
 
-	lot.findAll({productId: productId}).then( ( respLotData: dbModels.Lot ) => {
+	lot.findAll({
+		productId: productId,
+		active: false
+	}).then( ( respLotData: dbModels.Lot ) => {
 		deferred.resolve(respLotData);
 	}).catch( () => {
 		returnServerError(deferred)
@@ -58,7 +61,7 @@ export function updateActiveLot(lotId : string , lotActive : boolean)
 	let deferred = Q.defer();
 
 	lot.updateOne(lotId,{
-		$set:{active:lotActive}
+		$set:{active: lotActive}
 	}).then( ( respOrderData : dbModels.Lot ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
