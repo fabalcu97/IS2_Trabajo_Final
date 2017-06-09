@@ -12,10 +12,12 @@ export class ReportComponent implements OnInit {
 
     // Attributes
         resources: ResourcesService;
-        orders: dbModels.Order[];
+        //orders: dbModels.Order[];
+        orders: any;
         private switchIO: boolean = true;
     // Methods
         constructor (resources : ResourcesService) {
+            this.orders = {};
             this.resources = resources;
         }
 

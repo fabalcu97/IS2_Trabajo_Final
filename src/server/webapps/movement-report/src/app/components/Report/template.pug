@@ -22,34 +22,35 @@ body
             h4.text-center(
                *ngIf="switchIO==true"
             ) Input
-            
+       
         br
+       
+        table(style='width:100%')
+            tr
+                th # Bill
+                th Destinatario
+                th Monto    
+            tr(*ngFor='let order of orders; let i = index')
+                td {{ order.billId }}
+                
+            
+
+
                 
         .columns
             ul.price
-                li.header(style='background-color:#80bfb0') # Bill 
-                li {{orders.billId}}
-                li 2
-                li 3
-                li 4
-                
-                                
+                li.header(style='background-color:#80bfb0') # Bill   
+                li 
+                                                               
         .columns
             ul.price
                 li.header(style='background-color:#58b7a1') Destinatario                
-                li A
-                li B
-                li C
-                li D
-                
-                
+                li a               
+                                
         .columns
             ul.price
                 li.header(style='background-color:#04a580') Monto (S/.)              
-                li 1000
-                li 3000
-                li 50000
-                li 1000
+                li 1000               
                 li.grey 5500 
                 
 
