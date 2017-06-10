@@ -176,6 +176,19 @@ apiRoutes.addRoute('GET', '/get/orders', (req, res) => {
 	})
 });
 
+apiRoutes.addRoute('GET', '/get/orders/late', (req, res) => {
+	Order.getOrderByLate(req.query.late)
+        .then( (data) => {
+			res.status(200);
+			res.send(data);
+			res.end();
+		}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
 apiRoutes.addRoute('GET', '/get/product/:productId', (req, res) => {
 	Product.getProductById(req.params.productId).then( (data) => {
 		res.status(200);
