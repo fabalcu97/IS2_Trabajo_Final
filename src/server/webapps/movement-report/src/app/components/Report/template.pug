@@ -26,28 +26,29 @@ body
         br
        
         table(style='width:100%')
-            tr
+            tr  
+                th $
                 th # Bill
-                th Destinatario
+                th Reason
                 th Monto    
-            tr(*ngFor='let order of orders; let i = index')
-                td {{ order.billId }}
-                
-            
-
-
-                
-        .columns
+            tr(*ngFor='let destinata1 of destinatary; let i = index')
+                th {{i+1}}
+                th {{ orders[i].billId }}
+                th {{ destinata1.reason }}
+                th HOLA  
+             
+              
+        //.columns
             ul.price
                 li.header(style='background-color:#80bfb0') # Bill   
                 li 
                                                                
-        .columns
+        //.columns
             ul.price
                 li.header(style='background-color:#58b7a1') Destinatario                
                 li a               
                                 
-        .columns
+        //.columns
             ul.price
                 li.header(style='background-color:#04a580') Monto (S/.)              
                 li 1000               

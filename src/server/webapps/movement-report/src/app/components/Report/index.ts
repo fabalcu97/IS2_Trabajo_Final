@@ -14,10 +14,12 @@ export class ReportComponent implements OnInit {
         resources: ResourcesService;
         //orders: dbModels.Order[];
         orders: any;
+        destinatary :any[];
         private switchIO: boolean = true;
     // Methods
         constructor (resources : ResourcesService) {
             this.orders = {};
+            this.destinatary = [];
             this.resources = resources;
         }
 
@@ -25,7 +27,7 @@ export class ReportComponent implements OnInit {
             this.resources.getOrdersByOutput(this.switchIO).subscribe(
             (data) => {
                 this.orders = data;
-                console.log(this.orders);                    
+                //console.log(this.orders);     
             },
             (err) => {
                 console.log(err);
@@ -33,10 +35,32 @@ export class ReportComponent implements OnInit {
             )
         }
 
-
         ngOnInit () {
-            this.orders = [];
-            this.getOrders();            
+        
+            this.resources.getOrdersByOutput(this.switchIO).subscribe(
+            (data) => {
+                this.orders = data;
+                console.log(this.orders);    
+
+                this.orders.forEach( (guides) => {                                        
+                if(guides.guideId){
+                    this.resources.getRemisionGuide(guides.guideId).subscribe(                    
+                        (guideData) => {                        
+                            this.destinatary.push(guideData);                        
+                        },
+                        (err) => {
+                            console.log(err);
+                        }
+                    )
+                }
+                else console.log('wi');
+            })
+            },
+            (err) => {
+                console.log(err);
+            })
+            
+                     
         }
 
         changeSwitch(){
