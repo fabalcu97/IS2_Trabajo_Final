@@ -8,7 +8,9 @@ describe ( ' Get Lot By Product Id ' , function () {
         request.get('http://localhost:8000/api/get/lot/:productId', {
             form : {
                 productId : "product01",
-                locationId : "123"
+                locationId : "123",
+                departureDate : "001",
+                active : true
             }
         },( err , httpResponse , body ) => {
             assert.equal (200 ,httpResponse.statusCode ) ;
