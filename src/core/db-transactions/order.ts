@@ -133,5 +133,22 @@ export function getOrderByOutput(output : boolean)
 	return deferred.promise;
 }
 
+export function getOrderByLate(late : boolean)
+{
+	let order : MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.findAll({
+		late: late
+	}).then( ( respOrderData: dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+
+	
+	return deferred.promise;
+}
+
 
 
