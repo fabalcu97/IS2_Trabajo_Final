@@ -7,6 +7,8 @@ import * as Detail from '../../core/db-transactions/detail';
 import * as Product from '../../core/db-transactions/Product';
 import * as Lot from  '../../core/db-transactions/lot';
 import * as StorageLocation from '../../core/db-transactions/storagelocation';
+import * as Type from  '../../core/db-transactions/type';
+
 
 export let apiRoutes: ExpressRouter;
 
@@ -14,6 +16,18 @@ apiRoutes = new ExpressRouter();
 
 apiRoutes.addRoute('POST', '/add/order', (req, res) => {
 	Order.registerOrder(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
+
+apiRoutes.addRoute('POST', '/add/type', (req, res) => {
+	Type.registerType(req.body).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
@@ -149,8 +163,21 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 	})
 });
 
-apiRoutes.addRoute('GET', '/get/orders/:output', (req, res) => {
+apiRoutes.addRoute('GET', '/get/orders/output/:output', (req, res) => {
 	Order.getOrderByOutput(req.query.output)
+        .then( (data) => {
+			res.status(200);
+			res.send(data);
+			res.end();
+		}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('GET', '/get/orders/late/:late', (req, res) => {
+	Order.getOrderByLate(req.query.late)
         .then( (data) => {
 			res.status(200);
 			res.send(data);
