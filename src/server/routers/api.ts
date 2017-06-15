@@ -163,7 +163,7 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 	})
 });
 
-apiRoutes.addRoute('GET', '/get/orders', (req, res) => {
+apiRoutes.addRoute('GET', '/get/orders/output/:output', (req, res) => {
 	Order.getOrderByOutput(req.query.output)
         .then( (data) => {
 			res.status(200);
@@ -176,7 +176,7 @@ apiRoutes.addRoute('GET', '/get/orders', (req, res) => {
 	})
 });
 
-apiRoutes.addRoute('GET', '/get/orders/late', (req, res) => {
+apiRoutes.addRoute('GET', '/get/orders/late/:late', (req, res) => {
 	Order.getOrderByLate(req.query.late)
         .then( (data) => {
 			res.status(200);
