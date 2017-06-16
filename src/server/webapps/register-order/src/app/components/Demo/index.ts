@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { ResourcesService } from "../../shared/services/Resources";
+import { DateService } from "../../shared/services/Date";
 import { FormGroup,FormArray,FormBuilder,Validators } from '@angular/forms';
 import * as dbModels from "../../../../../../../core/db-models/models";
 
@@ -12,15 +13,18 @@ export class DemoComponent implements OnInit {
 
     // Attributes
       resources: ResourcesService;
+      date: DateService;
       products: dbModels.Product[];
       detailList: dbModels.Detail[];
       bill: dbModels.Bill;
       order: dbModels.Order;
       guide: dbModels.RemissionGuide;
+      temporalDate: Date;
 
     // Methods
-      constructor (resources: ResourcesService) {
+      constructor (resources: ResourcesService, date: DateService) {
         this.resources = resources;
+        this.date = date;
         this.bill = {
           iva: 19,
           subtotal: 0,
@@ -78,6 +82,10 @@ export class DemoComponent implements OnInit {
 
         this.bill.total = this.bill.subtotal + this.bill.subtotal*(this.bill.iva/100);
 
+      }
+
+      setDate() {
+        this.order.arrivalDate = this.date.convertDate(this.temporalDate);
       }
 
       addProduct () {

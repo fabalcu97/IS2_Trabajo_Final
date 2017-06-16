@@ -42,9 +42,10 @@ body
                 h3.pageSubtitle Arrival Date:
               td
                 input(
-                    type='number',
-                    [(ngModel)]='order.arrivalDate',
-                      required
+                    type='date',
+                    [(ngModel)]='temporalDate',
+                    (change)='setDate()',
+                    required
                   )
             tr
               td
