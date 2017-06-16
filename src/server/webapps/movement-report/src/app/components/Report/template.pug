@@ -29,13 +29,13 @@ body
             tr  
                 th $
                 th # Bill
-                th Reason
-                th Monto    
+                th Subtotal
+                th Total 
             tr(*ngFor='let destinata1 of destinatary; let i = index')
                 th {{i+1}}
                 th {{ orders[i].billId }}
-                th {{ destinata1.reason }}
-                th {{ orders[i].}}
+                th {{ destinata1.subtotal }}
+                th {{ destinata1.total }}
              
               
         //.columns

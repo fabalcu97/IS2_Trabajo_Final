@@ -23,55 +23,39 @@ export class ReportComponent implements OnInit {
             this.resources = resources;
         }
 
-        getOrders(){
+        getOrders2(){
             this.resources.getOrdersByOutput(this.switchIO).subscribe(
-            (data) => {
-                this.orders = data;
-                //console.log(this.orders);     
-            },
-            (err) => {
-                console.log(err);
-            }
-            )
-        }
+            (ordersData) => {
+                this.orders = ordersData;
+                console.log(this.orders[2].billId);    
 
-        ngOnInit () {
-        
-            this.resources.getOrdersByOutput(this.switchIO).subscribe(
-            (data) => {
-                this.orders = data;
-                console.log(this.orders);    
-
-                this.orders.forEach( (guides) => {                                        
-                if(guides.guideId){
-                    this.resources.getRemisionGuide(guides.guideId).subscribe(                    
-                        (guideData) => {                        
-                            this.destinatary.push(guideData);                        
+                this.orders.forEach( (bill) => {                                        
+                if(bill.billId){
+                    this.resources.getBill(bill.billId).subscribe(
+                        (billsData) => {
+                            this.destinatary.push(billsData);
                         },
                         (err) => {
                             console.log(err);
                         }
-                    )
+                    )                    
                 }
-                else console.log('wi');
+                else console.log('deletex wi');
             })
             },
             (err) => {
                 console.log(err);
             })
-            
-                     
+        }
+
+        ngOnInit () {
+            this.changeSwitch();                               
         }
 
         changeSwitch(){
-            this.switchIO =! this.switchIO;
-            if (this.switchIO == true){
-                console.log('Input');
-            }
-            else{
-                console.log('Output');
-            }
-            this.getOrders();
+            this.switchIO =! this.switchIO;           
+            this.getOrders2();
+            console.log(this.orders);
         }
 
 }
