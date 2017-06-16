@@ -19,12 +19,17 @@ export class DemoComponent implements OnInit {
       bill: dbModels.Bill;
       order: dbModels.Order;
       guide: dbModels.RemissionGuide;
-      temporalDate: Date;
+      temporalDate1: Date;
+      temporalDate2: Date;
+      temporalDate3: Date;
 
     // Methods
       constructor (resources: ResourcesService, date: DateService) {
         this.resources = resources;
         this.date = date;
+        this.temporalDate1 = null;
+        this.temporalDate2 = null;
+        this.temporalDate3 = null;
         this.bill = {
           iva: 19,
           subtotal: 0,
@@ -84,8 +89,16 @@ export class DemoComponent implements OnInit {
 
       }
 
-      setDate() {
-        this.order.arrivalDate = this.date.convertDate(this.temporalDate);
+      setDate1() {
+        this.order.arrivalDate = this.date.convertDate(this.temporalDate1);
+      }
+
+      setDate2() {
+        this.guide.departureDate = this.date.convertDate(this.temporalDate2);
+      }
+
+      setDate3() {
+        this.guide.arrivalDate = this.date.convertDate(this.temporalDate3);
       }
 
       addProduct () {
