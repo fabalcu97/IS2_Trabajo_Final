@@ -185,6 +185,19 @@ export class ResourcesService {
 
   public getOrdersByOutput (output: boolean): Observable<Interfaces.Order[]> {
     return this.$http.get('http://localhost:8000/api/get/orders/output/' + output).map((res: Response) => res.json());
+<<<<<<< HEAD
+=======
+  }
+
+  public registerType (type: Interfaces.Type): Observable<Interfaces.Type> {
+    return this.$http.post('http://localhost:8000/api/add/type', {
+        name : type.name
+	  }).map((res: Response) => res.json());
+  }
+
+  public getOrdersByLate (late: boolean): Observable<Interfaces.Order[]> {
+    return this.$http.get('http://localhost:8000/api/get/orders/late/' + late).map((res: Response) => res.json());
+>>>>>>> 38e855a218e942947cd3eb16a0ccd6d6418a7982
   }
 
   public registerType (type: Interfaces.Type): Observable<Interfaces.Type> {

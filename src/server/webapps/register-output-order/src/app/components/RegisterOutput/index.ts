@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StateService} from 'ui-router-ng2';
 import { ResourcesService } from "../../shared/services/Resources";
+import { DateService } from "../../shared/services/Date";
 import * as dbModels from "../../../../../../../core/db-models/models";
 
 
@@ -12,6 +13,7 @@ export class RegisterOutputOrderComponent implements OnInit {
 
     // Attributes
       resources: ResourcesService;
+      date: DateService;
       state: StateService;
       products: dbModels.Product[];
       lots: dbModels.Lot[][];
@@ -20,12 +22,18 @@ export class RegisterOutputOrderComponent implements OnInit {
       bill: dbModels.Bill;
       order: dbModels.Order;
       guide: dbModels.RemissionGuide;
-
+      temporalDate1: Date;
+      temporalDate2: Date;
+      temporalDate3: Date;
 
     // Methods
-      constructor (resources: ResourcesService, state: StateService) {
+      constructor (resources: ResourcesService, state: StateService, date: DateService) {
         this.resources = resources;
         this.state = state;
+        this.date = date;
+        this.temporalDate1 = null;
+        this.temporalDate2 = null;
+        this.temporalDate3 = null;
         this.bill = {
           iva: 19,
           subtotal: 0,
@@ -64,6 +72,18 @@ export class RegisterOutputOrderComponent implements OnInit {
             console.log(err);
           }
         )
+      }
+
+      setDate1() {
+        this.order.arrivalDate = this.date.convertDate(this.temporalDate1);
+      }
+
+      setDate2() {
+        this.guide.departureDate = this.date.convertDate(this.temporalDate2);
+      }
+
+      setDate3() {
+        this.guide.arrivalDate = this.date.convertDate(this.temporalDate3);
       }
 
       verifyLots(index) {

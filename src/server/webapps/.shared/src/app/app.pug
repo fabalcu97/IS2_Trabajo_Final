@@ -1,1 +1,12 @@
 dashboard
+
+div
+    input(
+        type="date",
+        [(ngModel)]="dateToConvert",
+        (change)="convert()"
+    )
+    br
+    span {{convertedDate}}
+    br
+    span {{convertedDate1}}

@@ -3,7 +3,9 @@ div.container
     table.table.table-bordered
         tr
             th Date
-            td {{bill.timestamp}}
+            td(
+                *ngIf="bill.timestamp"
+            ) {{setDate(bill.timestamp)}}
         tr
             th Subtotal:
             td {{bill.subtotal}}
