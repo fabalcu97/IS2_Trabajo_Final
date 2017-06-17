@@ -8,7 +8,9 @@ describe ( ' Register Lot' , function () {
         request.post('http://localhost:8000/api/add/lot', {
             form : {
                 productId : "product01",
-                locationId : "123"
+                locationId : "123" ,
+                departureDate: "001",
+                active : true
             }
         },( err , httpResponse , body ) => {
             assert.equal (200 ,httpResponse.statusCode ) ;

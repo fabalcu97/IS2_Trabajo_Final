@@ -13,8 +13,8 @@ describe ( 'Update Active' , function () {
                 active : true 
             }
         },(err , httpResponse , body ) => {
-            assert.equal (200, httpResponse.statusCode );
-            done ();
+                assert.equal (200, httpResponse.statusCode );
+                done ();
         });
     });
 });
