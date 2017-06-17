@@ -1,0 +1,44 @@
+div.container
+  div.column.col-md-6.col-xs-6
+    div(
+      style="display: flex;"
+    )
+      h2 Products
+      a(
+        uiSref='product'
+      ) (register)
+    div.row
+      div.col-md-4 Name
+      div.col-md-4 Category
+      div.col-md-4 Quantity Per Lot
+    div.row(
+      *ngFor="let product of products"
+    )
+      div.col-md-4 {{product.name}}
+      div.col-md-4 {{product.category}}
+      div.col-md-4 {{product.quantityPerLot}}
+
+  div.column.col-md-6.col-xs-6
+    div(
+      style="display: flex;"
+    )
+      h2 Locations
+      a(
+        uiSref='location'
+      ) (register)
+    div.row
+      div.col-md-6 Category
+      div.col-md-2 x
+      div.col-md-2 y
+      div.col-md-2 z
+    div.row(
+      *ngFor="let location of locations"
+    )
+      div.col-md-6 {{location.category}}
+      div.col-md-2 {{location.x}}
+      div.col-md-2 {{location.y}}
+      div.col-md-2 {{location.z}}
+
+  a.btn(
+    href="/"
+  ) Home

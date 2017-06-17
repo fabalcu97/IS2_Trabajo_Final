@@ -196,4 +196,8 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/api/get/orders/late/' + late).map((res: Response) => res.json());
   }
 
+  public getAllLocations (): Observable<Interfaces.StorageLocation[]> {
+    return this.$http.get('http://localhost:8000/api/get/allLocations').map((res: Response) => res.json());
+  }
+
 }
