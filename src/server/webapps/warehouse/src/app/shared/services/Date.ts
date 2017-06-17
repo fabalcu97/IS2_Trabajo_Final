@@ -11,7 +11,6 @@ export class DateService {
 
   convertDate(date: any): any {
       if(typeof(date) == 'number') {
-          console.log(123);
         let newDate: Date = new Date(date);
         return newDate.getDate() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getFullYear();
       }
