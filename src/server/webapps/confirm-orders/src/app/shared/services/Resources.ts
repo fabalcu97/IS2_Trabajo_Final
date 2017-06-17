@@ -126,7 +126,6 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/api/get/products').map((res: Response) => res.json());
   }
 
-
   public getStorageLocation (storageLocationId: String): Observable<Interfaces.StorageLocation> {
     return this.$http.get('http://localhost:8000/api/get/slocation/' + storageLocationId).map((res: Response) => res.json());
   }
@@ -196,4 +195,9 @@ export class ResourcesService {
   public getOrdersByLate (late: boolean): Observable<Interfaces.Order[]> {
     return this.$http.get('http://localhost:8000/api/get/orders/late/' + late).map((res: Response) => res.json());
   }
+
+  public getAllLocations (): Observable<Interfaces.StorageLocation[]> {
+    return this.$http.get('http://localhost:8000/api/get/allLocations').map((res: Response) => res.json());
+  }
+
 }

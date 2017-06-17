@@ -13,34 +13,36 @@ export class ReportComponent implements OnInit {
     // Attributes
         resources: ResourcesService;
         //orders: dbModels.Order[];
-        orders: any;
-        destinatary :any[];
-        private switchIO: boolean = false;
+        orders: any[];
+        bills :any[];
+        private switchIO: boolean = true;
     // Methods
         constructor (resources : ResourcesService) {
-            this.orders = {};
-            this.destinatary = [];
+            this.orders = [];
+            this.bills = [];
             this.resources = resources;
         }
 
         getOrders2(){
+            this.orders = [];
+            this.bills = [];
+            //console.log("pre aqui");
+            //console.log(this.switchIO);
             this.resources.getOrdersByOutput(this.switchIO).subscribe(
             (ordersData) => {
                 this.orders = ordersData;
-                console.log(this.orders);    
+                //console.log("aqui");
+                //console.log(this.orders[0].output);    
 
-                this.orders.forEach( (bill) => {                                        
-                if(bill.billId){
+                this.orders.forEach( (bill) => {                                                        
                     this.resources.getBill(bill.billId).subscribe(
                         (billsData) => {
-                            this.destinatary.push(billsData);
+                            this.bills.push(billsData);
                         },
                         (err) => {
                             console.log(err);
                         }
-                    )                    
-                }
-                else console.log('deletex wi');
+                    )                                   
             })
             },
             (err) => {
@@ -49,13 +51,13 @@ export class ReportComponent implements OnInit {
         }
 
         ngOnInit () {
-            this.changeSwitch();                               
+            this.getOrders2();                              
         }
 
         changeSwitch(){
-            this.switchIO =! this.switchIO;           
-            this.getOrders2();
-            console.log(this.orders);
+            this.switchIO =! this.switchIO; 
+            console.log(this.switchIO);          
+            this.getOrders2();            
         }
 
 }

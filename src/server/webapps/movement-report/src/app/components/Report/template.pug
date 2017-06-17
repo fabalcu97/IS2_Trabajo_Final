@@ -28,16 +28,14 @@ body
         table(style='width:100%')
             tr  
                 th #
-                th # Bill
-                th Output
+                th # Bill               
                 th Subtotal            
                 th Total 
-            tr(*ngFor='let destinata1 of destinatary; let i = index')
+            tr(*ngFor='let bill of bills; let i = index')
                 th {{i+1}}
-                th {{ orders[i].billId }}
-                th(*ngIf=" orders[i].output == null") 1
-                th {{ destinata1.subtotal }}
-                th(*ngIf="destinata1.total " ) {{ destinata1.total }}
+                th {{ orders[i].billId }}                
+                th {{ bill.subtotal }}
+                th {{ bill.total }}
              
               
         //.columns
