@@ -10,12 +10,12 @@ export function registerOrder( orderData: dbModels.Order) {
 
 	let baseOrderData: dbModels.Order = {
 		billId : orderData.billId,
+		guideId : orderData.guideId,
 		output : orderData.output,
-        guideId : orderData.guideId,
-        arrivalDate : orderData.arrivalDate,
-        bulkControl : (orderData.bulkControl || false),
-        received : (orderData.received || false),
-        late : (orderData.late || false)
+		arrivalDate : orderData.arrivalDate,
+		bulkControl : (orderData.bulkControl || false),
+		received : (orderData.received || false),
+		late : (orderData.late || false)
 	};
 
 	//Begin validate
