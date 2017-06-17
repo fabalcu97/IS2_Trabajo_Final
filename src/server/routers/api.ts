@@ -379,3 +379,15 @@ apiRoutes.addRoute('POST', '/updateActive/lot', (req, res) => {
 		res.end();
 	})
 });
+
+apiRoutes.addRoute('GET', '/get/allLocations', (req, res) => {
+	StorageLocation.getAllLocations().then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch( (err) => {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	});
+});
