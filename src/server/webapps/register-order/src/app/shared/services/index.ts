@@ -1,11 +1,9 @@
 import { DashboardService } from './Dashboard';
-import { ResourcesService } from './Resources';
-import { DateService } from "./Date";
+import { ResourcesService } from './Resources'
 
 export let sharedServices = {
   ResourcesService: ResourcesService,
-  DashboardService: DashboardService,
-  DateService: DateService
+  DashboardService: DashboardService
 };
 
 export let sharedServicesList = Object.keys(sharedServices).map((key) => {

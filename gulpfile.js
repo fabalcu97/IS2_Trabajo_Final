@@ -5,7 +5,7 @@
 	var open = require('open');
 	var runSequence = require('run-sequence');
 	var ts = require('gulp-typescript');
-	var package1 = require('./package.json');
+	var package = require('./package.json');
 	var tsconfig = require('./tsconfig.json');
 	var fs = require('fs-extra');
 	var replace = require("replace");
@@ -51,7 +51,7 @@
 			}));
 		});
 		gulp.task('webapps:new', function(name) {
-				if (!name) {
+            if (!name) {
 				return;
             }
 			var seedWebappPath = path.join(__dirname, 'src/server/webapps/.seed');
@@ -61,22 +61,20 @@
 			console.log('Installing webapp dependencies');
 			shell.exec('sh -c \'cd ' + webappPath + ' && npm install\'');
 
-			runSequence('webapps:shared:update');
-			console.log('Webapp created..');
+            console.log('Webapp created..');
 		});
 
 		gulp.task('webapps:shared:update', function () {
-			var webapps = fs.readdirSync(path.join(__dirname, 'src/server/webapps/'));
-			var sharedPath = path.join(__dirname, '/src/server/webapps/.shared/src/app/shared');
-			webapps.forEach(function (webapp) {
-				if (webapp === '.shared' || webapp === '.seed'){
-					return;
-				}
-				var webappPath = path.join(__dirname, 'src/server/webapps/', webapp);
-				var webappSharedPath = path.join(webappPath, 'src/app/shared');
-				fs.copySync(sharedPath, webappSharedPath);
-			});
-			console.log('Webapps shared updated!');
+				var webapps = fs.readdirSync(path.join(__dirname, 'src/server/webapps/'));
+				var sharedPath = path.join(__dirname, '/src/server/webapps/.shared/src/app/shared');
+				webapps.forEach(function (webapp) {
+						if (webapp === '.shared') return;
+      if (webapp === '.seed') return;
+						var webappPath = path.join(__dirname, 'src/server/webapps/', webapp);
+						var webappSharedPath = path.join(webappPath, 'src/app/shared');
+      fs.copySync(sharedPath, webappSharedPath);
+				});
+				console.log('Webapps shared updated!');
 		});
 
 	// Test

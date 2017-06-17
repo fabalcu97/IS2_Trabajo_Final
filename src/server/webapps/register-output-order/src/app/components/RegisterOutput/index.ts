@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {StateService} from 'ui-router-ng2';
 import { ResourcesService } from "../../shared/services/Resources";
-import { DateService } from "../../shared/services/Date";
 import * as dbModels from "../../../../../../../core/db-models/models";
 
 
@@ -13,8 +11,6 @@ export class RegisterOutputOrderComponent implements OnInit {
 
     // Attributes
       resources: ResourcesService;
-      date: DateService;
-      state: StateService;
       products: dbModels.Product[];
       lots: dbModels.Lot[][];
       locationStorages: dbModels.StorageLocation[][];
@@ -22,18 +18,10 @@ export class RegisterOutputOrderComponent implements OnInit {
       bill: dbModels.Bill;
       order: dbModels.Order;
       guide: dbModels.RemissionGuide;
-      temporalDate1: Date;
-      temporalDate2: Date;
-      temporalDate3: Date;
 
     // Methods
-      constructor (resources: ResourcesService, state: StateService, date: DateService) {
+      constructor (resources: ResourcesService) {
         this.resources = resources;
-        this.state = state;
-        this.date = date;
-        this.temporalDate1 = null;
-        this.temporalDate2 = null;
-        this.temporalDate3 = null;
         this.bill = {
           iva: 19,
           subtotal: 0,
@@ -74,18 +62,6 @@ export class RegisterOutputOrderComponent implements OnInit {
         )
       }
 
-      setDate1() {
-        this.order.arrivalDate = this.date.convertDate(this.temporalDate1);
-      }
-
-      setDate2() {
-        this.guide.departureDate = this.date.convertDate(this.temporalDate2);
-      }
-
-      setDate3() {
-        this.guide.arrivalDate = this.date.convertDate(this.temporalDate3);
-      }
-
       verifyLots(index) {
         this.resources.getAvailableLots(this.detailList[index].productId).subscribe(
           (data) => {
@@ -116,6 +92,7 @@ export class RegisterOutputOrderComponent implements OnInit {
             else {
               this.locationStorages.push(tempStorage);
             }
+            console.log(this.locationStorages);
           },
           (err) => {
             console.log(err);
@@ -156,6 +133,7 @@ export class RegisterOutputOrderComponent implements OnInit {
       }
 
       getProductName(index): String {
+        console.log(index);
         for (let i = 0; i < this.products.length; ++i) {
           if(this.products[i].id == this.detailList[index].productId) {
             return this.products[i].name;
@@ -169,12 +147,6 @@ export class RegisterOutputOrderComponent implements OnInit {
       }
 
       submitForm () {
-        for(let i = 0; i < this.detailList.length; ++i) {
-          if (this.detailList[i].lotQuantity > this.lots[i].length){
-            alert('Verify lots quantity please');
-            return;
-          }
-        }
         this.resources.registerBill(this.bill).subscribe(
           (billData) => {
             this.resources.registerRemisionGuide(this.guide).subscribe(
@@ -209,27 +181,7 @@ export class RegisterOutputOrderComponent implements OnInit {
                 console.log(err);
               }
             );
-            for(let i = 0; i < this.locationStorages.length; ++i) {
-              for(let j = 0; j < this.locationStorages[i].length; ++j) {
-                this.resources.updateStorageLocation(this.locationStorages[i][j].id, true).subscribe(
-                  (data) => {
-                    this.resources.updateActiveLot(this.lots[i][j].id, true).subscribe(
-                      (data) => {
-                        console.log(data);
-                      },
-                      (err) => {
-                        console.log(err);
-                      });
-                  },
-                  (err) => {
-                    console.log(err);
-                  }
-                )
-              }
-            }
-
-            alert("Please store your bill id: " + billData.id);
-            this.state.href('localhost:8000', {});
+            alert("PLease store your bill id: " + billData.id);
           },
           (err) => {
             console.log(err);

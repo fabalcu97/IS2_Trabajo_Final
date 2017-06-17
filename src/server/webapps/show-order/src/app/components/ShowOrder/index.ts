@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UIRouter, Transition } from 'ui-router-ng2';
 import { ResourcesService } from "../../shared/services/Resources";
-import { DateService } from "../../shared/services/Date";
 
 @Component({
     selector: 'show-order',
@@ -15,7 +14,6 @@ export class ShowOrderComponent implements OnInit {
         billId: String;
         trans: Transition;
         resources: ResourcesService;
-        date: DateService;
         bill: any;
         order: any;
         remisionGuide: any;
@@ -23,10 +21,9 @@ export class ShowOrderComponent implements OnInit {
         products: any[];
 
     // Methods
-        constructor (trans: Transition, resources: ResourcesService, date: DateService) {
+        constructor (trans: Transition, resources: ResourcesService) {
             this.trans = trans;
             this.resources = resources;
-            this.date = date;
             this.billId = this.trans.params().billId;
             this.bill = {};
             this.order = {};
@@ -81,10 +78,6 @@ export class ShowOrderComponent implements OnInit {
                     console.log(err);
                 }
             )
-        }
-
-        setDate(date: number) {
-            return this.date.convertDate(date);
         }
 
         updateBulk () {

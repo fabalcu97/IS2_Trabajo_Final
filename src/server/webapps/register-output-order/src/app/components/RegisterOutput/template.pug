@@ -42,9 +42,8 @@ body
             h5.pageSubtitle Arrival Date:
           td
             input(
-              type='date',
-              [(ngModel)]='temporalDate1',
-              (change)="setDate1()",
+              type='number',
+              [(ngModel)]='order.arrivalDate',
               required
             )
         tr
@@ -121,9 +120,8 @@ body
             h5.pageSubtitle Departure:
           td
             input(
-              type='date',
-              [(ngModel)]='temporalDate2',
-              (change)="setDate2()",
+              type='number',
+              [(ngModel)]='guide.departureDate',
               required
             )
         tr
@@ -131,9 +129,8 @@ body
             h5.pageSubtitle Arrival:
           td
             input(
-              type='date',
-              [(ngModel)]='temporalDate3',
-              (change)="setDate3()",
+              type='number',
+              [(ngModel)]='guide.arrivalDate',
               required
             )
         tr
@@ -179,4 +176,4 @@ body
 
       button.button.btnPush.btnBlueGreen(
         (click)='submitForm()'
-      ) Confirm
+      ) Confirmar

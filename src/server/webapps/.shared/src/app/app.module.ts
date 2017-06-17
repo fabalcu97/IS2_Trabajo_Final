@@ -5,15 +5,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UIRouterModule } from 'ui-router-ng2';
-import { sharedServicesList } from "./shared/services/index";
-import { sharedComponentList } from './shared/components/index';
-import { DateService } from './shared/services/Date';
+import { DashboardComponent } from './shared/components/Dashboard';
+import { DashboardService } from './shared/services/Dashboard';
 import { AppComponent } from './app';
 import { statesConfig } from './app.routes';
 
 
 @NgModule({
-  declarations: [ AppComponent ].concat(sharedComponentList),
+  declarations: [ AppComponent, DashboardComponent ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -21,7 +20,7 @@ import { statesConfig } from './app.routes';
     HttpModule,
     UIRouterModule.forRoot(statesConfig)
   ],
-  providers: [ ].concat(sharedServicesList),
+  providers: [ DashboardService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
