@@ -4,15 +4,14 @@ import {Injectable} from '@angular/core';
 export class DateService {
 
   // Attributes
-    now: number;
     
   // Methods
   constructor () {
-    this.now = 0;
   }
 
   convertDate(date: any): any {
       if(typeof(date) == 'number') {
+          console.log(123);
         let newDate: Date = new Date(date);
         return newDate.getDate() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getFullYear();
       }
