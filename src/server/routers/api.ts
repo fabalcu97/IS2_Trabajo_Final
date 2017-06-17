@@ -164,15 +164,15 @@ apiRoutes.addRoute('GET', '/get/order/:billId', (req, res) => {
 });
 
 apiRoutes.addRoute('GET', '/get/orders/output/:output', (req, res) => {
-	Order.getOrderByOutput(req.query.output)
-        .then( (data) => {
+	Order.getOrderByOutput(req.params.output)
+		.then( (data) => {
 			res.status(200);
 			res.send(data);
 			res.end();
 		}).catch( (err) => {
-		res.status(err.httpStatus);
-		res.send(err.description);
-		res.end();
+			res.status(err.httpStatus);
+			res.send(err.description);
+			res.end();
 	})
 });
 

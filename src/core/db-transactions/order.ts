@@ -131,9 +131,8 @@ export function getOrderByOutput(output : boolean)
 {
 	let order : MongoModel = new MongoModel('order');
 	let deferred = Q.defer();
-
 	order.findAll({
-		output: output
+		output: Boolean(output)
 	}).then( ( respOrderData: dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
@@ -150,7 +149,7 @@ export function getOrderByLate(late : boolean)
 	let deferred = Q.defer();
 
 	order.findAll({
-		late: late
+		late: Boolean(late)
 	}).then( ( respOrderData: dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
