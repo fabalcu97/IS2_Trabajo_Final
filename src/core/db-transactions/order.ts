@@ -1,8 +1,7 @@
 import * as Q from 'q';
 import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
-import { Error } from '../interface/Error'
-import { returnServerError } from '../../core/services/returnServerError'
+import { returnServerError } from '../services/returnServerError'
 
 export function registerOrder( orderData: dbModels.Order) {
 	let order: MongoModel = new MongoModel('order');
@@ -117,12 +116,31 @@ export function updateLateOrder(orderId : string , OrderLate : boolean)//(idOrde
 }
 
 
-export function getOrderByOutput (output : boolean)
+export function getOrderByOutput(output : boolean)
 {
 	let order : MongoModel = new MongoModel('order');
 	let deferred = Q.defer();
 
-	order.findAll(output).then( ( respOrderData: dbModels.Order ) => {
+	order.findAll({
+		output: output
+	}).then( ( respOrderData: dbModels.Order ) => {
+		deferred.resolve(respOrderData);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+
+	
+	return deferred.promise;
+}
+
+export function getOrderByLate(late : boolean)
+{
+	let order : MongoModel = new MongoModel('order');
+	let deferred = Q.defer();
+
+	order.findAll({
+		late: late
+	}).then( ( respOrderData: dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
 		returnServerError(deferred)
