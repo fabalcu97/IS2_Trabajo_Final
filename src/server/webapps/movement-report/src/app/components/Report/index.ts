@@ -15,7 +15,7 @@ export class ReportComponent implements OnInit {
         //orders: dbModels.Order[];
         orders: any;
         destinatary :any[];
-        private switchIO: boolean = true;
+        private switchIO: boolean = false;
     // Methods
         constructor (resources : ResourcesService) {
             this.orders = {};
@@ -27,7 +27,7 @@ export class ReportComponent implements OnInit {
             this.resources.getOrdersByOutput(this.switchIO).subscribe(
             (ordersData) => {
                 this.orders = ordersData;
-                console.log(this.orders[2].billId);    
+                console.log(this.orders);    
 
                 this.orders.forEach( (bill) => {                                        
                 if(bill.billId){
