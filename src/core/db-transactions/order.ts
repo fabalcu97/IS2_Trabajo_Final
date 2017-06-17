@@ -2,6 +2,7 @@ import * as Q from 'q';
 import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
 import { returnServerError } from '../services/returnServerError'
+import { validateObject } from '../services/returnServerError'
 
 export function registerOrder( orderData: dbModels.Order) {
 	let order: MongoModel = new MongoModel('order');
@@ -9,13 +10,23 @@ export function registerOrder( orderData: dbModels.Order) {
 
 	let baseOrderData: dbModels.Order = {
 		billId : orderData.billId,
+		guideId : orderData.guideId,
 		output : orderData.output,
-        guideId : orderData.guideId,
-        arrivalDate : orderData.arrivalDate,
-        bulkControl : (orderData.bulkControl || false),
-        received : (orderData.received || false),
-        late : (orderData.late || false)
+		arrivalDate : orderData.arrivalDate,
+		bulkControl : (orderData.bulkControl || false),
+		received : (orderData.received || false),
+		late : (orderData.late || false)
 	};
+
+	//Begin validate
+	let validate = validateObject(baseOrderData);
+
+	if (!validate.flag) {
+
+		deferred.reject(validate.error);
+		return deferred.promise;
+	}
+	//End validate
 
 	order.insertOne(baseOrderData).then( ( respOrderData: dbModels.Order ) => {
 		deferred.resolve(respOrderData);
