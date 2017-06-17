@@ -11,10 +11,10 @@ export function registerDetail( DetailData: dbModels.Detail) {
 
 	let baseDetailData: dbModels.Detail = {
 		billId : DetailData.billId,
-        productId : DetailData.productId,
-        quantity : DetailData.quantity,
-        totalPrice : DetailData.totalPrice,
-        totalWeight : DetailData.totalWeight,
+		productId : DetailData.productId,
+		quantity : DetailData.quantity,
+		totalPrice : DetailData.totalPrice,
+		totalWeight : DetailData.totalWeight,
 		lotQuantity: DetailData.lotQuantity,
 		stored : false
 	};
