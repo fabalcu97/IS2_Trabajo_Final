@@ -62,3 +62,16 @@ export function updateAvailableStorageLocation(storageLocationId : string , avai
 	});
 	return deferred.promise;
 }
+
+export function getAllLocations () {
+
+	let location: MongoModel = new MongoModel('storagelocation');
+	let deferred = Q.defer();
+
+	location.findAll({}).then( ( respLocations: dbModels.StorageLocation ) => {
+		deferred.resolve(respLocations);
+	}).catch( () => {
+		returnServerError(deferred)
+	});
+	return deferred.promise;
+}
