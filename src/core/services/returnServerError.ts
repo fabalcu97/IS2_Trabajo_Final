@@ -12,3 +12,22 @@ export function returnServerError (deferred: any) {
 		deferred.reject(error);
 	}
 }
+
+export function validateObject(objectToValidate: Object): any {  	
+	let flag: boolean = true;
+	let error = {};
+
+  	for (var key in objectToValidate) {
+        if (objectToValidate[key] == null || objectToValidate[key] == "" || objectToValidate[key] == undefined)
+            flag = false;
+    }
+
+	if(!flag){
+		error = {
+			httpStatus: (400),
+			description: ('Parameters error'),
+		};
+	}
+
+	return {flag: flag, error: error};
+}
