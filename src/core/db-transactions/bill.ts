@@ -8,14 +8,22 @@ import { validateObject } from '../services/returnServerError'
 export function registerBill( billData: dbModels.Bill) {
 	let bill: MongoModel = new MongoModel('bill');
 	let deferred = Q.defer();
-	
-	console.log(billData);
 
 	let baseBillData: dbModels.Bill = {
         subtotal : billData.subtotal,
         iva : billData.iva,
         total : billData.total
 	};
+
+	//Begin validate
+	let validate = validateObject(baseBillData);
+
+	if (!validate.flag) {
+
+		deferred.reject(validate.error);
+		return deferred.promise;
+	}
+	//End validate
 
 	bill.insertOne(baseBillData).then( ( respBillData: dbModels.Bill ) => {
 		deferred.resolve(respBillData);

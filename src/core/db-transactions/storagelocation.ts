@@ -2,6 +2,7 @@ import * as Q from 'q';
 import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
 import { returnServerError } from '../services/returnServerError';
+import { validateObject } from '../services/returnServerError'
 
 export function registerStorageLocation (storageLocationData: dbModels.StorageLocation) {
 	let storageLocation: MongoModel = new MongoModel('storagelocation');
@@ -14,6 +15,16 @@ export function registerStorageLocation (storageLocationData: dbModels.StorageLo
         available : true,
         category : storageLocationData.category
 	};
+
+	//Begin validate
+	let validate = validateObject(baseStorageLocationData);
+
+	if (!validate.flag) {
+
+		deferred.reject(validate.error);
+		return deferred.promise;
+	}
+	//End validate
 
 	storageLocation.insertOne(baseStorageLocationData).then( ( respStorageLocationData: dbModels.StorageLocation ) => {
 		deferred.resolve(respStorageLocationData);
