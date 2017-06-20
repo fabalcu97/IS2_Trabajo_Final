@@ -11,7 +11,7 @@ export function registerOrder( orderData: dbModels.Order) {
 	let baseOrderData: dbModels.Order = {
 		billId : orderData.billId,
 		guideId : orderData.guideId,
-		output : orderData.output,
+		output : (orderData.output || false),
 		arrivalDate : orderData.arrivalDate,
 		bulkControl : (orderData.bulkControl || false),
 		received : (orderData.received || false),
@@ -132,7 +132,7 @@ export function getOrderByOutput(output : boolean)
 	let order : MongoModel = new MongoModel('order');
 	let deferred = Q.defer();
 	order.findAll({
-		output: Boolean(output)
+		output: output
 	}).then( ( respOrderData: dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
@@ -147,9 +147,8 @@ export function getOrderByLate(late : boolean)
 {
 	let order : MongoModel = new MongoModel('order');
 	let deferred = Q.defer();
-
 	order.findAll({
-		late: Boolean(late)
+		late: late
 	}).then( ( respOrderData: dbModels.Order ) => {
 		deferred.resolve(respOrderData);
 	}).catch( () => {
