@@ -50,56 +50,18 @@ input
 
 /* TABLAA */
 
-* {
-    box-sizing: border-box;
-}
+table
+    border-collapse collapse
+    width 100%
 
-/* Create three columns of equal width */
-.columns {
-    float: left;
-    width: 33.3%;
-    padding: 8px;
-}
+th, td
+    text-align left
+    padding 8px
 
-/* Style the list */
-.price {
-    list-style-type: none;
-    border: 1px solid #eee;
-    margin: 0;
-    padding: 0;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-}
+tr
+    &:nth-child(even)
+        background-color #f2f2f2
 
-/* Add shadows on hover */
-.price:hover {
-    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.5)
-}
-
-/* Pricing header */
-.price .header {
-    background-color: #6ab7a5;
-    color: white;
-    font-size: 25px;
-}
-
-/* List items */
-.price li {
-    border-bottom: 1px solid #eee;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Grey list item */
-.price .grey {
-    background-color: #c1bfbf;
-    font-size: 20px;
-}
-
-/* Change the width of the three columns to 100% 
-(to stack horizontally on small screens) */
-@media only screen and (max-width: 600px) {
-    .columns {
-        width: 100%;
-    }
-}            
+th
+    background-color #4CAF50
+    color white

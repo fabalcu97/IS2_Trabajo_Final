@@ -26,13 +26,13 @@ export class ReportComponent implements OnInit {
         getOrders2(){
             this.orders = [];
             this.bills = [];
-            //console.log("pre aqui");
-            //console.log(this.switchIO);
+            console.log("pre aqui");
+            console.log(this.switchIO);
             this.resources.getOrdersByOutput(this.switchIO).subscribe(
             (ordersData) => {
                 this.orders = ordersData;
-                //console.log("aqui");
-                //console.log(this.orders[0].output);    
+                console.log("aqui");
+                console.log(this.orders[0].output);    
 
                 this.orders.forEach( (bill) => {                                                        
                     this.resources.getBill(bill.billId).subscribe(
