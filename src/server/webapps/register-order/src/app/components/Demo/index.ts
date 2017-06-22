@@ -84,7 +84,8 @@ export class DemoComponent implements OnInit {
           this.guide.totalWeight += product[0].unitWeight * detail.quantity;
 
         });
-
+        //probamdo output true, sin esta linea el output sale null
+        this.order.output = true;
         this.bill.total = this.bill.subtotal + this.bill.subtotal*(this.bill.iva/100);
 
       }
@@ -110,7 +111,8 @@ export class DemoComponent implements OnInit {
           totalWeight: 0,
           lotQuantity: 0
         })
-      }
+      }     
+
 
       deleteProduct (index: number) {
         this.detailList.splice(index, 1);

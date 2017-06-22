@@ -1,0 +1,50 @@
+body
+
+
+    .wrapper
+        
+        h3 Daily            
+            input(type='date', name='bday')
+        br
+        
+        label.switch
+            input(
+                type="checkbox",          
+                [(ngModel)]='switchIO',
+                (click)='changeSwitch()'                
+            )
+            div.slider.round
+            br
+            h4.text-center(
+               *ngIf="switchIO==false"
+            ) Output
+
+            h4.text-center(
+               *ngIf="switchIO==true"
+            ) Input
+       
+        br
+       
+        table
+            tr  
+                th #
+                th # Bill               
+                th Subtotal            
+                th Total 
+                th Bill Detail
+
+            tr(*ngFor='let bill of bills; let i = index; let sum = index ')
+                td {{i+1}}
+                td {{ orders[i].billId }}                
+                td {{ bill.subtotal }}
+                td {{ bill.total }}
+                td 
+                    a.button.btnPush.btnLightBlue(    
+                        (click)="searchBill()"
+                    ) Go to bill !
+            tr  
+                th 
+                th 
+                th Total
+                th {{ totalMount }} 
+                th 
