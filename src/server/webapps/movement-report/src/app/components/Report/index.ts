@@ -16,6 +16,7 @@ export class ReportComponent implements OnInit {
         orders: any[];
         bills :any[];
         private switchIO: boolean = true;
+        public totalMount: number;
     // Methods
         constructor (resources : ResourcesService) {
             this.orders = [];
@@ -38,6 +39,12 @@ export class ReportComponent implements OnInit {
                     this.resources.getBill(bill.billId).subscribe(
                         (billsData) => {
                             this.bills.push(billsData);
+                            /* Total of all bills */
+                            this.bills.forEach(
+                                (totalperbill) => {
+                                    this.totalMount = totalperbill.total; 
+                                } 
+                            )
                         },
                         (err) => {
                             console.log(err);
@@ -59,5 +66,7 @@ export class ReportComponent implements OnInit {
             console.log(this.switchIO);          
             this.getOrders2();            
         }
-
+        searchBill(){
+            /* button fuction to see bill detail*/
+        }
 }

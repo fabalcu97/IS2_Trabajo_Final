@@ -25,19 +25,26 @@ body
        
         br
        
-        table(style='width:100%')
+        table
             tr  
                 th #
                 th # Bill               
                 th Subtotal            
                 th Total 
-            tr(*ngFor='let bill of bills; let i = index')
-                th {{i+1}}
-                th {{ orders[i].billId }}                
-                th {{ bill.subtotal }}
-                th {{ bill.total }}
-             
-              
+                th Bill Detail
 
-
-            
+            tr(*ngFor='let bill of bills; let i = index; let sum = index ')
+                td {{i+1}}
+                td {{ orders[i].billId }}                
+                td {{ bill.subtotal }}
+                td {{ bill.total }}
+                td 
+                    a.button.btnPush.btnLightBlue(    
+                        (click)="searchBill()"
+                    ) Go to bill !
+            tr  
+                th 
+                th 
+                th Total
+                th {{ totalMount }} 
+                th 
