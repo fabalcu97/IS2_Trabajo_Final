@@ -3,6 +3,7 @@ import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
 import { Error } from '../interface/Error'
 import { returnServerError } from '../../core/services/returnServerError'
+import { validateObject } from '../services/returnServerError'
 
 export function registerProduct (productData: dbModels.Product) {
 	let product: MongoModel = new MongoModel('product');
@@ -15,6 +16,16 @@ export function registerProduct (productData: dbModels.Product) {
 		unitWeight: productData.unitWeight,
 		quantityPerLot: productData.quantityPerLot
 	};
+
+	//Begin validate
+	let validate = validateObject(baseProductData);
+
+	if (!validate.flag) {
+
+		deferred.reject(validate.error);
+		return deferred.promise;
+	}
+	//End validate
 
 	product.insertOne(baseProductData).then( ( respProductData: dbModels.Product ) => {
 		deferred.resolve(respProductData);

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { ResourcesService } from "../../shared/services/Resources";
+import { DateService } from "../../shared/services/Date";
 import { FormGroup,FormArray,FormBuilder,Validators } from '@angular/forms';
 import * as dbModels from "../../../../../../../core/db-models/models";
 
@@ -12,28 +13,36 @@ export class DemoComponent implements OnInit {
 
     // Attributes
       resources: ResourcesService;
+      date: DateService;
       products: dbModels.Product[];
       detailList: dbModels.Detail[];
       bill: dbModels.Bill;
       order: dbModels.Order;
       guide: dbModels.RemissionGuide;
+      temporalDate1: Date;
+      temporalDate2: Date;
+      temporalDate3: Date;
 
     // Methods
-      constructor (resources: ResourcesService) {
+      constructor (resources: ResourcesService, date: DateService) {
         this.resources = resources;
+        this.date = date;
+        this.temporalDate1 = null;
+        this.temporalDate2 = null;
+        this.temporalDate3 = null;
         this.bill = {
           iva: 19,
           subtotal: 0,
           total: 0
         };
         this.order = {
-          arrivalDate: 0,
-          output: false,
           guideId: '0',
           billId: '0',
+          output: false,
+          arrivalDate: 0,
           bulkControl: false,
-          late: false,
-          received: false
+          received: false,
+          late: false
         };
         this.guide = {
           addressee: '',
@@ -80,14 +89,26 @@ export class DemoComponent implements OnInit {
 
       }
 
+      setDate1() {
+        this.order.arrivalDate = this.date.convertDate(this.temporalDate1);
+      }
+
+      setDate2() {
+        this.guide.departureDate = this.date.convertDate(this.temporalDate2);
+      }
+
+      setDate3() {
+        this.guide.arrivalDate = this.date.convertDate(this.temporalDate3);
+      }
+
       addProduct () {
         this.detailList.push({
           billId: '',
-          lotQuantity: 0,
           productId: '',
           quantity: 0,
           totalPrice: 0,
-          totalWeight: 0
+          totalWeight: 0,
+          lotQuantity: 0
         })
       }
 

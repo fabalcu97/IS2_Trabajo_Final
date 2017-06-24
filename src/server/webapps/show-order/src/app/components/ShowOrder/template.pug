@@ -3,7 +3,9 @@ div.container
     table.table.table-bordered
         tr
             th Date
-            td {{bill.timestamp}}
+            td(
+                *ngIf="bill.timestamp"
+            ) {{setDate(bill.timestamp)}}
         tr
             th Subtotal:
             td {{bill.subtotal}}
@@ -96,5 +98,6 @@ div.container
                 td {{product.unitPrice}}
 
 a.button.btnPush.btnLightBlue(
+    *ngIf="!order.output",
   href="/confirm-order/#/confirm/{{billId}}",
 ) Confirm order
