@@ -8,6 +8,8 @@ import * as Product from '../../core/db-transactions/Product';
 import * as Lot from  '../../core/db-transactions/lot';
 import * as StorageLocation from '../../core/db-transactions/storagelocation';
 import * as Type from  '../../core/db-transactions/type';
+import * as Person from  '../../core/db-transactions/Person';
+import * as Code from  '../../core/db-transactions/Code';
 
 import * as session from "express-session";
 
@@ -21,11 +23,29 @@ apiRoutes.use(session({
 	saveUninitialized: false
 }));
 
-apiRoutes.addRoute('GET', '/register', (req, res) => {
-	Person.register(req.body).then( (data) => {
+apiRoutes.addRoute('GET', '/get-code', (req, res) => {
+	Code.getCode(req.query).then( (data) => {
 		console.log(data);
+		res.status(200);
+		res.send(data);
+		res.end();
 	}).catch((err)=> {
-		console.log(err);
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/update-code', (req, res) => {
+	Code.updateCode(req.query).then( (data) => {
+		console.log(data);
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch((err)=> {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
 	})
 });
 
