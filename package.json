@@ -61,14 +61,20 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "@types/bcrypt": "^1.0.0",
+    "@types/express-session": "^1.15.0",
+    "@types/randomstring": "^1.1.6",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
+    "express-session": "^1.15.3",
     "jsonschema": "^1.1.1",
     "mongodb": "^2.2.25",
     "mongodb-core": "^2.1.9",
     "morgan": "^1.8.1",
     "q": "^1.4.1",
+    "randomstring": "^1.1.5",
     "shelljs": "^0.7.7"
   }
 }

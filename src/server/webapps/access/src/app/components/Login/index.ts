@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {UIRouter} from 'ui-router-ng2';
+import { Component, OnInit } from '@angular/core';
+import { UIRouter, StateService } from 'ui-router-ng2';
 import { ResourcesService } from '../../shared/services/Resources'
 import * as dbModels from '../../../../../../../core/db-models/models'
 
@@ -12,25 +12,32 @@ export class LoginComponent implements OnInit {
 
     // Attributes
       resources: ResourcesService;
-      products: dbModels.Product[];
+      state: StateService;
+      person: any;
 
     // Methods
-        constructor (resources: ResourcesService) {
+        constructor (resources: ResourcesService, state: StateService) {
           this.resources = resources;
-          this.products = [];
+          this.state = state;
+          this.person = {
+            username: "",
+            password: ""
+          }
         }
 
         ngOnInit () {
-          this.resources.getProducts().subscribe(
-            (data) => {
-              this.products = data;
-              console.log(this.products);
+
+        }
+
+        submit() {
+          this.resources.login(this.person).subscribe(
+            (resp) => {
+              window.location.href = '/app/home'
             },
             (err) => {
-              console.log(err);
+              console.error(err);
             }
-          );
-          console.log(this.products);
+          )
         }
 
 }

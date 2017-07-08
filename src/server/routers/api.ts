@@ -8,11 +8,79 @@ import * as Product from '../../core/db-transactions/Product';
 import * as Lot from  '../../core/db-transactions/lot';
 import * as StorageLocation from '../../core/db-transactions/storagelocation';
 import * as Type from  '../../core/db-transactions/type';
-
+import * as Person from  '../../core/db-transactions/Person';
+import * as Code from  '../../core/db-transactions/Code';
+import * as session from 'express-session';
+import * as cookie from "cookie-parser";
 
 export let apiRoutes: ExpressRouter;
 
 apiRoutes = new ExpressRouter();
+
+apiRoutes.use(session({
+	secret: 'keyboard cat',
+	resave: true,
+	saveUninitialized: false
+}));
+
+apiRoutes.addRoute('GET', '/get-code', (req, res) => {
+	Code.getCode(req.query).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch((err)=> {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/update-code', (req, res) => {
+	Code.updateCode(req.query).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch((err)=> {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/register-person', (req, res) => {
+	Person.registerPerson(req.body.person).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch((err)=> {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/login', (req, res) => {
+	Person.validateUser(req.body.person).then( (data) => {
+		res.cookie('uid', data.id);
+		res.cookie('name', data.name);
+		res.cookie('type', data.type);
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch((err)=> {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('get', '/logout', (req, res) => {
+	res.clearCookie('uid');
+	res.clearCookie('name');
+	res.clearCookie('type');
+	res.status(200);
+	res.end();
+});
 
 apiRoutes.addRoute('POST', '/add/order', (req, res) => {
 	Order.registerOrder(req.body).then( (data) => {

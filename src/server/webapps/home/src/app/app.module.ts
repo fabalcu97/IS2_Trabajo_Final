@@ -7,9 +7,10 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UIRouterModule } from 'ui-router-ng2';
 import { components, componentsList } from './components';
 import { services, servicesList } from './services';
+import { sharedServicesList } from "./shared/services/index";
 import { AppComponent } from './app';
 import { statesConfig } from './app.routes';
-
+import { CookieService } from "angular2-cookie/core";
 
 @NgModule({
   declarations: [ AppComponent ].concat(componentsList),
@@ -20,7 +21,7 @@ import { statesConfig } from './app.routes';
     HttpModule,
     UIRouterModule.forRoot(statesConfig)
   ],
-  providers: [].concat(servicesList),
+  providers: [CookieService].concat(servicesList, sharedServicesList),
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}

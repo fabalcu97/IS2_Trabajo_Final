@@ -200,4 +200,23 @@ export class ResourcesService {
     return this.$http.get('http://localhost:8000/api/get/allLocations').map((res: Response) => res.json());
   }
 
+  public validateCode(code: string):  Observable<Interfaces.Code> {
+    return this.$http.post('http://localhost:8000/api/update-code?code=' + code, {}).map((res: Response) => res.json());
+  }
+
+  public getCode(type: string):  Observable<Interfaces.Code> {
+    return this.$http.get('http://localhost:8000/api/get-code?type=' + type).map((res: Response) => res.json());
+  }
+
+  public registerPerson(person: Interfaces.Person):  Observable<Interfaces.Person> {
+    return this.$http.post('http://localhost:8000/api/register-person', {person: person}).map((res: Response) => res.json());
+  }
+
+  public login(person: any):  Observable<Interfaces.Person> {
+    return this.$http.post('http://localhost:8000/api/login', {person: person}).map((res: Response) => res.json());
+  }
+
+  public logout():  Observable<any> {
+    return this.$http.get('http://localhost:8000/api/logout');
+  }
 }
