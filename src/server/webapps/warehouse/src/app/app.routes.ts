@@ -20,6 +20,11 @@ export let statesConfig: any = {
       name: 'location',
       url: '/location',
       component: components.RegisterLocationComponent
+    },
+    {
+      name: 'code',
+      url: '/code',
+      component: components.CodeGeneratorComponent
     }
   ]
 };
