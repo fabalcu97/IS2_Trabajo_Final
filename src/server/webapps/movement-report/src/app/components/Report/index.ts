@@ -66,7 +66,7 @@ export class ReportComponent implements OnInit {
             console.log(this.switchIO);          
             this.getOrders2();            
         }
-        searchBill(){
-            /* button fuction to see bill detail*/
+        searchBill(billId: string){
+            window.location.href = "/app/show-order/#/show/" + billId;
         }
 }

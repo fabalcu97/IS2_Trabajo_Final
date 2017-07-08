@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
                 {
                     name: 'Confirm Order',
                     page: 'confirm-order',
-                    type: 'receptor'
+                    type: 'admin'
                 },
                 {
                     name: 'Movement Report',
@@ -36,12 +36,12 @@ export class HomeComponent implements OnInit {
                 {
                     name: 'Register Order',
                     page: 'register-order',
-                    type: 'emitter'
+                    type: 'admin'
                 },
                 {
                     name: 'Register Output Order',
                     page: 'register-output-order',
-                    type: 'receptor'
+                    type: 'admin'
                 },
                 {
                     name: 'Show Order',
