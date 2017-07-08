@@ -8,15 +8,15 @@ html
             #card.login
               .front.signin_form
                 p Login Your Account
-                form.login-form
+                form.login-form((ngSubmit)="submit()")
                   .form-group
                     .input-group
-                      input.form-control(type='email', placeholder='Type your email')
+                      input.form-control(type='string', placeholder='Type your username', [(ngModel)]="person.username", name="username")
                       span.input-group-addon
                         i.glyphicon.glyphicon-user
                   .form-group
                     .input-group
-                      input.form-control(type='password', placeholder='Type your password')
+                      input.form-control(type='password', placeholder='Type your password', [(ngModel)]="person.password", name="password")
                       span.input-group-addon
                         i.glyphicon.glyphicon-lock
                   .form-group.sign-btn
@@ -24,36 +24,5 @@ html
                     p
                       strong New?
                       br
-                      a#flip-btn.signup.signup_link(href='#') Sign up for a new account
-              .back.signup_form(style='opacity: 0;')
-                p Sign Up for Your New Account
-                form.login-form
-                  .form-group
-                    .input-group
-                      input.form-control(type='text', placeholder='Username')
-                      span.input-group-addon
-                        i.glyphicon.glyphicon-user
-                  .form-group
-                    .input-group
-                      input.form-control(type='text')
-                      span.input-group-btn
-                        button.btn.btn-cyan(type='button')
-                          span.fa.fa-refresh
-                  .form-group
-                    .input-group
-                      input.form-control(type='password', placeholder='Confirm Password')
-                      span.input-group-addon
-                        i.glyphicon.glyphicon-lock
-                  .form-group
-                    .input-group
-                      input.form-control(type='email', placeholder='Email')
-                      span.input-group-addon
-                        i.glyphicon.glyphicon-envelope
-                  .form-group.sign-btn
-                    input.btn(type='submit', value='Sign up')
-                    br
-                    br
-                    p
-                      | You have already Account So 
-                      a#unflip-btn.signup(href='#') Log in
+                      a#flip-btn.signup.signup_link(uiSref='register') Sign up for a new account
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jQuery-Flip/1.0.18/jquery.flip.js')

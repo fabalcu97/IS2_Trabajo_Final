@@ -4,11 +4,9 @@ import {Injectable} from '@angular/core';
 export class DateService {
 
   // Attributes
-    now: number;
     
   // Methods
   constructor () {
-    this.now = 0;
   }
 
   convertDate(date: any): any {

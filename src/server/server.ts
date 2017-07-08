@@ -7,12 +7,14 @@ import * as morgan from 'morgan';
 import { connectDatabase, MongoModel } from '../core/classes/MongoModel';
 import { setupRouters } from './routers/index';
 import { config } from '../settings/index';
+let helmet = require('helmet');
 
 // Server setup
 	export let server = express();
 	var httpServer = http.createServer(server);
 
 // Setup middleware
+	server.use(helmet());
 	server.use(morgan(':method :url :status || :res[content-length] - :response-time ms'));
 	server.use(bodyParser.urlencoded({ extended: false }));
 	server.use(bodyParser.json());

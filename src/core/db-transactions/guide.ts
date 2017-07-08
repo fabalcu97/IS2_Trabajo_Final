@@ -3,6 +3,7 @@ import * as dbModels from '../db-models/models';
 import { MongoModel } from '../classes/MongoModel';
 import { Error } from '../interface/Error'
 import { returnServerError } from '../../core/services/returnServerError'
+import { validateObject } from '../services/returnServerError'
 
 export function registerGuide( guideData: dbModels.RemissionGuide) {
 	let guide: MongoModel = new MongoModel('remissionGuide');
@@ -17,6 +18,16 @@ export function registerGuide( guideData: dbModels.RemissionGuide) {
 		vehiclePlate : guideData.vehiclePlate,
 		totalWeight : guideData.totalWeight
 	};
+
+	//Begin validate
+	let validate = validateObject(baseGuideData);
+
+	if (!validate.flag) {
+
+		deferred.reject(validate.error);
+		return deferred.promise;
+	}
+	//End validate
 
 	guide.insertOne(baseGuideData).then( ( respGuideData: dbModels.Order ) => {
 		deferred.resolve(respGuideData);

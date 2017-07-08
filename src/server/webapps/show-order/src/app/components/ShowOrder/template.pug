@@ -33,7 +33,9 @@ div.container
                 a.button.btnPush.btnLightBlue(
                     (click)='updateBulk()'
                 ) Update Bulk Control
-        tr
+        tr(
+            *ngIf="!order.output"
+        )
             th Received
             td
                 label.switch
@@ -98,5 +100,6 @@ div.container
                 td {{product.unitPrice}}
 
 a.button.btnPush.btnLightBlue(
-  href="/confirm-order/#/confirm/{{billId}}",
+    *ngIf="!order.output",
+  href="/app/confirm-order/#/confirm/{{billId}}",
 ) Confirm order

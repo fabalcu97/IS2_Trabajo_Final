@@ -36,13 +36,13 @@ export class DemoComponent implements OnInit {
           total: 0
         };
         this.order = {
-          arrivalDate: 0,
-          output: false,
           guideId: '0',
           billId: '0',
+          output: false,
+          arrivalDate: 0,
           bulkControl: false,
-          late: false,
-          received: false
+          received: false,
+          late: false
         };
         this.guide = {
           addressee: '',
@@ -84,7 +84,8 @@ export class DemoComponent implements OnInit {
           this.guide.totalWeight += product[0].unitWeight * detail.quantity;
 
         });
-
+        //probamdo output true, sin esta linea el output sale null
+        this.order.output = true;
         this.bill.total = this.bill.subtotal + this.bill.subtotal*(this.bill.iva/100);
 
       }
@@ -104,13 +105,14 @@ export class DemoComponent implements OnInit {
       addProduct () {
         this.detailList.push({
           billId: '',
-          lotQuantity: 0,
           productId: '',
           quantity: 0,
           totalPrice: 0,
-          totalWeight: 0
+          totalWeight: 0,
+          lotQuantity: 0
         })
-      }
+      }     
+
 
       deleteProduct (index: number) {
         this.detailList.splice(index, 1);
