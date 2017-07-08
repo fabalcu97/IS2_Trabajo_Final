@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UIRouter} from 'ui-router-ng2';
+import { ResourcesService } from "../../shared/services/Resources";
 
 @Component({
     selector: 'register',
@@ -9,10 +10,18 @@ import {UIRouter} from 'ui-router-ng2';
 export class RegisterComponent implements OnInit {
 
     // Attributes
+        resources: ResourcesService;
+        code: string;
 
     // Methods
-        constructor () {}
+        constructor (resources: ResourcesService) {
+            this.resources = resources;
+            this.code = "";
+        }
 
-        ngOnInit () {}
+        ngOnInit () {
+            this.code = prompt("Insert the code");
+            console.log(this.code);
+        }
 
 }
