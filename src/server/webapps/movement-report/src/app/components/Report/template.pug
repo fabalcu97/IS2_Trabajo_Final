@@ -40,7 +40,7 @@ body
                 td {{ bill.total }}
                 td 
                     a.button.btnPush.btnLightBlue(    
-                        (click)="searchBill()"
+                        (click)="searchBill(orders[i].billId)"
                     ) Go to bill !
             tr  
                 th 
