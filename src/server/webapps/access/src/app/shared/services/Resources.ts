@@ -217,6 +217,6 @@ export class ResourcesService {
   }
 
   public logout():  Observable<any> {
-    return this.$http.get('http://localhost:8000/api/logout').map((res: Response) => res.json());
+    return this.$http.get('http://localhost:8000/api/logout');
   }
 }
