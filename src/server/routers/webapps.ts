@@ -23,7 +23,7 @@ webappsEntries = webappsEntries.filter(function (entry) {
 });
 
 webappsRoutes.router.use('/app', (req, res, next) => {
-	if(!req.session) {
+	if(!req.cookies.name || !req.cookies.type) {
 		res.redirect('/access');
 		res.end();
 	}
