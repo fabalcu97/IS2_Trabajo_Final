@@ -215,4 +215,8 @@ export class ResourcesService {
   public login(person: any):  Observable<Interfaces.Person> {
     return this.$http.post('http://localhost:8000/api/login', {person: person}).map((res: Response) => res.json());
   }
+
+  public logout():  Observable<any> {
+    return this.$http.get('http://localhost:8000/api/logout').map((res: Response) => res.json());
+  }
 }
