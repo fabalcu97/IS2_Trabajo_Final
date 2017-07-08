@@ -1,36 +1,8 @@
 div.container-fluid.text-center
-  h2 SERVICES
-  br
-  div.row
-    div.col-sm-4
-        a(
-            href="show-order"
-        )
-            span.glyphicon.glyphicon-list-alt
-            h4 View Order
-    div.col-sm-4
-      a(
-            href="register-order"
-        )
-            span.glyphicon.glyphicon-floppy-save
-            h4 Register Order
-    div.col-sm-4
-      a(
-        href="confirm-order"
-      )
-        span.glyphicon.glyphicon-check
-        h4 Confirm Order
-  hr
-  div.row
-    div.col-sm-4
-      a(
-        href="register-output-order"
-      )
-        span.glyphicon.glyphicon-check
-        h4 Register output order
-    div.col-sm-4
-      a(
-        href="warehouse"
-      )
-        span.glyphicon.glyphicon-tent
-        h4 Warehouse Management
+  h2 SERVICES {{type}}
+  <div class="list-group">
+    <a href="/app/{{app.page}}" [ngClass]="{'hide':type!==app.type && type!=='admin' && app.type!=='*'}" class="list-group-item" *ngFor="let app of pages">{{app.name}}</a>
+  </div>
+  <div class="list-group">
+    <a (click)="logout()" class="list-group-item" >Logout</a>
+  </div>
