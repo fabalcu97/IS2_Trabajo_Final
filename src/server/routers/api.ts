@@ -10,8 +10,8 @@ import * as StorageLocation from '../../core/db-transactions/storagelocation';
 import * as Type from  '../../core/db-transactions/type';
 import * as Person from  '../../core/db-transactions/Person';
 import * as Code from  '../../core/db-transactions/Code';
-
-import * as session from "express-session";
+import * as session from 'express-session';
+import * as cookie from "cookie-parser";
 
 export let apiRoutes: ExpressRouter;
 
@@ -41,6 +41,31 @@ apiRoutes.addRoute('POST', '/update-code', (req, res) => {
 		console.log(data);
 		res.status(200);
 		res.send(data);
+		res.end();
+	}).catch((err)=> {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/register-person', (req, res) => {
+	Person.registerPerson(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		res.end();
+	}).catch((err)=> {
+		res.status(err.httpStatus);
+		res.send(err.description);
+		res.end();
+	})
+});
+
+apiRoutes.addRoute('POST', '/login', (req, res) => {
+	Person.validateUser(req.body).then( (data) => {
+		res.status(200);
+		res.send(data);
+		req.session.user = data;
 		res.end();
 	}).catch((err)=> {
 		res.status(err.httpStatus);

@@ -13,9 +13,9 @@ export function getCode(codeInfo: any) {
 
   if(!codeInfo.type || (codeInfo.type !== 'emitter' && codeInfo.type !== 'receptor') ) {
     deferred.reject({
-        httpStatus: 401,
-        description: 'Type required'
-		  });
+      httpStatus: 401,
+      description: 'Type required'
+    });
     return deferred.promise;
   }
 
