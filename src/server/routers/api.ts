@@ -75,9 +75,9 @@ apiRoutes.addRoute('POST', '/login', (req, res) => {
 });
 
 apiRoutes.addRoute('get', '/logout', (req, res) => {
-	res.ClearCookie('uid');
-	res.ClearCookie('name');
-	res.ClearCookie('type');
+	res.clearCookie('uid');
+	res.clearCookie('name');
+	res.clearCookie('type');
 	res.status(200);
 	res.end();
 });
