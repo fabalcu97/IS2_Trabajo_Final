@@ -25,7 +25,6 @@ apiRoutes.use(session({
 
 apiRoutes.addRoute('GET', '/get-code', (req, res) => {
 	Code.getCode(req.query).then( (data) => {
-		console.log(data);
 		res.status(200);
 		res.send(data);
 		res.end();
@@ -38,7 +37,6 @@ apiRoutes.addRoute('GET', '/get-code', (req, res) => {
 
 apiRoutes.addRoute('POST', '/update-code', (req, res) => {
 	Code.updateCode(req.query).then( (data) => {
-		console.log(data);
 		res.status(200);
 		res.send(data);
 		res.end();
@@ -50,7 +48,7 @@ apiRoutes.addRoute('POST', '/update-code', (req, res) => {
 });
 
 apiRoutes.addRoute('POST', '/register-person', (req, res) => {
-	Person.registerPerson(req.body).then( (data) => {
+	Person.registerPerson(req.body.person).then( (data) => {
 		res.status(200);
 		res.send(data);
 		res.end();
@@ -62,10 +60,12 @@ apiRoutes.addRoute('POST', '/register-person', (req, res) => {
 });
 
 apiRoutes.addRoute('POST', '/login', (req, res) => {
-	Person.validateUser(req.body).then( (data) => {
+	Person.validateUser(req.body.person).then( (data) => {
+		res.cookie('uid', data.id);
+		res.cookie('name', data.name);
+		res.cookie('type', data.type);
 		res.status(200);
 		res.send(data);
-		req.session.user = data;
 		res.end();
 	}).catch((err)=> {
 		res.status(err.httpStatus);
