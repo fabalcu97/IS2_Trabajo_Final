@@ -11,7 +11,7 @@ export function getCode(codeInfo: any) {
   let code: MongoModel = new MongoModel('code');
 	let deferred = Q.defer();
 
-  if(!codeInfo.type || (codeInfo.type !== 'emitter' && codeInfo.type !== 'receptor') ) {
+  if(!codeInfo.type || (codeInfo.type !== 'emitter' && codeInfo.type !== 'receptor' && codeInfo.type !== 'admin') ) {
     deferred.reject({
       httpStatus: 401,
       description: 'Type required'
@@ -42,6 +42,13 @@ export function updateCode(codeInfo: any) {
   code.findOne({
     code: codeInfo.code
   }).then((respData: dbModels.Code) => {
+    if(respData === null) {
+      deferred.reject({
+        httpStatus: 404,
+        description: 'Code not found'
+		  });
+      return deferred.promise;
+    }
 
     if(respData.used) {
       deferred.reject({
