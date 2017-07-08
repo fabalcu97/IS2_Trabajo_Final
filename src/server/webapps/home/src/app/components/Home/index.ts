@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
         router: UIRouter;
         pages: any[];
         type: string;
+        name: string;
 
     // Methods
         constructor (resources: ResourcesService, router: UIRouter, cookies: CookieService) {
@@ -54,6 +55,7 @@ export class HomeComponent implements OnInit {
                 }
             ];
             this.type = this.cookies.get('type');
+            this.name = this.cookies.get('name');
         }
 
         ngOnInit () {

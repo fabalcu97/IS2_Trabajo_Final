@@ -1,8 +1,8 @@
 div.container-fluid.text-center
-  h2 SERVICES {{type}}
+  h2 Welcome {{name}}!
   <div class="list-group">
     <a href="/app/{{app.page}}" [ngClass]="{'hide':type!==app.type && type!=='admin' && app.type!=='*'}" class="list-group-item" *ngFor="let app of pages">{{app.name}}</a>
   </div>
   <div class="list-group">
-    <a (click)="logout()" class="list-group-item" >Logout</a>
+    <a href="#" (click)="logout()" class="list-group-item" >Logout</a>
   </div>
