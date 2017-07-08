@@ -74,6 +74,14 @@ apiRoutes.addRoute('POST', '/login', (req, res) => {
 	})
 });
 
+apiRoutes.addRoute('get', '/logout', (req, res) => {
+	res.ClearCookie('uid');
+	res.ClearCookie('name');
+	res.ClearCookie('type');
+	res.status(200);
+	res.end();
+});
+
 apiRoutes.addRoute('POST', '/add/order', (req, res) => {
 	Order.registerOrder(req.body).then( (data) => {
 		res.status(200);
