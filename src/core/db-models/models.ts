@@ -8,4 +8,6 @@ export {Subtype} from './Subtype';
 export {ProductType} from './ProductType';
 export {Lot} from './Lot';
 export {StorageLocation} from './StorageLocation';
+export {Person} from './Person';
+export {Code} from './Code';
 
