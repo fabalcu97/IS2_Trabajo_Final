@@ -4,5 +4,6 @@ div.container-fluid.text-center
     <a href="/app/{{app.page}}" [ngClass]="{'hide':type!==app.type && type!=='admin' && app.type!=='*'}" class="list-group-item" *ngFor="let app of pages">{{app.name}}</a>
   </div>
   <div class="list-group">
+    <a href="/app/Warehouse/#/code" *ngIf="type==='admin'" class="list-group-item" >Generate account code</a>
     <a href="#" (click)="logout()" class="list-group-item" >Logout</a>
   </div>
