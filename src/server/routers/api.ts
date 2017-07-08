@@ -9,10 +9,25 @@ import * as Lot from  '../../core/db-transactions/lot';
 import * as StorageLocation from '../../core/db-transactions/storagelocation';
 import * as Type from  '../../core/db-transactions/type';
 
+import * as session from "express-session";
 
 export let apiRoutes: ExpressRouter;
 
 apiRoutes = new ExpressRouter();
+
+apiRoutes.use(session({
+	secret: 'keyboard cat',
+	resave: true,
+	saveUninitialized: false
+}));
+
+apiRoutes.addRoute('GET', '/register', (req, res) => {
+	Person.register(req.body).then( (data) => {
+		console.log(data);
+	}).catch((err)=> {
+		console.log(err);
+	})
+});
 
 apiRoutes.addRoute('POST', '/add/order', (req, res) => {
 	Order.registerOrder(req.body).then( (data) => {

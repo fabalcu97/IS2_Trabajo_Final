@@ -2,7 +2,7 @@
  * Created by fabalcu97 on 13/04/17.
  */
 
-import {ExpressRouter} from '../../core/classes/ExpressRouter';
+import { ExpressRouter } from '../../core/classes/ExpressRouter';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as express from 'express';
